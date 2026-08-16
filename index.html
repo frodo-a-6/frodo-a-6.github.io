@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sur la route – Französisch Ardèche</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%230055A4'/%3E%3Crect x='1' width='1' height='2' fill='%23FFFFFF'/%3E%3Crect x='2' width='1' height='2' fill='%23EF4135'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #F1EEE3;
+    --ink: #20302B;
+    --title-ink: #1E3A34;
+    --muted: #5B5640;
+    --muted2: #8A8365;
+    --border: #DAD2B8;
+    --border2: #C9C1A8;
+    --accent: #1E7A8C;
+    --accent2: #E8A93B;
+    --violet: #6B5B95;
+    --ok-bg: #E4EEE0;
+    --ok-border: #5C7A4A;
+    --ok-text: #3F5A32;
+    --bad-bg: #F4E3E0;
+    --bad-border: #B34A3C;
+    --bad-text: #7A2E24;
+    --chip-bg: #EDE6D6;
+    --field-bg: #F9F7EF;
+    --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px; }
+  .spotify-wrap { padding-top: 0; padding-bottom: 32px; text-align: center; }
+  .spotify-link { color: var(--accent); font-size: 14px; text-decoration: underline; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin: 0 0 4px 0;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--title-ink);
+    margin: 0 0 4px 0;
+  }
+  .subtitle { font-size: 14px; color: var(--muted); margin: 0 0 20px 0; }
+  .route-scroll { overflow-x: auto; padding-bottom: 8px; }
+  .route-scroll svg { display: block; min-width: 950px; width: 100%; height: 90px; }
+  .route-dot { cursor: pointer; }
+  .chapter-picker { display: flex; align-items: center; gap: 8px; margin: 8px 0 16px 0; flex-wrap: wrap; }
+  .chapter-picker select, #rate-select {
+    font-size: 14px;
+    padding: 8px 10px;
+    border: 1px solid var(--border2);
+    background: var(--field-bg);
+    color: var(--ink);
+    border-radius: 6px;
+    max-width: 100%;
+    height: 38px;
+    box-sizing: border-box;
+  }
+  .chapter-picker select { flex: 1; min-width: 180px; }
+  .card {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .card-top { display: flex; align-items: center; justify-content: flex-end; margin-bottom: 14px; }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .badge-muted {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted2);
+  }
+  .kind-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .chapter-icon { font-size: 22px; line-height: 1; }
+  .kind-chip {
+    font-size: 12px;
+    background: var(--chip-bg);
+    color: var(--violet);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--title-ink);
+    margin: 0;
+  }
+  .direction { font-size: 12px; color: var(--muted2); margin: 0 0 4px 0; }
+  .prompt { font-size: 18px; color: var(--ink); margin: 0 0 14px 0; }
+  .prompt-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .prompt-row .prompt { margin-bottom: 0; }
+  .options { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 12px; }
+  .opt-btn {
+    text-align: left;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid var(--border2);
+    background: var(--field-bg);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .opt-btn:disabled { cursor: default; }
+  .opt-correct { background: var(--ok-bg); border-color: var(--ok-border); }
+  .opt-wrong { background: var(--bad-bg); border-color: var(--bad-border); }
+  .opt-row { display: flex; align-items: center; gap: 6px; }
+  .opt-row .opt-btn { flex: 1; }
+  .speak-btn {
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--border2); background: var(--field-bg); color: var(--ink);
+    cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;
+  }
+  .feedback { margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 14px; }
+  .feedback.ok { background: var(--ok-bg); color: var(--ok-text); }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad-text); }
+  .feedback p { margin: 0 0 6px 0; }
+  .feedback .stat-line { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .stat-dots { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 2px 0 14px 0; }
+  .stat-dots .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .stat-dots .dot-correct { background: var(--ok-border); }
+  .stat-dots .dot-wrong { background: var(--bad-border); }
+  .next-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    color: var(--bg);
+    background: var(--accent);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .next-btn:disabled { background: var(--border2); cursor: default; }
+  .footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--muted2);
+  }
+  .footer-row button {
+    background: none;
+    border: none;
+    color: var(--muted2);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  /* ---- Hör-Modus (am- = audio mode) ---- */
+  .am-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 24px; text-align: center; }
+  .am-progress { font-family: var(--font-mono); font-size: 12px; color: var(--muted2); margin-bottom: 18px; }
+  .am-phase-label { font-size: 12px; color: var(--violet); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; height: 16px; }
+  .am-lang-tag { font-size: 11px; color: var(--muted2); margin-bottom: 4px; }
+  .am-display-text { font-size: 22px; font-family: var(--font-display); color: var(--title-ink); min-height: 64px; display: flex; align-items: center; justify-content: center; padding: 0 8px; }
+  .am-display-text.dim { color: var(--border2); }
+  .am-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 20px; }
+  .am-ctrl-btn {
+    border: 1px solid var(--border2); background: var(--field-bg); color: var(--ink);
+    border-radius: 50%; width: 44px; height: 44px; font-size: 18px; cursor: pointer; font-family: inherit;
+    display: flex; align-items: center; justify-content: center;
+    font-variant-emoji: text;
+  }
+  .am-play-btn {
+    border: none; background: var(--accent); color: var(--bg);
+    border-radius: 50%; width: 68px; height: 68px; font-size: 26px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .am-options-row { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; font-size: 13px; color: var(--muted); }
+  .am-footer-note { text-align: center; font-size: 11px; color: var(--muted2); margin-top: 16px; }
+  .am-voice-warning { background: #F4E3E0; color: #7A2E24; font-size: 12px; padding: 8px 10px; border-radius: 6px; margin-bottom: 14px; }
+  .dlg-lines { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+  .dlg-line { display: flex; gap: 8px; align-items: baseline; padding: 6px 10px; border-radius: 8px; font-size: 14px; color: var(--muted2); transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease; }
+  .dlg-line.dlg-active { background: var(--field-bg); color: var(--ink); font-weight: 600; }
+  .dlg-line.dlg-faded { opacity: 0.2; }
+  .dlg-line.dlg-placeholder { opacity: 0; pointer-events: none; }
+  .dlg-speaker { font-size: 11px; font-weight: 700; color: var(--accent); min-width: 18px; }
+
+  /* ---- Moduswechsel-Switch ---- */
+  #mode-toggle {
+    position: fixed; top: 14px; right: 14px; z-index: 50;
+    width: 68px; height: 34px; border-radius: 17px; border: 1px solid var(--border2);
+    background: var(--field-bg); cursor: pointer;
+    display: flex; align-items: center; padding: 3px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  #mode-toggle .mode-knob {
+    position: absolute; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent); top: 3px; left: 3px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+  #mode-toggle.audio .mode-knob { transform: translateX(34px); }
+  #mode-toggle .mode-icon {
+    position: relative; z-index: 1; flex: 1; text-align: center;
+    font-size: 14px; color: var(--muted2); pointer-events: none;
+  }
+  #mode-toggle .mode-icon.active { color: var(--bg); }
+
+  @media (max-width: 480px) {
+    .card { padding: 16px; }
+  }
+  @media (max-width: 640px) {
+    .eyebrow { display: none; }
+    h1 { font-size: 20px; }
+    .subtitle { display: none; }
+    .route-scroll { display: none; }
+    .footer-row { justify-content: flex-end; }
+    .footer-text { display: none; }
+    #mode-toggle { width: 60px; height: 30px; top: 10px; right: 10px; }
+    #mode-toggle .mode-knob { width: 22px; height: 22px; }
+    #mode-toggle.audio .mode-knob { transform: translateX(30px); }
+  }
+</style>
+</head>
+<body>
+<div id="mode-toggle" title="Modus wechseln">
+  <span class="mode-knob"></span>
+  <span class="mode-icon" id="mode-icon-quiz">✓</span>
+  <span class="mode-icon" id="mode-icon-audio">♪</span>
+</div>
+<div class="wrap" id="app"></div>
+<div class="wrap spotify-wrap">
+  <a class="spotify-link" href="https://open.spotify.com/playlist/23nyr9xLOE8p0FRkDw99ka?si=X_sMK5OjQsWcy6Gn7NuWsw" target="_blank" rel="noopener">Musik in Spotify öffnen</a>
+</div>
+
+<script>
+/* =================================================================
+   1) DATEN (gemeinsam fuer Quiz- und Hoer-Modus)
+================================================================= */
+function mk(arr) { return arr.map(function(p){ return { fr: p[0], de: p[1] }; }); }
+
+var CHAPTER_TITLES = [
+  "Anreise & VW Bus","VW Bus: Panne & Werkstatt","Ankunft auf dem Campingplatz",
+  "Übergabe bei der Abreise","Aquapark & Pools","Sport & Freizeit","Wäscherei",
+  "Épicerie & Snacks","Einkaufen & Selbstkochen","Bezahlen allgemein","Restaurant",
+  "Eis essen","Kajak fahren","Museum","Allgemein & Small Talk","Zahlen & Uhrzeiten",
+  "Wetter","Kleine Wehwehchen","Für den Notfall"
+];
+
+var CHAPTER_ICONS = [
+  "🚐","🔧","🏕️","🔑","🏊","🎾","🧺","🥖","🛒","💳",
+  "🍽️","🍦","🛶","🖼️","💬","🔢","⛅","🩹","🚨","📋"
+];
+
+var PHRASE_DEFS = [
+  mk([
+    ["Où pouvons-nous nous garer pour la nuit ?", "Wo können wir für die Nacht parken?"],
+    ["Est-ce qu'on peut dormir ici, dans le van ?", "Können wir hier im Van schlafen?"],
+    ["Le plein, s'il vous plaît.", "Volltanken, bitte."],
+    ["Où sont les toilettes / la station-service la plus proche ?", "Wo sind die Toiletten / die nächste Tankstelle?"]
+  ]),
+  mk([
+    ["Notre van est en panne.", "Unser Van hat eine Panne."],
+    ["Pouvez-vous nous envoyer une dépanneuse ?", "Können Sie uns einen Abschleppwagen schicken?"],
+    ["Où est le garage le plus proche ?", "Wo ist die nächste Werkstatt?"],
+    ["C'est un problème de moteur / de batterie / de pneu.", "Es ist ein Problem mit dem Motor / der Batterie / dem Reifen."],
+    ["Nous avons un pneu crevé.", "Wir haben einen platten Reifen."],
+    ["Pouvez-vous nous aider à changer la roue ?", "Können Sie uns beim Radwechsel helfen?"],
+    ["Du gazole ou de l'essence ?", "Diesel oder Benzin?"],
+    ["Combien de temps faut-il pour la réparation ?", "Wie lange dauert die Reparatur?"],
+    ["Pouvez-vous vérifier la pression des pneus / le niveau d'huile ?", "Können Sie den Reifendruck / den Ölstand prüfen?"]
+  ]),
+  mk([
+    ["Bonjour, nous avons réservé un mobil-home au nom de [Name].", "Guten Tag, wir haben ein Mobilehome auf den Namen [Name] reserviert."],
+    ["Faut-il prendre rendez-vous pour la remise des clés ?", "Muss man einen Termin für die Schlüsselübergabe vereinbaren?"],
+    ["Je voudrais réserver un créneau pour l'état des lieux d'entrée.", "Ich möchte einen Termin für die Zustandskontrolle bei der Ankunft buchen."],
+    ["À quelle heure pouvons-nous prendre possession du mobil-home ?", "Um wie viel Uhr können wir das Mobilehome beziehen?"],
+    ["Faites-vous l'état des lieux avec nous, ou devons-nous le faire seuls ?", "Machen Sie die Zustandsaufnahme mit uns zusammen, oder müssen wir das allein tun?"],
+    ["Pouvez-vous noter que ceci est déjà abîmé / manquant ?", "Können Sie vermerken, dass dies bereits beschädigt / nicht vorhanden ist?"],
+    ["Combien de clés recevons-nous ?", "Wie viele Schlüssel bekommen wir?"],
+    ["Où se trouve l'emplacement numéro… ?", "Wo befindet sich Stellplatz Nummer…?"],
+    ["Avez-vous un plan du camping ?", "Haben Sie einen Lageplan vom Campingplatz?"],
+    ["Le Wi-Fi fonctionne où ?", "Wo funktioniert das WLAN?"],
+    ["Notre climatisation / réfrigérateur ne fonctionne pas.", "Unsere Klimaanlage / unser Kühlschrank funktioniert nicht."],
+    ["Le logement est sale et doit être nettoyé.", "Die Unterkunft ist schmutzig und muss gereinigt werden."],
+    ["Il y a un problème avec la fenêtre / le robinet / les toilettes / la cuisinière.", "Es gibt ein Problem mit dem Fenster / dem Wasserhahn / der Toilette / dem Herd."],
+    ["Pouvez-vous nous donner un adaptateur / une deuxième clé ?", "Können Sie uns einen Adapter / einen zweiten Schlüssel geben?"],
+    ["Où pouvons-nous jeter les poubelles / trier les déchets ?", "Wo können wir den Müll wegbringen / trennen?"],
+    ["La réception est ouverte jusqu'à quelle heure ?", "Bis wie viel Uhr ist die Rezeption geöffnet?"]
+  ]),
+  mk([
+    ["À quelle heure devons-nous libérer le mobil-home le jour du départ ?", "Um wie viel Uhr müssen wir das Mobilehome am Abreisetag räumen?"],
+    ["Faut-il prendre rendez-vous pour l'état des lieux de sortie ?", "Muss man einen Termin für die Abnahme bei der Abreise vereinbaren?"],
+    ["À quelle heure aura lieu la vérification finale ?", "Um wie viel Uhr findet die Endkontrolle statt?"],
+    ["Où devons-nous déposer les clés ?", "Wo müssen wir die Schlüssel abgeben?"],
+    ["Quand la caution sera-t-elle remboursée ?", "Wann wird die Kaution zurückerstattet?"]
+  ]),
+  mk([
+    ["À quelle heure ouvre / ferme le parc aquatique ?", "Um wie viel Uhr öffnet / schließt der Aquapark?"],
+    ["Est-ce que les toboggans sont ouverts toute la journée ?", "Sind die Rutschen den ganzen Tag geöffnet?"],
+    ["Le grand toboggan, c'est à partir de quel âge ?", "Ab welchem Alter ist die große Rutsche erlaubt?"],
+    ["Où sont les vestiaires / les douches ?", "Wo sind die Umkleiden / Duschen?"]
+  ]),
+  mk([
+    ["Où puis-je réserver une activité (escalade, tir à l'arc, canoë) ?", "Wo kann ich eine Aktivität buchen (Klettern, Bogenschießen, Kanu)?"],
+    ["Peut-on réserver un terrain de tennis / de pétanque ?", "Kann man einen Tennisplatz / eine Boule-Bahn reservieren?"],
+    ["Avez-vous un court de libre à quatorze heures ?", "Haben Sie um vierzehn Uhr einen freien Platz?"],
+    ["C'est combien pour une heure ?", "Was kostet eine Stunde?"],
+    ["Peut-on louer des raquettes / des boules ?", "Kann man Schläger / Boule-Kugeln ausleihen?"],
+    ["Combien coûte la location de raquettes pour une heure ?", "Was kostet der Schlägerverleih pro Stunde?"],
+    ["Avez-vous des balles, ou faut-il les acheter ?", "Haben Sie Bälle, oder muss man sie kaufen?"],
+    ["Où peut-on louer des vélos ?", "Wo kann man Fahrräder ausleihen?"],
+    ["Faut-il réserver à l'avance ?", "Muss man im Voraus reservieren?"],
+    ["Le matériel est-il fourni ?", "Wird das Material gestellt?"]
+  ]),
+  mk([
+    ["Où se trouve la laverie ?", "Wo ist die Wäscherei?"],
+    ["Comment fonctionne la machine à laver / le sèche-linge ?", "Wie funktioniert die Waschmaschine / der Trockner?"],
+    ["Avez-vous de la lessive ?", "Haben Sie Waschmittel?"],
+    ["Faut-il des jetons ou une carte pour les machines ?", "Braucht man Münzen/Jetons oder eine Karte für die Maschinen?"]
+  ]),
+  mk([
+    ["Vendez-vous du pain frais tous les matins ?", "Verkaufen Sie jeden Morgen frisches Brot?"],
+    ["Faut-il commander le pain à l'avance ?", "Muss man das Brot vorbestellen?"],
+    ["Faites-vous des plats à emporter ?", "Bieten Sie Essen zum Mitnehmen an?"],
+    ["Peut-on commander une pizza pour ce soir ?", "Können wir für heute Abend Pizza bestellen?"],
+    ["Vous prenez la carte bancaire ?", "Nehmen Sie Kartenzahlung?"],
+    ["Où puis-je acheter des billets pour les Gorges de l'Ardèche / la Grotte Chauvet ?", "Wo kann ich Tickets für die Gorges de l'Ardèche / die Grotte Chauvet kaufen?"]
+  ]),
+  mk([
+    ["Où est le marché / le supermarché le plus proche ?", "Wo ist der nächste Markt / Supermarkt?"],
+    ["Je voudrais un kilo de tomates, s'il vous plaît.", "Ich hätte gern ein Kilo Tomaten, bitte."],
+    ["C'est combien, le kilo ?", "Was kostet das Kilo?"],
+    ["Avez-vous du pain frais / des œufs / du fromage local ?", "Haben Sie frisches Brot / Eier / lokalen Käse?"],
+    ["Ça se mange comment ?", "Wie isst man das?"],
+    ["Je peux goûter ?", "Darf ich das probieren?"],
+    ["Je peux avoir un sac, s'il vous plaît ?", "Kann ich eine Tüte bekommen, bitte?"]
+  ]),
+  mk([
+    ["Combien je vous dois ?", "Wie viel schulde ich Ihnen?"],
+    ["Vous acceptez les paiements sans contact ?", "Akzeptieren Sie kontaktloses Bezahlen?"],
+    ["Je paie en espèces / par carte.", "Ich zahle bar / mit Karte."],
+    ["Avez-vous la monnaie sur un billet de cinquante euros ?", "Können Sie auf einen 50-Euro-Schein herausgeben?"],
+    ["Le service est-il compris ?", "Ist die Bedienung inbegriffen?"],
+    ["Pouvez-vous me faire un reçu, s'il vous plaît ?", "Können Sie mir eine Quittung geben, bitte?"]
+  ]),
+  mk([
+    ["Une table pour quatre, s'il vous plaît.", "Einen Tisch für vier, bitte."],
+    ["C'est possible de ne prendre qu'une boisson ?", "Ist es in Ordnung, wenn wir nur etwas trinken?"],
+    ["Faut-il réserver pour ce soir ?", "Muss man für heute Abend reservieren?"],
+    ["Qu'est-ce que vous nous conseillez ?", "Was empfehlen Sie uns?"],
+    ["Je voudrais une pizza margherita et des frites.", "Ich hätte gern eine Pizza Margherita und Pommes."],
+    ["Sans oignons / sans salade, s'il vous plaît.", "Ohne Zwiebeln / ohne Salat, bitte."],
+    ["Pouvez-vous apporter ce plat en même temps que les entrées, s'il vous plaît ?", "Können Sie dieses Gericht bitte zusammen mit den Vorspeisen bringen?"],
+    ["L'addition, s'il vous plaît.", "Die Rechnung, bitte."],
+    ["C'était très bon, merci !", "Das war sehr lecker, danke!"]
+  ]),
+  mk([
+    ["Deux boules, s'il vous plaît : chocolat et fraise.", "Zwei Kugeln bitte: Schokolade und Erdbeere."],
+    ["Je voudrais un cornet à trois boules, s'il vous plaît.", "Ich hätte gern eine Waffel mit drei Kugeln, bitte."],
+    ["Quels parfums avez-vous ?", "Welche Sorten haben Sie?"],
+    ["Un cornet ou un pot ?", "Waffel oder Becher?"],
+    ["Avec ou sans chantilly ?", "Mit oder ohne Sahne?"],
+    ["vanille", "Vanille"],
+    ["chocolat", "Schokolade"],
+    ["fraise", "Erdbeere"],
+    ["pistache", "Pistazie"],
+    ["caramel au beurre salé", "Karamell mit gesalzener Butter"],
+    ["framboise", "Himbeere"],
+    ["noisette", "Haselnuss"],
+    ["menthe", "Minze mit Schokostückchen"]
+  ]),
+  mk([
+    ["Avez-vous des places pour la descente en canoë demain ?", "Haben Sie noch Plätze für die Kanutour morgen?"],
+    ["Nous voudrions louer deux kayaks pour la journée.", "Wir würden gerne zwei Kajaks für den Tag ausleihen."],
+    ["Faut-il savoir nager ?", "Muss man schwimmen können?"],
+    ["Les gilets de sauvetage sont-ils inclus ?", "Sind Rettungswesten inklusive?"],
+    ["Quel est le point de départ / d'arrivée ?", "Was ist der Start- / Endpunkt?"],
+    ["C'est adapté pour des adolescents ?", "Ist das für Jugendliche geeignet?"],
+    ["Nous avons une tente, des sacs de couchage et des provisions pour la nuit.", "Wir haben ein Zelt, Schlafsäcke und Verpflegung für die Übernachtung dabei."],
+    ["À quelle heure serons-nous récupérés à l'arrivée ?", "Wann werden wir am Ziel abgeholt?"],
+    ["À quelle heure au plus tard devons-nous y être ?", "Wann müssen wir spätestens dort sein?"],
+    ["Je vous enverrai un message / je vous appellerai quand nous serons arrivés.", "Ich schreibe eine Nachricht / ich rufe an, wenn wir angekommen sind."]
+  ]),
+  mk([
+    ["Deux adultes et deux adolescents, s'il vous plaît.", "Zwei Erwachsene und zwei Jugendliche, bitte."],
+    ["Y a-t-il un tarif famille ?", "Gibt es einen Familientarif?"],
+    ["Y a-t-il une visite guidée en allemand ou en anglais ?", "Gibt es eine Führung auf Deutsch oder Englisch?"],
+    ["Est-ce qu'on peut prendre des photos ?", "Darf man fotografieren?"]
+  ]),
+  mk([
+    ["Merci beaucoup, c'est très gentil.", "Vielen Dank, das ist sehr nett."],
+    ["Excusez-moi, je ne parle pas très bien français.", "Entschuldigung, ich spreche nicht sehr gut Französisch."],
+    ["Pouvez-vous parler un peu plus lentement, s'il vous plaît ?", "Können Sie bitte etwas langsamer sprechen?"],
+    ["Comment dit-on … en français ?", "Wie sagt man … auf Französisch?"],
+    ["Bonne journée !", "Schönen Tag noch!"]
+  ]),
+  mk([
+    ["zéro", "0"], ["un", "1"], ["deux", "2"], ["trois", "3"], ["quatre", "4"],
+    ["cinq", "5"], ["six", "6"], ["sept", "7"], ["huit", "8"], ["neuf", "9"],
+    ["dix", "10"], ["onze", "11"], ["treize", "13"], ["quinze", "15"],
+    ["dix-sept", "17"], ["dix-neuf", "19"], ["vingt", "20"],
+    ["trente", "30"], ["quarante", "40"], ["cinquante", "50"], ["soixante", "60"],
+    ["soixante-dix", "70"], ["quatre-vingts", "80"], ["quatre-vingt-dix", "90"], ["cent", "100"],
+    ["Quelle heure est-il ?", "Wie spät ist es?"],
+    ["Il est dix heures.", "Es ist zehn Uhr."],
+    ["Il est dix heures et demie.", "Es ist halb elf."],
+    ["À quelle heure… ?", "Um wie viel Uhr…?"],
+    ["Demain matin / cet après-midi / ce soir.", "Morgen früh / heute Nachmittag / heute Abend."]
+  ]),
+  mk([
+    ["Quel temps fait-il aujourd'hui ?", "Wie ist das Wetter heute?"],
+    ["Il fait beau / très chaud / froid.", "Es ist schön / sehr heiß / kalt."],
+    ["Il va pleuvoir cet après-midi.", "Es wird heute Nachmittag regnen."],
+    ["Y a-t-il de l'orage annoncé ?", "Ist Gewitter angesagt?"],
+    ["Il y a beaucoup de soleil, pensez à la crème solaire.", "Es ist sehr sonnig, denkt an die Sonnencreme."],
+    ["Le niveau de la rivière est-il assez haut pour le canoë ?", "Ist der Wasserstand des Flusses hoch genug fürs Kanufahren?"]
+  ]),
+  mk([
+    ["J'ai un coup de soleil.", "Ich habe einen Sonnenbrand."],
+    ["J'ai été piqué(e) par un moustique / une guêpe.", "Ich wurde von einer Mücke / Wespe gestochen."],
+    ["J'ai une ampoule au pied.", "Ich habe eine Blase am Fuß."],
+    ["Avez-vous une crème contre les piqûres / les coups de soleil ?", "Haben Sie eine Creme gegen Insektenstiche / Sonnenbrand?"],
+    ["Avez-vous des pansements / un désinfectant ?", "Haben Sie Pflaster / ein Desinfektionsmittel?"],
+    ["J'ai mal au ventre / à la tête / à la gorge.", "Ich habe Bauch-/Kopf-/Halsschmerzen."],
+    ["Avez-vous quelque chose contre les nausées ?", "Haben Sie etwas gegen Übelkeit?"]
+  ]),
+  mk([
+    ["Au secours !", "Hilfe!"],
+    ["Appelez un médecin / les pompiers, s'il vous plaît.", "Rufen Sie bitte einen Arzt / die Feuerwehr."],
+    ["Où est l'hôpital / la pharmacie le plus proche ?", "Wo ist das nächste Krankenhaus / die nächste Apotheke?"]
+  ])
+];
+
+var VOCAB_DEFS = [
+  mk([["la nuit","die Nacht"],["une aire de camping-car","ein Wohnmobil-Stellplatz"],["le plein","volltanken"],["la station-service","die Tankstelle"],["le van","der Van"]]),
+  mk([["la panne","die Panne"],["le garage","die Werkstatt"],["la dépanneuse","der Abschleppwagen"],["le pneu crevé","der platte Reifen"],["la batterie","die Batterie"],["le gazole","der Diesel"]]),
+  mk([["un créneau","ein Termin/Zeitfenster"],["l'état des lieux","die Zustandsaufnahme"],["abîmé","beschädigt"],["l'emplacement","der Stellplatz"],["la climatisation","die Klimaanlage"],["le réfrigérateur","der Kühlschrank"],["sale","schmutzig"],["la réception","die Rezeption"]]),
+  mk([["le départ","die Abreise"],["libérer","räumen"],["la vérification finale","die Endkontrolle"],["la caution","die Kaution"]]),
+  mk([["le parc aquatique","der Wasserpark"],["le toboggan","die Wasserrutsche"],["le vestiaire","die Umkleide"],["la douche","die Dusche"]]),
+  mk([["un court","ein Tennisplatz"],["libre","frei"],["une raquette","ein Schläger"],["une boule","eine Boule-Kugel"],["le matériel","das Material"]]),
+  mk([["la laverie","die Wäscherei"],["la machine à laver","die Waschmaschine"],["le sèche-linge","der Trockner"],["la lessive","das Waschmittel"]]),
+  mk([["le pain","das Brot"],["à l'avance","im Voraus"],["un plat à emporter","ein Gericht zum Mitnehmen"],["un billet","ein Ticket"]]),
+  mk([["le marché","der Markt"],["le supermarché","der Supermarkt"],["un kilo","ein Kilo"],["un œuf","ein Ei"],["le fromage","der Käse"],["une livre","ein Pfund"],["cinq cents grammes","fünfhundert Gramm"],["un litre","ein Liter"],["une bouteille","eine Flasche"],["un morceau","ein Stück"],["dix tranches","zehn Scheiben"],["une douzaine","ein Dutzend"],["un pot","ein Glas/Becher"],["un sachet","eine Tüte/ein Beutel"],["un peu","ein bisschen"],["beaucoup","viel"],["quelques","ein paar"],["un peu plus","(etwas) mehr"],["un peu moins","(etwas) weniger"]]),
+  mk([["la monnaie","das Wechselgeld"],["une pièce","eine Münze"],["les espèces","das Bargeld"],["un reçu","eine Quittung"],["le service","die Bedienung"]]),
+  mk([["une table","ein Tisch"],["une boisson","ein Getränk"],["une entrée","eine Vorspeise"],["l'addition","die Rechnung"],["une assiette","ein Teller"]]),
+  mk([["une boule","eine Kugel"],["un cornet","eine Waffel"],["un pot","ein Becher"],["un parfum","eine Eissorte"],["la chantilly","die Schlagsahne"]]),
+  mk([["la descente","die Kanutour"],["un gilet de sauvetage","eine Rettungsweste"],["une tente","ein Zelt"],["un sac de couchage","ein Schlafsack"],["des provisions","Verpflegung"]]),
+  mk([["un adulte","ein Erwachsener"],["un adolescent","ein Jugendlicher"],["un tarif famille","ein Familientarif"],["une visite guidée","eine Führung"]]),
+  mk([["gentil","nett"],["lentement","langsam"],["bonne journée","schönen Tag"]]),
+  mk([["l'heure","die Uhrzeit"],["la minute","die Minute"],["demain","morgen"],["ce soir","heute Abend"]]),
+  mk([["le temps","das Wetter"],["la pluie","der Regen"],["l'orage","das Gewitter"],["le soleil","die Sonne"],["la crème solaire","die Sonnencreme"]]),
+  mk([["un coup de soleil","ein Sonnenbrand"],["une piqûre","ein Stich"],["une ampoule","eine Blase"],["un pansement","ein Pflaster"],["un désinfectant","ein Desinfektionsmittel"]]),
+  mk([["le secours","die Hilfe"],["un médecin","ein Arzt"],["les pompiers","die Feuerwehr"],["la pharmacie","die Apotheke"]])
+];
+
+var CONJ_DEFS = [
+  { inf: "vouloir", de: "wollen", ch: 0, forms: { je:"je veux", tu:"tu veux", il:"il veut", nous:"nous voulons", vous:"vous voulez", ils:"ils veulent" }, deForms: { je:"Ich will", tu:"Du willst", il:"Er will", nous:"Wir wollen", vous:"Sie wollen", ils:"Sie wollen (mehrere)" } },
+  { inf: "pouvoir", de: "können", ch: 0, forms: { je:"je peux", tu:"tu peux", il:"il peut", nous:"nous pouvons", vous:"vous pouvez", ils:"ils peuvent" }, deForms: { je:"Ich kann", tu:"Du kannst", il:"Er kann", nous:"Wir können", vous:"Sie können", ils:"Sie können (mehrere)" } },
+  { inf: "avoir", de: "haben", ch: 0, forms: { je:"j'ai", tu:"tu as", il:"il a", nous:"nous avons", vous:"vous avez", ils:"ils ont" }, deForms: { je:"Ich habe", tu:"Du hast", il:"Er hat", nous:"Wir haben", vous:"Sie haben", ils:"Sie haben (mehrere)" } },
+  { inf: "faire", de: "machen", ch: 0, forms: { je:"je fais", tu:"tu fais", il:"il fait", nous:"nous faisons", vous:"vous faites", ils:"ils font" }, deForms: { je:"Ich mache", tu:"Du machst", il:"Er macht", nous:"Wir machen", vous:"Sie machen", ils:"Sie machen (mehrere)" } },
+  { inf: "se garer", de: "parken", ch: 0, forms: { je:"je me gare", tu:"tu te gares", il:"il se gare", nous:"nous nous garons", vous:"vous vous garez", ils:"ils se garent" }, deForms: { je:"Ich parke", tu:"Du parkst", il:"Er parkt", nous:"Wir parken", vous:"Sie parken", ils:"Sie parken (mehrere)" } },
+  { inf: "dormir", de: "schlafen", ch: 0, forms: { je:"je dors", tu:"tu dors", il:"il dort", nous:"nous dormons", vous:"vous dormez", ils:"ils dorment" }, deForms: { je:"Ich schlafe", tu:"Du schläfst", il:"Er schläft", nous:"Wir schlafen", vous:"Sie schlafen", ils:"Sie schlafen (mehrere)" } },
+  { inf: "vérifier", de: "überprüfen", ch: 1, forms: { je:"je vérifie", tu:"tu vérifies", il:"il vérifie", nous:"nous vérifions", vous:"vous vérifiez", ils:"ils vérifient" }, deForms: { je:"Ich überprüfe", tu:"Du überprüfst", il:"Er überprüft", nous:"Wir überprüfen", vous:"Sie überprüfen", ils:"Sie überprüfen (mehrere)" } },
+  { inf: "réserver", de: "reservieren", ch: 2, forms: { je:"je réserve", tu:"tu réserves", il:"il réserve", nous:"nous réservons", vous:"vous réservez", ils:"ils réservent" }, deForms: { je:"Ich reserviere", tu:"Du reservierst", il:"Er reserviert", nous:"Wir reservieren", vous:"Sie reservieren", ils:"Sie reservieren (mehrere)" } },
+  { inf: "recevoir", de: "bekommen", ch: 2, forms: { je:"je reçois", tu:"tu reçois", il:"il reçoit", nous:"nous recevons", vous:"vous recevez", ils:"ils reçoivent" }, deForms: { je:"Ich bekomme", tu:"Du bekommst", il:"Er bekommt", nous:"Wir bekommen", vous:"Sie bekommen", ils:"Sie bekommen (mehrere)" } },
+  { inf: "rembourser", de: "zurückerstatten", ch: 3, forms: { je:"je rembourse", tu:"tu rembourses", il:"il rembourse", nous:"nous remboursons", vous:"vous remboursez", ils:"ils remboursent" }, deForms: { je:"Ich erstatte zurück", tu:"Du erstattest zurück", il:"Er erstattet zurück", nous:"Wir erstatten zurück", vous:"Sie erstatten zurück", ils:"Sie erstatten zurück (mehrere)" } },
+  { inf: "ouvrir", de: "öffnen", ch: 4, forms: { je:"j'ouvre", tu:"tu ouvres", il:"il ouvre", nous:"nous ouvrons", vous:"vous ouvrez", ils:"ils ouvrent" }, deForms: { je:"Ich öffne", tu:"Du öffnest", il:"Er öffnet", nous:"Wir öffnen", vous:"Sie öffnen", ils:"Sie öffnen (mehrere)" } },
+  { inf: "louer", de: "mieten/leihen", ch: 5, forms: { je:"je loue", tu:"tu loues", il:"il loue", nous:"nous louons", vous:"vous louez", ils:"ils louent" }, deForms: { je:"Ich leihe", tu:"Du leihst", il:"Er leiht", nous:"Wir leihen", vous:"Sie leihen", ils:"Sie leihen (mehrere)" } },
+  { inf: "coûter", de: "kosten", ch: 5, forms: { je:"je coûte", tu:"tu coûtes", il:"il coûte", nous:"nous coûtons", vous:"vous coûtez", ils:"ils coûtent" }, deForms: { je:"Ich koste", tu:"Du kostest", il:"Er kostet", nous:"Wir kosten", vous:"Sie kosten", ils:"Sie kosten (mehrere)" } },
+  { inf: "fonctionner", de: "funktionieren", ch: 6, forms: { je:"je fonctionne", tu:"tu fonctionnes", il:"il fonctionne", nous:"nous fonctionnons", vous:"vous fonctionnez", ils:"ils fonctionnent" }, deForms: { je:"Ich funktioniere", tu:"Du funktionierst", il:"Er funktioniert", nous:"Wir funktionieren", vous:"Sie funktionieren", ils:"Sie funktionieren (mehrere)" } },
+  { inf: "commander", de: "bestellen", ch: 7, forms: { je:"je commande", tu:"tu commandes", il:"il commande", nous:"nous commandons", vous:"vous commandez", ils:"ils commandent" }, deForms: { je:"Ich bestelle", tu:"Du bestellst", il:"Er bestellt", nous:"Wir bestellen", vous:"Sie bestellen", ils:"Sie bestellen (mehrere)" } },
+  { inf: "manger", de: "essen", ch: 8, forms: { je:"je mange", tu:"tu manges", il:"il mange", nous:"nous mangeons", vous:"vous mangez", ils:"ils mangent" }, deForms: { je:"Ich esse", tu:"Du isst", il:"Er isst", nous:"Wir essen", vous:"Sie essen", ils:"Sie essen (mehrere)" } },
+  { inf: "payer", de: "bezahlen", ch: 9, forms: { je:"je paie", tu:"tu paies", il:"il paie", nous:"nous payons", vous:"vous payez", ils:"ils paient" }, deForms: { je:"Ich bezahle", tu:"Du bezahlst", il:"Er bezahlt", nous:"Wir bezahlen", vous:"Sie bezahlen", ils:"Sie bezahlen (mehrere)" } },
+  { inf: "devoir", de: "müssen/schulden", ch: 9, forms: { je:"je dois", tu:"tu dois", il:"il doit", nous:"nous devons", vous:"vous devez", ils:"ils doivent" }, deForms: { je:"Ich muss", tu:"Du musst", il:"Er muss", nous:"Wir müssen", vous:"Sie müssen", ils:"Sie müssen (mehrere)" } },
+  { inf: "servir", de: "servieren", ch: 10, forms: { je:"je sers", tu:"tu sers", il:"il sert", nous:"nous servons", vous:"vous servez", ils:"ils servent" }, deForms: { je:"Ich serviere", tu:"Du servierst", il:"Er serviert", nous:"Wir servieren", vous:"Sie servieren", ils:"Sie servieren (mehrere)" } },
+  { inf: "apporter", de: "bringen", ch: 10, forms: { je:"j'apporte", tu:"tu apportes", il:"il apporte", nous:"nous apportons", vous:"vous apportez", ils:"ils apportent" }, deForms: { je:"Ich bringe", tu:"Du bringst", il:"Er bringt", nous:"Wir bringen", vous:"Sie bringen", ils:"Sie bringen (mehrere)" } },
+  { inf: "savoir", de: "können/wissen", ch: 12, forms: { je:"je sais", tu:"tu sais", il:"il sait", nous:"nous savons", vous:"vous savez", ils:"ils savent" }, deForms: { je:"Ich weiß/kann", tu:"Du weißt/kannst", il:"Er weiß/kann", nous:"Wir wissen/können", vous:"Sie wissen/können", ils:"Sie wissen/können (mehrere)" } },
+  { inf: "appeler", de: "anrufen", ch: 12, forms: { je:"j'appelle", tu:"tu appelles", il:"il appelle", nous:"nous appelons", vous:"vous appelez", ils:"ils appellent" }, deForms: { je:"Ich rufe an", tu:"Du rufst an", il:"Er ruft an", nous:"Wir rufen an", vous:"Sie rufen an", ils:"Sie rufen an (mehrere)" } },
+  { inf: "parler", de: "sprechen", ch: 14, forms: { je:"je parle", tu:"tu parles", il:"il parle", nous:"nous parlons", vous:"vous parlez", ils:"ils parlent" }, deForms: { je:"Ich spreche", tu:"Du sprichst", il:"Er spricht", nous:"Wir sprechen", vous:"Sie sprechen", ils:"Sie sprechen (mehrere)" } }
+];
+
+var SPEISEKARTE_CATEGORIES = [
+  { name: "Fleisch", items: mk([
+    ["le bœuf","Rindfleisch"],["le veau","Kalbfleisch"],["le porc","Schweinefleisch"],["l'agneau","Lamm"],
+    ["le mouton","Hammelfleisch"],["le poulet","Hähnchen"],["la dinde","Pute"],["le canard","Ente"],
+    ["l'oie","Gans"],["le lapin","Kaninchen"],["le gibier","Wild"],["le sanglier","Wildschwein"],
+    ["le cerf","Hirsch"],["le chevreuil","Reh"],["la caille","Wachtel"],["le steak haché","Hackfleisch/Frikadelle"],
+    ["le jambon","Schinken"],["le saucisson","Salami/Landwurst"],["la saucisse","Wurst"],["les abats","Innereien"]
+  ])},
+  { name: "Gemüse", items: mk([
+    ["la carotte","Karotte"],["la pomme de terre","Kartoffel"],["le poireau","Lauch"],["le chou","Kohl"],
+    ["le chou-fleur","Blumenkohl"],["les haricots verts","grüne Bohnen"],["les petits pois","Erbsen"],["l'aubergine","Aubergine"],
+    ["la courgette","Zucchini"],["le poivron","Paprika"],["l'oignon","Zwiebel"],["l'ail","Knoblauch"],
+    ["le champignon","Pilz"],["l'artichaut","Artischocke"],["l'épinard","Spinat"],["la betterave","Rote Bete"],
+    ["le céleri","Sellerie"],["le fenouil","Fenchel"],["la tomate","Tomate"],["la salade verte","grüner Salat"]
+  ])},
+  { name: "Zubereitung", items: mk([
+    ["grillé","gegrillt"],["rôti","gebraten (im Ofen)"],["poêlé","in der Pfanne gebraten"],["frit","frittiert"],
+    ["bouilli","gekocht"],["mijoté","geschmort"],["braisé","geschmort (Braise)"],["cuit au four","im Ofen gebacken"],
+    ["cuit à la vapeur","gedämpft"],["fumé","geräuchert"],["mariné","mariniert"],["farci","gefüllt"],
+    ["gratiné","überbacken"],["pané","paniert"],["cru","roh"],["saignant","blutig (Fleisch)"],
+    ["à point","medium (Fleisch)"],["bien cuit","durchgebraten"],["flambé","flambiert"],["en croûte","in einer Teighülle"]
+  ])},
+  { name: "Fisch & Meeresfrüchte", items: mk([
+    ["le saumon","Lachs"],["la truite","Forelle"],["le thon","Thunfisch"],["la morue","Kabeljau (gesalzen)"],
+    ["le cabillaud","Kabeljau (frisch)"],["la sole","Seezunge"],["les moules","Muscheln"],["les huîtres","Austern"],
+    ["les crevettes","Garnelen"],["le homard","Hummer"]
+  ])},
+  { name: "Sonstiges", items: mk([
+    ["la sauce","Soße"],["le jus","Bratensaft/Jus"],["la crème fraîche","Crème fraîche"],["le fromage de chèvre","Ziegenkäse"],
+    ["le riz","Reis"],["les pâtes","Nudeln"],["la baguette","Baguette"],["la vinaigrette","Vinaigrette/Salatsoße"],
+    ["les herbes de Provence","Provenzalische Kräuter"],["la moutarde","Senf"]
+  ])}
+];
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+function escapeHtml(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+/* =================================================================
+   2) QUIZ-MODUS
+================================================================= */
+var HOMOPHONES = {
+  pain: ["pin"], sale: ["salle"], addition: ["audition"], boisson: ["poisson"],
+  soleil: ["sommeil"], plein: ["plan"], gazole: ["gazelle"], "crevé": ["creusé"],
+  "crevée": ["creusée"], "réparation": ["répétition"], moteur: ["moniteur"], laverie: ["lavabo"],
+  sept: ["cette"], vingt: ["vin"], cent: ["sans", "sang"], deux: ["d'eux"],
+  quatre: ["cadre"], dix: ["dit"], neuf: ["neuve"], cinq: ["sain"]
+};
+var VERB_FORMS = {
+  avez: ["avons", "ont"], avons: ["avez", "ont"], est: ["sont", "était"], sont: ["est"],
+  pouvons: ["pouvez", "peuvent"], pouvez: ["pouvons", "peuvent"], peut: ["peuvent", "peux"],
+  peuvent: ["peut"], voudrais: ["voudrions", "veux"], voudrions: ["voudrais", "voulons"],
+  devons: ["devez", "doit"], recevons: ["recevez", "reçoivent"], faites: ["fait", "font"],
+  fonctionne: ["fonctionnent"], ouvre: ["ouvrent", "ouvrez"], ferme: ["ferment"],
+  "coûte": ["coûtent"], "êtes": ["sont"]
+};
+var NUMBER_UNITS = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf",
+   "dix", "onze", "treize", "quinze", "dix-sept", "dix-neuf", "vingt"];
+var NUMBER_TENS = ["trente", "quarante", "cinquante", "soixante", "soixante-dix",
+   "quatre-vingts", "quatre-vingt-dix", "cent"];
+
+var GROUPS = [
+  ["je", "tu", "il", "elle", "nous", "vous", "ils", "elles", "on"],
+  ["notre", "votre", "leur", "mon", "ton", "son"],
+  ["nos", "vos", "leurs"],
+  ["un", "une"], ["le", "la"], ["les", "des"], ["ce", "cette", "ces"],
+  NUMBER_UNITS,
+  NUMBER_TENS,
+  ["combien", "comment", "quand", "pourquoi"]
+];
+
+function hashStr(s) {
+  var h = 0;
+  for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  return h;
+}
+function findAlternatives(lower) {
+  if (HOMOPHONES[lower]) return { alts: HOMOPHONES[lower], priority: 0 };
+  if (VERB_FORMS[lower]) return { alts: VERB_FORMS[lower], priority: 1 };
+  for (var i = 0; i < GROUPS.length; i++) {
+    if (GROUPS[i].indexOf(lower) !== -1) return { alts: GROUPS[i].filter(function(w){ return w !== lower; }), priority: 2 };
+  }
+  return null;
+}
+function perturbations(sentence) {
+  var tokens = sentence.split(/([A-Za-zÀ-ÖØ-öø-ÿ'’]+)/);
+  var found = [];
+  tokens.forEach(function(tok, i) {
+    if (!/[A-Za-zÀ-ÖØ-öø-ÿ]/.test(tok)) return;
+    var lower = tok.toLowerCase();
+    var hit = findAlternatives(lower);
+    if (!hit) return;
+    hit.alts.forEach(function(alt) {
+      var cased = tok[0] === tok[0].toUpperCase() ? alt.charAt(0).toUpperCase() + alt.slice(1) : alt;
+      var clone = tokens.slice();
+      clone[i] = cased;
+      var variant = clone.join("");
+      if (variant !== sentence) found.push({ text: variant, priority: hit.priority });
+    });
+  });
+  found.sort(function(a,b){ return a.priority - b.priority; });
+  var seen = {}; seen[sentence] = true;
+  var out = [];
+  found.forEach(function(f){ if (!seen[f.text]) { seen[f.text] = true; out.push(f.text); } });
+  return out;
+}
+function buildDistractors(correct, pool) {
+  var seen = {}; seen[correct] = true;
+  var out = [];
+  perturbations(correct).forEach(function(c){
+    if (out.length >= 3) return;
+    if (!seen[c]) { seen[c] = true; out.push(c); }
+  });
+  if (out.length < 3 && pool.length > 0) {
+    var idx = hashStr(correct) % pool.length;
+    var step = 1;
+    while (out.length < 3 && step < pool.length + 5) {
+      idx = (idx + step) % pool.length;
+      var cand = pool[idx];
+      if (!seen[cand]) { seen[cand] = true; out.push(cand); }
+      step++;
+    }
+  }
+  return out.slice(0, 3);
+}
+function buildFrenchMC(kind, dePrompt, correctFR, pool, id) {
+  var distractors = buildDistractors(correctFR, pool);
+  var options = distractors.slice();
+  var correctPos = hashStr(dePrompt + kind) % (distractors.length + 1);
+  options.splice(correctPos, 0, correctFR);
+  return { id: id, kind: kind, prompt: dePrompt, options: options, correct: correctPos };
+}
+
+var PERSON_ORDER = ["je", "tu", "il", "nous", "vous", "ils"];
+function stripPronoun(form) {
+  return form.replace(/^(j'|je |tu |il |nous |vous |ils )/, "");
+}
+function buildConjMC(verbDef, person) {
+  var stripped = {};
+  PERSON_ORDER.forEach(function(p){ stripped[p] = stripPronoun(verbDef.forms[p]); });
+  var correctForm = stripped[person];
+  var idx = PERSON_ORDER.indexOf(person);
+  var seenVals = {}; seenVals[correctForm] = true;
+  var distractors = [];
+  var i = idx, guard = 0;
+  while (distractors.length < 3 && guard < 12) {
+    i = (i + 1) % PERSON_ORDER.length;
+    guard++;
+    if (PERSON_ORDER[i] === person) continue;
+    var val = stripped[PERSON_ORDER[i]];
+    if (!seenVals[val]) { seenVals[val] = true; distractors.push(val); }
+  }
+  var options = distractors.slice();
+  var correctPos = hashStr(verbDef.inf + person) % (distractors.length + 1);
+  options.splice(correctPos, 0, correctForm);
+  return {
+    id: "verb-" + verbDef.inf + "-" + person,
+    kind: "verb",
+    prompt: verbDef.deForms[person] + " (" + verbDef.inf + ")",
+    infinitive: verbDef.inf,
+    options: options,
+    correct: correctPos
+  };
+}
+function buildMenuMC(catName, fr, de, categoryPool, id) {
+  var seen = {}; seen[de] = true;
+  var out = [];
+  var idx = hashStr(fr) % categoryPool.length;
+  var step = 1;
+  while (out.length < 3 && step < categoryPool.length + 5) {
+    idx = (idx + step) % categoryPool.length;
+    var cand = categoryPool[idx];
+    if (!seen[cand]) { seen[cand] = true; out.push(cand); }
+    step++;
+  }
+  var options = out.slice();
+  var correctPos = hashStr(fr + catName) % (options.length + 1);
+  options.splice(correctPos, 0, de);
+  return { id: id, kind: "menu", prompt: fr, category: catName, options: options, correct: correctPos };
+}
+
+var PHRASE_POOL = [];
+PHRASE_DEFS.forEach(function(p){ p.forEach(function(x){ PHRASE_POOL.push(x.fr); }); });
+var VOCAB_POOL = [];
+VOCAB_DEFS.forEach(function(p){ p.forEach(function(x){ VOCAB_POOL.push(x.fr); }); });
+
+function isNumberPair(pair) { return /^\d+$/.test(pair.de); }
+function numberPoolFor(fr) {
+  return NUMBER_UNITS.indexOf(fr) !== -1 ? NUMBER_UNITS : NUMBER_TENS;
+}
+
+var CHAPTERS = CHAPTER_TITLES.map(function(title, ci) {
+  var phraseQ = PHRASE_DEFS[ci].map(function(pair, j){
+    var pool = isNumberPair(pair) ? numberPoolFor(pair.fr) : PHRASE_POOL;
+    return buildFrenchMC("phrase", pair.de, pair.fr, pool, "p-" + ci + "-" + j);
+  });
+  var vocabQ = (VOCAB_DEFS[ci] || []).map(function(pair, j){ return buildFrenchMC("vocab", pair.de, pair.fr, VOCAB_POOL, "v-" + ci + "-" + j); });
+  var verbsHere = CONJ_DEFS.filter(function(v){ return v.ch === ci; });
+  var conjQ = [];
+  verbsHere.forEach(function(v){ ["je","tu","il","nous","vous","ils"].forEach(function(p){ conjQ.push(buildConjMC(v, p)); }); });
+  return { title: title, exercises: phraseQ.concat(vocabQ).concat(conjQ) };
+});
+
+var menuExercises = [];
+SPEISEKARTE_CATEGORIES.forEach(function(cat, ci) {
+  var catPool = cat.items.map(function(x){ return x.de; });
+  cat.items.forEach(function(item, j){
+    menuExercises.push(buildMenuMC(cat.name, item.fr, item.de, catPool, "menu-" + ci + "-" + j));
+  });
+});
+CHAPTERS.push({ title: "Speisekarte", exercises: menuExercises });
+
+var TOTAL_EXERCISES = CHAPTERS.reduce(function(s,c){ return s + c.exercises.length; }, 0);
+var STATS_KEY = "ardeche-quiz-stats-v1";
+var KIND_LABEL = { phrase: "📝 Satz", vocab: "🔤 Vokabel", verb: "🔁 Verb", menu: "🍽️ Speisekarte" };
+
+/* ---- Quiz-State ---- */
+var stats = {};
+try {
+  var rawStats = localStorage.getItem(STATS_KEY);
+  if (rawStats) stats = JSON.parse(rawStats);
+} catch (e) { stats = {}; }
+
+var quizOrder = CHAPTERS.map(function(c){ return shuffle(c.exercises.map(function(_,i){ return i; })); });
+var chapterIndex = Math.floor(Math.random() * CHAPTERS.length);
+var posInChapter = 0;
+var selected = null;
+var answered = false;
+
+function saveStats() {
+  try { localStorage.setItem(STATS_KEY, JSON.stringify(stats)); } catch (e) { /* Speichern nicht moeglich */ }
+}
+function currentExercise() {
+  var chapter = CHAPTERS[chapterIndex];
+  var exIdx = quizOrder[chapterIndex][posInChapter];
+  return chapter.exercises[exIdx];
+}
+function isChapterDone(ci) {
+  return CHAPTERS[ci].exercises.every(function(ex){
+    var s = stats[ex.id];
+    return s && (s.correct + s.wrong) > 0;
+  });
+}
+function masteredCount() {
+  var n = 0;
+  Object.keys(stats).forEach(function(id){ if (stats[id].correct > 0) n++; });
+  return n;
+}
+function selectOption(i) {
+  if (answered) return;
+  var exercise = currentExercise();
+  selected = i;
+  answered = true;
+  var ok = i === exercise.correct;
+  var entry = stats[exercise.id] ? Object.assign({}, stats[exercise.id]) : { correct: 0, wrong: 0 };
+  if (ok) entry.correct += 1; else entry.wrong += 1;
+  stats[exercise.id] = entry;
+  saveStats();
+  render();
+}
+function quizGoNext() {
+  var chapter = CHAPTERS[chapterIndex];
+  if (posInChapter < chapter.exercises.length - 1) {
+    posInChapter += 1;
+  } else if (chapterIndex < CHAPTERS.length - 1) {
+    chapterIndex += 1;
+    posInChapter = 0;
+    audioItemIndex = 0;
+  }
+  selected = null;
+  answered = false;
+  render();
+}
+function quizJumpToChapter(i) {
+  chapterIndex = i;
+  posInChapter = 0;
+  audioItemIndex = 0;
+  selected = null;
+  answered = false;
+  render();
+}
+function resetStats() {
+  stats = {};
+  saveStats();
+  render();
+}
+
+function routeSvg() {
+  var n = CHAPTERS.length;
+  var width = 950, height = 90;
+  var points = [];
+  for (var i = 0; i < n; i++) {
+    var x = 25 + (i * (width - 50)) / (n - 1);
+    var y = 45 + Math.sin(i * 0.9) * 26;
+    points.push({ x: x, y: y });
+  }
+  var pathD = points.map(function(p, i){ return (i === 0 ? "M " : "L ") + p.x + " " + p.y; }).join(" ");
+  var dots = points.map(function(p, i){
+    var done = isChapterDone(i);
+    var isCurrent = i === chapterIndex;
+    return '<g class="route-dot" data-jump="' + i + '"><title>' + CHAPTER_ICONS[i] + ' ' + escapeHtml(CHAPTERS[i].title) + '</title>' +
+      '<circle cx="' + p.x + '" cy="' + p.y + '" r="' + (isCurrent ? 13 : 10) + '" ' +
+      'fill="' + (done ? "#1E7A8C" : "#F1EEE3") + '" stroke="' + (isCurrent ? "#E8A93B" : "#8A8365") + '" stroke-width="' + (isCurrent ? 3 : 1.5) + '" />' +
+      '<text x="' + p.x + '" y="' + (p.y + 4) + '" font-size="12" text-anchor="middle">' + CHAPTER_ICONS[i] + '</text>' +
+      '</g>';
+  }).join("");
+  return '<div class="route-scroll"><svg viewBox="0 0 ' + width + ' ' + height + '">' +
+    '<path d="' + pathD + '" fill="none" stroke="#C9C1A8" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 14" />' +
+    dots + '</svg></div>';
+}
+
+function renderQuiz() {
+  var chapter = CHAPTERS[chapterIndex];
+  var exercise = currentExercise();
+  var isLastOverall = chapterIndex === CHAPTERS.length - 1 && posInChapter === chapter.exercises.length - 1;
+  var currentStat = stats[exercise.id];
+
+  var optionIsFrench = exercise.kind !== "menu";
+  var optionsHtml = exercise.options.map(function(opt, i){
+    var cls = "opt-btn";
+    if (answered && i === exercise.correct) cls += " opt-correct";
+    else if (answered && i === selected && i !== exercise.correct) cls += " opt-wrong";
+    var speakBtn = optionIsFrench ? '<button class="speak-btn" data-speak-opt="' + i + '" title="Anhören">♪</button>' : "";
+    return '<div class="opt-row">' +
+      '<button class="' + cls + '" data-opt="' + i + '" ' + (answered ? "disabled" : "") + '>' + escapeHtml(opt) + '</button>' +
+      speakBtn +
+      '</div>';
+  }).join("");
+
+  var dotsHtml = "";
+  if (currentStat && (currentStat.correct > 0 || currentStat.wrong > 0)) {
+    var dots = "";
+    for (var gi = 0; gi < currentStat.correct; gi++) dots += '<span class="dot dot-correct"></span>';
+    for (var ri = 0; ri < currentStat.wrong; ri++) dots += '<span class="dot dot-wrong"></span>';
+    dotsHtml = '<div class="stat-dots">' + dots + '</div>';
+  }
+
+  var feedbackHtml = "";
+  if (answered) {
+    var ok = selected === exercise.correct;
+    feedbackHtml = '<div class="feedback ' + (ok ? "ok" : "bad") + '">' +
+      '<p>' + (ok ? "Richtig !" : "Nicht ganz.") + '</p>' +
+      '<button class="next-btn" id="quiz-next-btn" ' + (isLastOverall ? "disabled" : "") + '>' + (isLastOverall ? "Letzte Frage erreicht" : "Weiter →") + '</button>' +
+      '</div>';
+  }
+
+  var isMobile = window.matchMedia("(max-width: 640px)").matches;
+  var chapterOptions = CHAPTERS.map(function(c, i){
+    var label = isMobile ? escapeHtml(c.title) : (CHAPTER_ICONS[i] + ' ' + escapeHtml(c.title));
+    return '<option value="' + i + '"' + (i === chapterIndex ? " selected" : "") + '>' + label + '</option>';
+  }).join("");
+
+  var html =
+    '<p class="eyebrow">Route Ardèche · Camping Le Pommier</p>' +
+    '<h1>Sur la route – Französisch-Quiz</h1>' +
+    '<p class="subtitle">20 Etappen, ' + TOTAL_EXERCISES + ' Fragen in zufälliger Reihenfolge. ' + masteredCount() + ' / ' + TOTAL_EXERCISES + ' schon mindestens einmal richtig.</p>' +
+    routeSvg() +
+    '<div class="chapter-picker">' +
+      '<select id="quiz-chapter-select">' + chapterOptions + '</select>' +
+    '</div>' +
+    '<div class="card">' +
+      '<div class="card-top">' +
+        '<span class="badge-muted">Frage ' + (posInChapter + 1) + ' / ' + chapter.exercises.length + '</span>' +
+      '</div>' +
+      '<div class="prompt-row"><p class="prompt">' + escapeHtml(exercise.prompt) + '</p>' + ((exercise.kind === "menu" || exercise.kind === "verb") ? '<button class="speak-btn" id="prompt-speak-btn" title="Anhören">♪</button>' : "") + '</div>' +
+      '<div class="options">' + optionsHtml + '</div>' +
+      dotsHtml +
+      feedbackHtml +
+    '</div>' +
+    '<div class="footer-row">' +
+      '<span class="footer-text">Statistik pro Frage wird dauerhaft lokal gespeichert. Reihenfolge wird bei jedem Öffnen neu gemischt.</span>' +
+      '<button id="reset-btn">Statistik zurücksetzen</button>' +
+    '</div>';
+
+  var app = document.getElementById("app");
+  app.innerHTML = html;
+
+  app.querySelectorAll(".opt-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){ selectOption(parseInt(btn.getAttribute("data-opt"), 10)); });
+  });
+  app.querySelectorAll("[data-speak-opt]").forEach(function(btn){
+    btn.addEventListener("click", function(e){
+      e.stopPropagation();
+      var idx = parseInt(btn.getAttribute("data-speak-opt"), 10);
+      speak(currentExercise().options[idx], "fr", null);
+    });
+  });
+  var promptSpeakBtn = document.getElementById("prompt-speak-btn");
+  if (promptSpeakBtn) promptSpeakBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    var ex = currentExercise();
+    var text = ex.kind === "verb" ? ex.infinitive : ex.prompt;
+    speak(text, "fr", null);
+  });
+  var nextBtn = document.getElementById("quiz-next-btn");
+  if (nextBtn) nextBtn.addEventListener("click", quizGoNext);
+  document.getElementById("reset-btn").addEventListener("click", resetStats);
+  document.getElementById("quiz-chapter-select").addEventListener("change", function(e){ quizJumpToChapter(parseInt(e.target.value, 10)); });
+  app.querySelectorAll(".route-dot").forEach(function(g){
+    g.addEventListener("click", function(){ quizJumpToChapter(parseInt(g.getAttribute("data-jump"), 10)); });
+  });
+}
+
+/* =================================================================
+   3) HOER-MODUS
+================================================================= */
+var PERSON_LABEL_FULL = { je: "ich", tu: "du", il: "er", nous: "wir", vous: "Sie/ihr", ils: "sie (mehrere)" };
+
+function audioChapterItems(ci) {
+  var items = [];
+  PHRASE_DEFS[ci].forEach(function(pair, j){
+    items.push({ id: "p-" + ci + "-" + j, first: pair.de, firstLang: "de", second: pair.fr, secondLang: "fr" });
+  });
+  (VOCAB_DEFS[ci] || []).forEach(function(pair, j){
+    items.push({ id: "v-" + ci + "-" + j, first: pair.de, firstLang: "de", second: pair.fr, secondLang: "fr" });
+  });
+  CONJ_DEFS.filter(function(v){ return v.ch === ci; }).forEach(function(v){
+    ["je","tu","il","nous","vous","ils"].forEach(function(p){
+      items.push({
+        id: "verb-" + v.inf + "-" + p,
+        first: v.deForms[p] + " (" + v.inf + ")",
+        firstLang: "de",
+        firstParts: [ { text: v.deForms[p], lang: "de" }, { text: v.inf, lang: "fr" } ],
+        second: v.forms[p],
+        secondLang: "fr"
+      });
+    });
+  });
+  return items;
+}
+
+var AUDIO_CHAPTERS = CHAPTER_TITLES.map(function(title, ci){
+  return { title: title, items: audioChapterItems(ci) };
+});
+var audioMenuItems = [];
+SPEISEKARTE_CATEGORIES.forEach(function(cat, ci){
+  cat.items.forEach(function(item, j){
+    audioMenuItems.push({ id: "menu-" + ci + "-" + j, first: item.fr, firstLang: "fr", second: item.de, secondLang: "de" });
+  });
+});
+AUDIO_CHAPTERS.push({ title: "Speisekarte", items: audioMenuItems });
+
+/* ---- Dialoge (reine Sprachdusche, nur Franzoesisch, ohne Uebersetzung) ---- */
+/* dl() baut Zeilen: [Sprecherkuerzel, Text]. Kuerzel bestimmen nur die Stimme. */
+function dl(arr) { return arr.map(function(p){ return { speaker: p[0], text: p[1] }; }); }
+
+var DIALOGUES = {
+  0: dl([
+    ["A", "On peut se garer ici pour la nuit ?"],
+    ["B", "Non, ici c'est interdit. Il y a une aire un peu plus loin."],
+    ["A", "D'accord, merci. Et le plein, c'est où ?"],
+    ["B", "La station-service est à cent mètres, sur la droite."],
+    ["A", "Où sont les toilettes, s'il vous plaît ?"],
+    ["B", "Juste à côté de la station-service."]
+  ]),
+  1: dl([
+    ["A", "Notre van est en panne, on ne sait pas pourquoi."],
+    ["B", "C'est un problème de moteur ou de batterie ?"],
+    ["A", "Je crois que c'est un pneu crevé."],
+    ["B", "D'accord, on peut vous aider à changer la roue."],
+    ["A", "Combien de temps faut-il pour la réparation ?"],
+    ["B", "Une demi-heure environ, pas plus."]
+  ]),
+  2: dl([
+    ["A", "Bonjour, nous avons réservé un mobil-home au nom de Weber."],
+    ["B", "Bonjour ! Faut-il prendre rendez-vous pour l'état des lieux."],
+    ["A", "Non, je peux le faire tout de suite avec vous."],
+    ["B", "Très bien. Où se trouve l'emplacement numéro douze ?"],
+    ["A", "Tout au fond, à droite après la piscine."],
+    ["B", "Merci. Le Wi-Fi fonctionne où, s'il vous plaît ?"],
+    ["A", "Près de la réception, le signal est meilleur."]
+  ]),
+  3: dl([
+    ["A", "À quelle heure devons-nous libérer le mobil-home ?"],
+    ["B", "Avant dix heures, s'il vous plaît."],
+    ["A", "Faut-il prendre rendez-vous pour l'état des lieux de sortie ?"],
+    ["B", "Oui, à neuf heures trente, ça vous va ?"],
+    ["A", "Parfait. Où devons-nous déposer les clés ?"],
+    ["B", "Ici, à la réception."],
+    ["A", "Et quand la caution sera-t-elle remboursée ?"],
+    ["B", "Sous une semaine, par virement."]
+  ]),
+  4: dl([
+    ["A", "Bonjour, à quelle heure ouvre le parc aquatique ?"],
+    ["B", "Bonjour Madame, il ouvre à dix heures et il ferme à dix-neuf heures."],
+    ["A", "Et est-ce que les toboggans sont ouverts toute la journée ?"],
+    ["B", "Oui, sauf le grand toboggan, il ferme à dix-huit heures."],
+    ["C", "Le grand toboggan, c'est à partir de quel âge ?"],
+    ["B", "À partir de douze ans, et il faut mesurer un mètre quarante."],
+    ["A", "Où sont les vestiaires et les douches, s'il vous plaît ?"],
+    ["B", "Juste derrière vous, à droite."]
+  ]),
+  5: dl([
+    ["A", "Bonjour, peut-on réserver un terrain de tennis ?"],
+    ["B", "Oui, avez-vous une heure en tête ?"],
+    ["A", "Avez-vous un court de libre à quatorze heures ?"],
+    ["B", "Oui, c'est possible. C'est combien pour une heure ?"],
+    ["A", "Sept euros. Peut-on louer des raquettes ?"],
+    ["B", "Bien sûr, deux euros la raquette. Avez-vous des balles ?"],
+    ["A", "Non, il faut les acheter à la boutique."]
+  ]),
+  6: dl([
+    ["A", "Où se trouve la laverie, s'il vous plaît ?"],
+    ["B", "Juste derrière les sanitaires, à gauche."],
+    ["A", "Comment fonctionne la machine à laver ?"],
+    ["B", "Vous mettez une carte, puis vous choisissez le programme."],
+    ["A", "Avez-vous de la lessive ?"],
+    ["B", "Oui, un petit sachet coûte un euro à l'accueil."]
+  ]),
+  7: dl([
+    ["A", "Vendez-vous du pain frais tous les matins ?"],
+    ["B", "Oui, à partir de sept heures."],
+    ["A", "Faut-il le commander à l'avance ?"],
+    ["B", "Pour les croissants, oui, c'est mieux."],
+    ["A", "Faites-vous des plats à emporter le soir ?"],
+    ["B", "Oui, des pizzas et des paninis. Vous prenez la carte bancaire ?"],
+    ["B", "Oui, sans problème."]
+  ]),
+  8: dl([
+    ["A", "Bonjour, où est le marché le plus proche ?"],
+    ["B", "Sur la place, tous les mardis matin."],
+    ["A", "Je voudrais un kilo de tomates, s'il vous plaît."],
+    ["B", "Voilà. Autre chose ?"],
+    ["A", "Avez-vous du fromage local ?"],
+    ["B", "Oui, ce picodon-là est excellent."],
+    ["A", "Je peux goûter ?"],
+    ["B", "Bien sûr, allez-y."]
+  ]),
+  9: dl([
+    ["A", "Combien je vous dois ?"],
+    ["B", "Ça fait vingt-trois euros, s'il vous plaît."],
+    ["A", "Vous acceptez les paiements sans contact ?"],
+    ["B", "Oui, bien sûr."],
+    ["A", "Avez-vous la monnaie sur un billet de cinquante euros ?"],
+    ["B", "Oui, pas de problème."],
+    ["A", "Pouvez-vous me faire un reçu, s'il vous plaît ?"],
+    ["B", "Voilà, bonne journée !"]
+  ]),
+  10: dl([
+    ["A", "Bonsoir, une table pour quatre, s'il vous plaît."],
+    ["B", "Bonsoir, vous avez réservé ?"],
+    ["A", "Non, faut-il réserver pour ce soir ?"],
+    ["B", "Non, ça va, suivez-moi. Qu'est-ce que je vous sers ?"],
+    ["A", "Je voudrais une pizza margherita et des frites."],
+    ["C", "Sans oignons, s'il vous plaît."],
+    ["B", "Très bien, ce sera prêt dans vingt minutes."],
+    ["A", "L'addition, s'il vous plaît. C'était très bon, merci !"]
+  ]),
+  11: dl([
+    ["A", "Bonjour, deux boules s'il vous plaît, chocolat et fraise."],
+    ["B", "Un cornet ou un pot ?"],
+    ["A", "Un cornet, s'il vous plaît."],
+    ["C", "Moi, je voudrais un cornet à trois boules."],
+    ["B", "Quels parfums ?"],
+    ["C", "Vanille, pistache et caramel au beurre salé."],
+    ["B", "Avec ou sans chantilly ?"],
+    ["C", "Avec, s'il vous plaît !"]
+  ]),
+  12: dl([
+    ["A", "Bonjour, avez-vous des places pour la descente en canoë demain ?"],
+    ["B", "Oui, pour combien de personnes ?"],
+    ["A", "Nous voudrions louer deux kayaks pour la journée."],
+    ["B", "Très bien. Faut-il savoir nager ?"],
+    ["A", "Oui, un peu, pourquoi ?"],
+    ["B", "Les gilets de sauvetage sont inclus, ne vous inquiétez pas."],
+    ["A", "Quel est le point de départ ?"],
+    ["B", "Juste ici, devant la base nautique, à neuf heures."]
+  ]),
+  13: dl([
+    ["A", "Bonjour, deux adultes et deux adolescents, s'il vous plaît."],
+    ["B", "Voilà. Y a-t-il un tarif famille ?"],
+    ["A", "Oui, justement, nous sommes une famille."],
+    ["B", "Alors ça fait vingt-deux euros au lieu de vingt-huit."],
+    ["A", "Merci. Y a-t-il une visite guidée en allemand ?"],
+    ["B", "Non, seulement en français, mais il y a un audioguide."],
+    ["A", "Est-ce qu'on peut prendre des photos ?"],
+    ["B", "Oui, sans flash."]
+  ]),
+  14: dl([
+    ["A", "Bonjour Madame, comment allez-vous ?"],
+    ["B", "Très bien, merci, et vous ?"],
+    ["A", "Bien, merci. Excusez-moi, je ne parle pas très bien français."],
+    ["B", "Ce n'est pas grave, vous vous débrouillez très bien !"],
+    ["A", "Pouvez-vous parler un peu plus lentement, s'il vous plaît ?"],
+    ["B", "Bien sûr, pas de problème."],
+    ["A", "Comment dit-on 'Danke' en français ?"],
+    ["B", "On dit 'merci' !"]
+  ]),
+  16: dl([
+    ["A", "Quel temps fait-il aujourd'hui ?"],
+    ["B", "Il fait beau, mais il va pleuvoir cet après-midi."],
+    ["A", "Y a-t-il de l'orage annoncé ?"],
+    ["B", "Oui, en fin de journée."],
+    ["A", "Il y a beaucoup de soleil ce matin, non ?"],
+    ["B", "Oui, pensez à la crème solaire."],
+    ["A", "Le niveau de la rivière est-il assez haut pour le canoë ?"],
+    ["B", "Oui, pour l'instant ça va."]
+  ]),
+  17: dl([
+    ["A", "Bonjour, j'ai un coup de soleil sur les épaules."],
+    ["B", "Avez-vous une crème contre les coups de soleil ?"],
+    ["A", "Non, justement, avez-vous quelque chose ?"],
+    ["B", "Oui, tenez, appliquez ça trois fois par jour."],
+    ["A", "Merci. J'ai aussi une ampoule au pied."],
+    ["B", "Avez-vous besoin d'un pansement ?"],
+    ["A", "Oui, s'il vous plaît, et un désinfectant aussi."]
+  ]),
+  18: dl([
+    ["A", "Au secours ! Mon fils est tombé !"],
+    ["B", "Restez calme, où êtes-vous exactement ?"],
+    ["A", "Près de la piscine, il a mal à la jambe."],
+    ["B", "J'appelle un médecin tout de suite."],
+    ["A", "Où est l'hôpital le plus proche ?"],
+    ["B", "À dix minutes en voiture, je vous accompagne."]
+  ])
+};
+
+var audioOrder = AUDIO_CHAPTERS.map(function(c){ return shuffle(c.items.map(function(_, i){ return i; })); });
+
+/* ---- Sprachausgabe ---- */
+var frenchVoice = null, germanVoice = null, voicesReady = false;
+var frenchVoicesList = [];   // alle franzoesischsprachigen Stimmen (fuer den Stimmentest)
+var frenchVoicePool = [];    // nur fr-FR-Varianten, fuer tatsaechliche Sprecherauswahl
+function pickVoices() {
+  var voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+  if (!voices.length) return;
+  frenchVoicesList = voices.filter(function(v){ return v.lang && v.lang.toLowerCase().indexOf("fr") === 0; });
+  var frFR = frenchVoicesList.filter(function(v){ return v.lang && v.lang.toLowerCase().replace("_","-") === "fr-fr"; });
+  frenchVoicePool = frFR.length ? frFR : frenchVoicesList;
+  frenchVoice = frenchVoicePool[0] || null;
+  germanVoice = voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf("de") === 0; }) || null;
+  voicesReady = true;
+}
+function frenchVoiceForSpeaker(speakerLetter) {
+  if (!frenchVoicePool.length) return frenchVoice;
+  if (frenchVoicePool.length === 1) return frenchVoicePool[0];
+  if (speakerLetter === "A") return frenchVoicePool[0];
+  if (speakerLetter === "B") return frenchVoicePool[frenchVoicePool.length - 1];
+  var middle = frenchVoicePool.slice(1, frenchVoicePool.length - 1);
+  if (!middle.length) return frenchVoicePool[1 % frenchVoicePool.length];
+  var idx = (speakerLetter.charCodeAt(0) - 67) % middle.length;
+  return middle[idx];
+}
+var SPEAKER_PITCH = { A: 1.0, B: 0.9, C: 1.12, D: 0.82 };
+function pitchForSpeaker(speakerLetter) {
+  if (!speakerLetter) return 1.0;
+  if (SPEAKER_PITCH.hasOwnProperty(speakerLetter)) return SPEAKER_PITCH[speakerLetter];
+  return 1.0;
+}
+if (window.speechSynthesis) {
+  pickVoices();
+  window.speechSynthesis.onvoiceschanged = pickVoices;
+}
+function speak(text, lang, onend, speakerLetter) {
+  if (!window.speechSynthesis) { if (onend) onend(); return; }
+  var utter = new SpeechSynthesisUtterance(text);
+  utter.lang = lang === "fr" ? "fr-FR" : "de-DE";
+  var voice = lang === "fr" ? (speakerLetter ? frenchVoiceForSpeaker(speakerLetter) : frenchVoice) : germanVoice;
+  if (voice) utter.voice = voice;
+  utter.rate = lang === "fr" ? audioRate * 0.8 : audioRate;
+  if (lang === "fr" && speakerLetter && speakerLetter !== "A") utter.pitch = pitchForSpeaker(speakerLetter);
+  utter.onend = function(){ if (onend) onend(); };
+  utter.onerror = function(){ if (onend) onend(); };
+  window.speechSynthesis.speak(utter);
+}
+function pauseForLength(text) {
+  var ms = text.length * 90;
+  return Math.max(3000, Math.min(10000, ms));
+}
+function speakParts(parts, idx, token, onDone) {
+  if (token !== audioSessionToken) return;
+  if (idx >= parts.length) { onDone(); return; }
+  speak(parts[idx].text, parts[idx].lang, function(){
+    speakParts(parts, idx + 1, token, onDone);
+  });
+}
+
+/* ---- Hoer-Modus State ---- */
+var audioItemIndex = 0;
+var audioPlaying = false;
+var audioPhase = "idle"; // idle | dialogue | first | gap | second | betweenItems | done
+var audioDialogueIndex = 0;
+var audioDialogueDone = false;
+var audioRate = 0.9;
+var audioPendingTimeout = null;
+var audioSessionToken = 0;
+
+function audioClearPending() {
+  if (audioPendingTimeout) { clearTimeout(audioPendingTimeout); audioPendingTimeout = null; }
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+}
+function audioCurrentItem() {
+  var chapter = AUDIO_CHAPTERS[chapterIndex];
+  var realIdx = audioOrder[chapterIndex][audioItemIndex];
+  return chapter.items[realIdx];
+}
+var wakeLock = null;
+var noSleepVideo = null;
+/* Fallback-Technik (wie in der bewaehrten Bibliothek NoSleep.js): ein unsichtbares,
+   endlos loopendes Video haelt den Bildschirm wach, auch wenn die neuere
+   Wake-Lock-API im Browser/Ansichtsfenster nicht verfuegbar oder blockiert ist. */
+function setupNoSleepVideo() {
+  if (noSleepVideo) return;
+  noSleepVideo = document.createElement("video");
+  noSleepVideo.setAttribute("title", "keep-awake");
+  noSleepVideo.setAttribute("playsinline", "");
+  noSleepVideo.muted = true;
+  noSleepVideo.style.position = "fixed";
+  noSleepVideo.style.width = "1px";
+  noSleepVideo.style.height = "1px";
+  noSleepVideo.style.opacity = "0";
+  noSleepVideo.style.pointerEvents = "none";
+  var source = document.createElement("source");
+  source.type = "video/webm";
+  source.src = "data:video/webm;base64,GkXfo59ChoEBQveBAULygQRC84EIQoKEd2VibUKHgQJChYECGFOAZwEAAAAAAAQLEU2bdLpNu4tTq4QVSalmU6yBoU27i1OrhBZUrmtTrIHYTbuMU6uEElTDZ1OsggEeTbuMU6uEHFO7a1OsggP17AEAAAAAAABZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVSalmsirXsYMPQkBNgI1MYXZmNjAuMTYuMTAwV0GNTGF2ZjYwLjE2LjEwMESJiECPQAAAAAAAFlSua8GuAQAAAAAAADjXgQFzxYghRo825uNlspyBACK1nIN1bmSIgQCGhVZfVlA4g4EBI+ODhAJiWgDgibCBArqBApqBAhJUw2f8c3OgY8CAZ8iaRaOHRU5DT0RFUkSHjUxhdmY2MC4xNi4xMDBzc9ZjwItjxYghRo825uNlsmfIoUWjh0VOQ09ERVJEh5RMYXZjNjAuMzEuMTAyIGxpYnZweGfIoUWjiERVUkFUSU9ORIeTMDA6MDA6MDEuMDAwMDAwMDAwAB9DtnVCUOeBAKOjgQAAgBACAJ0BKgIAAgAARwiFhYiFhIgCAgAMDWAA/v+rUICjlYEAKACxAQAPEfwAGAAYWC/0AAgAAKOVgQBQALEBAA8R/AAYABhYL/QACAAAo5WBAHgAsQEADxH8ABgAGFgv9AAIAACjlYEAoACxAQAPEfwAGAAYWC/0AAgAAKOVgQDIALEBAA8R/AAYABhYL/QACAAAo5WBAPAAsQEADxH8ABgAGFgv9AAIAACjlYEBGACxAQAPEBAUYABhYL/QACAAAKOVgQFAALEBAA8R/AAYABhYL/QAJAAAo5WBAWgAsQEADxH8ABgAGFgv9AAkAACjlYEBkACxAQAPEfwAGAAYWC/0ACQAAKOVgQG4ALEBAA8R/AAYABhYL/QAJAAAo5WBAeAAsQEADxH8ABgAGFgv9AAkAACjlYECCACxAQAPEfwAGAAYWC/0AAgAAKOVgQIwALEBAA8R/AAYABhYL/QAJAAAo5WBAlgAsQEADxH8ABgAGFgv9AAkAACjlYECgACxAQAPEfwAGAAYWC/0ACQAAKOVgQKoALEBAA8R/AAYABhYL/QAJAAAo5WBAtAAsQEADxAQFGAAYWC/0AAgAACjlYEC+ACxAQAPEfwAGAAYWC/0ACQAAKOVgQMgALEBAA8R/AAYABhYL/QAJAAAo5WBA0gAsQEADxH8ABgAGFgv9AAkAACjlYEDcACxAQAPEfwAGAAYWC/0ACQAAKOVgQOYALEBAA8R/AAYABhYL/QAJAAAo5WBA8AAsQEADxH8ABgAGFgv9AAkAAAcU7trkbuPs4EAt4r3gQHxggGf8IED";
+  noSleepVideo.appendChild(source);
+  noSleepVideo.addEventListener("loadedmetadata", function(){
+    if (noSleepVideo.duration <= 1) { noSleepVideo.setAttribute("loop", ""); }
+  });
+  document.body.appendChild(noSleepVideo);
+}
+function requestWakeLock() {
+  setupNoSleepVideo();
+  if (noSleepVideo) { noSleepVideo.play().catch(function(){}); }
+  if (!("wakeLock" in navigator)) return;
+  navigator.wakeLock.request("screen").then(function(lock){
+    wakeLock = lock;
+  }).catch(function(){ wakeLock = null; });
+}
+function releaseWakeLock() {
+  if (wakeLock) { wakeLock.release().catch(function(){}); wakeLock = null; }
+  if (noSleepVideo) { noSleepVideo.pause(); }
+}
+document.addEventListener("visibilitychange", function(){
+  if (document.visibilityState === "visible" && audioPlaying) {
+    if (!wakeLock) { requestWakeLock(); }
+    if (noSleepVideo && noSleepVideo.paused) { noSleepVideo.play().catch(function(){}); }
+  }
+});
+
+/* ---- Dialog am Kapitelanfang (reine Sprachdusche) ---- */
+function currentDialogue() {
+  return DIALOGUES[chapterIndex] || null;
+}
+function resetForChapterEntry() {
+  audioDialogueDone = false;
+  audioDialogueIndex = 0;
+  audioPhase = currentDialogue() ? "dialogue" : "idle";
+}
+
+function audioStop() {
+  audioPlaying = false;
+  audioPhase = (!audioDialogueDone && currentDialogue()) ? "dialogue" : "idle";
+  audioSessionToken++;
+  audioClearPending();
+  releaseWakeLock();
+  render();
+}
+function audioStart() {
+  audioPlaying = true;
+  audioSessionToken++;
+  requestWakeLock();
+  var token = audioSessionToken;
+  if (audioPhase === "dialogue") {
+    audioRunChapterDialogue(token, function(){ audioRunFirst(token); });
+  } else {
+    audioRunFirst(token);
+  }
+  render();
+}
+function audioRunChapterDialogue(token, afterDone) {
+  var lines = currentDialogue();
+  if (!lines || !lines.length) { audioDialogueDone = true; afterDone(); return; }
+  audioPhase = "dialogue";
+  audioDialogueIndex = 0;
+  render();
+  var i = 0;
+  function step() {
+    if (token !== audioSessionToken) return;
+    if (i >= lines.length) { audioDialogueDone = true; afterDone(); return; }
+    audioDialogueIndex = i;
+    render();
+    var line = lines[i];
+    speak(line.text, "fr", function(){
+      if (token !== audioSessionToken) return;
+      i++;
+      audioPendingTimeout = setTimeout(step, 350);
+    }, line.speaker);
+  }
+  step();
+}
+function audioRunFirst(token) {
+  if (token !== audioSessionToken) return;
+  audioPhase = "first";
+  render();
+  var item = audioCurrentItem();
+  var afterFirst = function(){
+    if (token !== audioSessionToken) return;
+    audioPhase = "gap";
+    render();
+    var wait = pauseForLength(item.second);
+    audioPendingTimeout = setTimeout(function(){ audioRunSecond(token); }, wait);
+  };
+  if (item.firstParts) {
+    speakParts(item.firstParts, 0, token, afterFirst);
+  } else {
+    speak(item.first, item.firstLang, afterFirst);
+  }
+}
+function audioRunSecond(token) {
+  if (token !== audioSessionToken) return;
+  audioPhase = "second";
+  render();
+  var item = audioCurrentItem();
+  speak(item.second, item.secondLang, function(){
+    if (token !== audioSessionToken) return;
+    audioPhase = "betweenItems";
+    render();
+    audioPendingTimeout = setTimeout(function(){ audioAdvance(token); }, 1400);
+  });
+}
+function audioAdvance(token) {
+  if (token !== audioSessionToken) return;
+  var chapter = AUDIO_CHAPTERS[chapterIndex];
+  if (audioItemIndex < chapter.items.length - 1) {
+    audioItemIndex++;
+    audioRunFirst(token);
+  } else if (chapterIndex < AUDIO_CHAPTERS.length - 1) {
+    chapterIndex++;
+    audioItemIndex = 0;
+    posInChapter = 0;
+    resetForChapterEntry();
+    if (audioPhase === "dialogue") {
+      audioRunChapterDialogue(token, function(){ audioRunFirst(token); });
+    } else {
+      audioRunFirst(token);
+    }
+  } else {
+    audioPlaying = false;
+    audioPhase = "done";
+    render();
+  }
+}
+function audioTogglePlay() {
+  if (audioPlaying) { audioStop(); } else { audioStart(); }
+}
+function audioGoPrevItem() {
+  audioClearPending();
+  audioSessionToken++;
+  var enteredNewChapter = false;
+  if (audioItemIndex > 0) { audioItemIndex--; }
+  else if (chapterIndex > 0) { chapterIndex--; audioItemIndex = AUDIO_CHAPTERS[chapterIndex].items.length - 1; posInChapter = 0; enteredNewChapter = true; }
+  audioPhase = "idle";
+  if (enteredNewChapter) { resetForChapterEntry(); }
+  if (audioPlaying && audioPhase === "dialogue") {
+    audioRunChapterDialogue(audioSessionToken, function(){ audioRunFirst(audioSessionToken); });
+  } else if (audioPlaying) {
+    audioRunFirst(audioSessionToken);
+  } else { render(); }
+}
+function audioGoNextItem() {
+  audioClearPending();
+  audioSessionToken++;
+  var enteredNewChapter = false;
+  var chapter = AUDIO_CHAPTERS[chapterIndex];
+  if (audioItemIndex < chapter.items.length - 1) { audioItemIndex++; }
+  else if (chapterIndex < AUDIO_CHAPTERS.length - 1) { chapterIndex++; audioItemIndex = 0; posInChapter = 0; enteredNewChapter = true; }
+  audioPhase = "idle";
+  if (enteredNewChapter) { resetForChapterEntry(); }
+  if (audioPlaying && audioPhase === "dialogue") {
+    audioRunChapterDialogue(audioSessionToken, function(){ audioRunFirst(audioSessionToken); });
+  } else if (audioPlaying) {
+    audioRunFirst(audioSessionToken);
+  } else { render(); }
+}
+function audioRepeatItem() {
+  audioClearPending();
+  audioSessionToken++;
+  var token = audioSessionToken;
+  if (audioPhase === "dialogue") {
+    if (audioPlaying) {
+      audioRunChapterDialogue(token, function(){ audioRunFirst(token); });
+    } else {
+      audioDialogueIndex = 0;
+      render();
+    }
+  } else if (audioPlaying) {
+    audioRunFirst(token);
+  } else {
+    render();
+  }
+}
+function audioJumpToChapter(i) {
+  audioClearPending();
+  audioSessionToken++;
+  chapterIndex = i;
+  audioItemIndex = 0;
+  posInChapter = 0;
+  resetForChapterEntry();
+  if (audioPlaying) {
+    var token = audioSessionToken;
+    if (audioPhase === "dialogue") {
+      audioRunChapterDialogue(token, function(){ audioRunFirst(token); });
+    } else {
+      audioRunFirst(token);
+    }
+  } else { render(); }
+}
+function audioJumpChapterRelative(delta) {
+  var newIndex = chapterIndex + delta;
+  if (newIndex < 0 || newIndex >= AUDIO_CHAPTERS.length) return;
+  audioJumpToChapter(newIndex);
+}
+function audioSetRate(r) {
+  audioRate = parseFloat(r);
+}
+
+function renderAudio() {
+  var chapter = AUDIO_CHAPTERS[chapterIndex];
+  var item = audioCurrentItem();
+  var inDialoguePhase = audioPhase === "dialogue";
+
+  var phaseLabelText = "";
+  if (inDialoguePhase) phaseLabelText = "Dialog";
+  else if (audioPhase === "first") phaseLabelText = item.firstLang === "fr" ? "Französisch" : "Deutsch";
+  else if (audioPhase === "second") phaseLabelText = item.secondLang === "fr" ? "Französisch" : "Deutsch";
+  else if (audioPhase === "gap") phaseLabelText = "… Zeit zum Überlegen …";
+  else if (audioPhase === "betweenItems") phaseLabelText = "";
+  else if (audioPhase === "done") phaseLabelText = "Fertig";
+
+  var showFirst = audioPhase === "first" || audioPhase === "gap" || audioPhase === "second" || audioPhase === "betweenItems";
+  var showSecond = audioPhase === "second" || audioPhase === "betweenItems";
+
+  var voiceWarning = "";
+  if (!window.speechSynthesis) {
+    voiceWarning = '<div class="am-voice-warning">Dieser Browser unterstützt leider keine Sprachausgabe (Web Speech API).</div>';
+  } else if (voicesReady && (!frenchVoice || !germanVoice)) {
+    voiceWarning = '<div class="am-voice-warning">Es wurde keine ' + (!frenchVoice ? "französische" : "deutsche") + ' Stimme auf diesem Gerät gefunden. Bitte in den Geräte-/Browsereinstellungen ein Sprachpaket installieren.</div>';
+  }
+
+  var chapterOptions = AUDIO_CHAPTERS.map(function(c, i){
+    return '<option value="' + i + '"' + (i === chapterIndex ? " selected" : "") + '>' + escapeHtml(c.title) + '</option>';
+  }).join("");
+
+  var dialogueLines = currentDialogue();
+
+  var mainCardBody;
+  if (inDialoguePhase && dialogueLines) {
+    var winStart = Math.min(Math.max(0, audioDialogueIndex - 1), Math.max(0, dialogueLines.length - 2));
+    var extStart = winStart - 1;
+    var extEnd = winStart + 2; // inklusive: 1 davor, 2 sichtbar, 1 danach
+    var slots = [];
+    for (var idx = extStart; idx <= extEnd; idx++) { slots.push(idx); }
+    mainCardBody =
+      '<div class="dlg-lines">' +
+        slots.map(function(realIndex){
+          if (realIndex < 0 || realIndex >= dialogueLines.length) return '<div class="dlg-line dlg-placeholder">&nbsp;</div>';
+          var line = dialogueLines[realIndex];
+          var isFaded = realIndex === extStart || realIndex === extEnd;
+          var isActive = audioPlaying && realIndex === audioDialogueIndex;
+          var cls = "dlg-line" + (isActive ? " dlg-active" : "") + (isFaded ? " dlg-faded" : "");
+          return '<div class="' + cls + '"><span class="dlg-speaker">' + escapeHtml(line.speaker) + '</span><span>' + escapeHtml(line.text) + '</span></div>';
+        }).join("") +
+      '</div>';
+  } else {
+    mainCardBody =
+      '<div class="am-progress">' + (audioItemIndex + 1) + ' / ' + chapter.items.length + '</div>' +
+      '<div class="am-phase-label">' + phaseLabelText + '</div>' +
+      '<div class="am-lang-tag">' + (showFirst ? (item.firstLang === "fr" ? "🇫🇷" : "🇩🇪") : "") + '</div>' +
+      '<div class="am-display-text">' + (showFirst ? escapeHtml(item.first) : "···") + '</div>' +
+      '<div class="am-lang-tag" style="margin-top:14px;">' + (showSecond ? (item.secondLang === "fr" ? "🇫🇷" : "🇩🇪") : "") + '</div>' +
+      '<div class="am-display-text ' + (showSecond ? "" : "dim") + '">' + (showSecond ? escapeHtml(item.second) : "···") + '</div>';
+  }
+
+  var html =
+    '<h1>Sur la route – Hör-Modus</h1>' +
+    '<p class="subtitle">Zum Üben unterwegs: hören, in der Pause selbst antworten, dann die Lösung hören.</p>' +
+    voiceWarning +
+    '<div class="chapter-picker">' +
+      '<select id="audio-chapter-select">' + chapterOptions + '</select>' +
+      '<select id="rate-select" title="Sprechgeschwindigkeit">' +
+        '<option value="0.7"' + (audioRate === 0.7 ? " selected" : "") + '>Langsam</option>' +
+        '<option value="0.9"' + (audioRate === 0.9 ? " selected" : "") + '>Normal</option>' +
+        '<option value="1.1"' + (audioRate === 1.1 ? " selected" : "") + '>Schnell</option>' +
+      '</select>' +
+    '</div>' +
+    '<div class="am-card">' +
+      mainCardBody +
+      '<div class="am-controls">' +
+        '<button class="am-ctrl-btn" id="audio-chapter-prev-btn" title="Voriges Kapitel"' + (chapterIndex === 0 ? " disabled" : "") + '>⏮</button>' +
+        '<button class="am-ctrl-btn" id="audio-prev-btn" title="Vorige Frage">⏪\uFE0E</button>' +
+        '<button class="am-play-btn" id="audio-play-btn" title="' + (audioPlaying ? "Pause" : "Start") + '">' + (audioPlaying ? "⏸\uFE0E" : "▶\uFE0E") + '</button>' +
+        '<button class="am-ctrl-btn" id="audio-next-btn" title="Nächste Frage">⏩\uFE0E</button>' +
+        '<button class="am-ctrl-btn" id="audio-chapter-next-btn" title="Nächstes Kapitel"' + (chapterIndex === AUDIO_CHAPTERS.length - 1 ? " disabled" : "") + '>⏭</button>' +
+      '</div>' +
+      '<div class="am-options-row">' +
+        '<button class="am-ctrl-btn" id="audio-repeat-btn" title="Wiederholen" style="width:auto;border-radius:20px;padding:0 14px;">↺ Wiederholen</button>' +
+      '</div>' +
+    '</div>' +
+    '<p class="am-footer-note">Läuft komplett offline über die Sprachausgabe deines Geräts. Bildschirm muss während der Wiedergabe an bleiben.</p>';
+
+  var app = document.getElementById("app");
+  app.innerHTML = html;
+
+  document.getElementById("audio-chapter-select").addEventListener("change", function(e){ audioJumpToChapter(parseInt(e.target.value, 10)); });
+  document.getElementById("audio-chapter-prev-btn").addEventListener("click", function(){ audioJumpChapterRelative(-1); });
+  document.getElementById("audio-chapter-next-btn").addEventListener("click", function(){ audioJumpChapterRelative(1); });
+  document.getElementById("rate-select").addEventListener("change", function(e){ audioSetRate(e.target.value); });
+  document.getElementById("audio-play-btn").addEventListener("click", audioTogglePlay);
+  document.getElementById("audio-prev-btn").addEventListener("click", audioGoPrevItem);
+  document.getElementById("audio-next-btn").addEventListener("click", audioGoNextItem);
+  document.getElementById("audio-repeat-btn").addEventListener("click", audioRepeatItem);
+}
+
+/* =================================================================
+   4) MODUSWECHSEL & START
+================================================================= */
+var mode = "quiz";
+
+function updateToggleButton() {
+  var el = document.getElementById("mode-toggle");
+  var iconQuiz = document.getElementById("mode-icon-quiz");
+  var iconAudio = document.getElementById("mode-icon-audio");
+  if (mode === "quiz") {
+    el.classList.remove("audio");
+    el.title = "Zum Hör-Modus wechseln";
+    iconQuiz.classList.add("active");
+    iconAudio.classList.remove("active");
+  } else {
+    el.classList.add("audio");
+    el.title = "Zum Quiz-Modus wechseln";
+    iconAudio.classList.add("active");
+    iconQuiz.classList.remove("active");
+  }
+}
+
+function findPositionForId(id, itemsArray, orderArray) {
+  var realIdx = -1;
+  for (var k = 0; k < itemsArray.length; k++) { if (itemsArray[k].id === id) { realIdx = k; break; } }
+  if (realIdx === -1) return null;
+  var pos = orderArray[chapterIndex].indexOf(realIdx);
+  return pos === -1 ? null : pos;
+}
+
+function toggleMode() {
+  if (mode === "audio" && audioPlaying) { audioStop(); }
+  var goingToAudio = mode === "quiz";
+  var fromId = goingToAudio ? currentExercise().id : audioCurrentItem().id;
+  if (goingToAudio) {
+    var pos1 = findPositionForId(fromId, AUDIO_CHAPTERS[chapterIndex].items, audioOrder);
+    if (pos1 !== null) audioItemIndex = pos1;
+  } else {
+    var pos2 = findPositionForId(fromId, CHAPTERS[chapterIndex].exercises, quizOrder);
+    if (pos2 !== null) posInChapter = pos2;
+  }
+  mode = goingToAudio ? "audio" : "quiz";
+  updateToggleButton();
+  render();
+}
+
+function render() {
+  if (mode === "quiz") { renderQuiz(); } else { renderAudio(); }
+}
+
+document.getElementById("mode-toggle").addEventListener("click", toggleMode);
+resetForChapterEntry();
+updateToggleButton();
+render();
+window.addEventListener("resize", function(){ if (mode === "quiz") render(); });
+</script>
+</body>
+</html>
