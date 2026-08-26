@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streckenkompass</title>
+<style>
+  :root{
+    --ink:#12161a;
+    --surface:#1a2129;
+    --surface-2:#222b34;
+    --border:#2b3540;
+    --border-strong:#3a4652;
+    --paper:#ece7da;
+    --paper-dim:#9aa4ad;
+    --paper-faint:#6b747d;
+    --amber:#e2a63b;
+    --amber-dim:#8a6a2e;
+    --teal:#4db6a8;
+    --teal-dim:#2c5851;
+    --red:#d9695f;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-data: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--font-ui);
+    -webkit-font-smoothing:antialiased;
+  }
+  body{
+    min-height:100vh;
+    padding-bottom:20px;
+  }
+  header{
+    position:sticky; top:0; z-index:10;
+    background:var(--ink);
+    border-bottom:1px solid var(--border);
+    padding:10px 12px 8px;
+  }
+  .status-line{
+    margin-top:6px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:8px; flex-wrap:wrap;
+  }
+  .toggle-wrap{
+    display:flex; align-items:center; gap:7px;
+  }
+  .toggle-label{
+    font-size:11.5px; color:var(--paper-dim);
+  }
+  .switch{
+    position:relative; width:34px; height:19px; flex-shrink:0;
+  }
+  .switch input{
+    position:absolute; opacity:0; width:100%; height:100%; margin:0; cursor:pointer; z-index:2;
+  }
+  .switch .track{
+    position:absolute; inset:0; border-radius:10px;
+    background:var(--surface-2); border:1px solid var(--border-strong);
+    transition:background .2s, border-color .2s;
+  }
+  .switch .knob{
+    position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%;
+    background:var(--paper-dim);
+    transition:transform .2s, background .2s;
+  }
+  .switch input:checked + .track{ background:var(--teal-dim); border-color:var(--teal); }
+  .switch input:checked + .track + .knob{ transform:translateX(15px); background:var(--teal); }
+  .meta-text{
+    font-family:var(--font-data);
+    font-size:10px; color:var(--paper-faint);
+    display:flex; align-items:center; gap:5px;
+  }
+  .refresh-btn{
+    background:var(--surface-2); border:1px solid var(--border-strong);
+    color:var(--paper-dim); font-family:var(--font-data); font-size:9.5px;
+    padding:4px 7px; border-radius:5px; cursor:pointer;
+    letter-spacing:.2px;
+  }
+  .refresh-btn:hover{ border-color:var(--amber); color:var(--paper); }
+  .refresh-btn:active{ transform:translateY(1px); }
+  .refresh-btn:disabled{ opacity:.4; cursor:default; }
+
+  .dir-row{
+    margin-top:7px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .segmented{
+    display:flex; border:1px solid var(--border-strong);
+    border-radius:7px; overflow:hidden;
+  }
+  .segmented button{
+    font-family:var(--font-data);
+    font-size:11px; letter-spacing:.3px;
+    padding:4px 12px;
+    background:var(--surface-2); color:var(--paper-dim);
+    border:none; cursor:pointer;
+  }
+  .segmented button + button{ border-left:1px solid var(--border-strong); }
+  .segmented button.active{ background:var(--amber-dim); color:var(--paper); }
+  .segmented button:hover:not(.active){ color:var(--paper); }
+
+  .banner{
+    margin:8px 10px 0; padding:7px 10px;
+    border:1px solid var(--border-strong); border-left:3px solid var(--red);
+    border-radius:0 6px 6px 0;
+    font-size:11px; color:var(--paper-dim);
+    display:none;
+  }
+  .banner.show{ display:block; }
+
+  main{
+    padding:10px; display:flex; flex-direction:column; gap:6px;
+    max-width:640px; margin:0 auto;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:8px 10px;
+    display:flex; gap:10px; align-items:center;
+  }
+
+  .compass{
+    flex-shrink:0; width:38px; height:38px; position:relative;
+    display:block; text-decoration:none;
+    border-radius:50%;
+    transition:transform .15s;
+  }
+  .compass:hover{ transform:scale(1.08); }
+  .compass:active{ transform:scale(0.96); }
+  .compass:hover .ring{ stroke:var(--amber); }
+  .compass svg{ width:100%; height:100%; display:block; }
+
+  .card-body{ flex:1; min-width:0; }
+  .card-top{
+    display:flex; align-items:center; gap:6px;
+    margin-bottom:4px; flex-wrap:wrap;
+  }
+  .name{
+    font-size:12.5px; font-weight:500; color:var(--paper);
+    line-height:1.25;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    flex:1; min-width:0;
+  }
+  .badge{
+    font-family:var(--font-data);
+    font-size:8.5px; letter-spacing:.3px; text-transform:uppercase;
+    padding:2px 5px; border-radius:4px;
+    white-space:nowrap; flex-shrink:0;
+    border:1px solid var(--border-strong);
+    color:var(--paper-dim);
+  }
+  .badge[data-cat="Autobahn-Raststätte"]{ color:#e2a63b; border-color:#5c481f; background:rgba(226,166,59,.08); }
+  .badge[data-cat="Stadt"]{ color:#7fb8e2; border-color:#2b4a5c; background:rgba(127,184,226,.08); }
+  .badge[data-cat="Toilette"]{ color:#9fc47b; border-color:#3c4f2b; background:rgba(159,196,123,.08); }
+  .badge[data-cat="Parkplatz"]{ color:#c98fd6; border-color:#4a2f52; background:rgba(201,143,214,.08); }
+  .badge[data-cat="Campingplatz"]{ color:#4db6a8; border-color:#204d47; background:rgba(77,182,168,.08); }
+  .badge[data-cat="Fast-Food"]{ color:#e2836b; border-color:#5c2e1f; background:rgba(226,131,107,.08); }
+  .badge[data-cat="Natur"]{ color:#8fc45a; border-color:#3c5220; background:rgba(143,196,90,.08); }
+
+  .stats-line{
+    display:flex; align-items:baseline; gap:5px; flex-wrap:wrap;
+  }
+  .lbl{
+    font-family:var(--font-data);
+    font-size:9px; letter-spacing:.3px; text-transform:uppercase;
+    color:var(--paper-faint);
+  }
+  .stat-value{
+    font-family:var(--font-data); font-size:11.5px; color:var(--paper);
+    white-space:nowrap;
+  }
+  .stat-value.live{ color:var(--teal); font-weight:600; }
+  .stat-value.pending{ color:var(--paper-faint); font-weight:400; }
+  .stat-sep{
+    color:var(--border-strong); font-size:10px;
+  }
+
+  .here-divider{
+    display:flex; align-items:center;
+    padding:2px 2px;
+  }
+  .here-line{
+    flex:1; height:1px;
+    background:repeating-linear-gradient(90deg, var(--teal) 0 5px, transparent 5px 9px);
+  }
+
+  @media (max-width:340px){
+    .stats-line{ gap:4px; }
+    .stat-value{ font-size:10.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="status-line">
+    <div class="toggle-wrap">
+      <label class="switch">
+        <input type="checkbox" id="liveToggle" checked>
+        <span class="track"></span>
+        <span class="knob"></span>
+      </label>
+      <span class="toggle-label">Live-Tracking</span>
+    </div>
+    <div class="meta-text">
+      <span id="metaText">wird ermittelt&hellip;</span>
+      <button class="refresh-btn" id="refreshBtn">jetzt aktualisieren</button>
+    </div>
+  </div>
+  <div class="dir-row">
+    <div class="segmented" id="dirToggle">
+      <button type="button" data-dir="hin" class="active">Hin</button>
+      <button type="button" data-dir="zurueck">Zurück</button>
+    </div>
+  </div>
+</header>
+
+<div class="banner" id="errorBanner"></div>
+
+<main id="list"></main>
+
+<script>
+// ---- Stammdaten ----------------------------------------------------------
+const DESTINATION = { lat: 44.572320, lon: 4.510037 };  // Camping Le Pommier, Villeneuve-de-Berg
+
+const locations = [
+    { name: "Karlsruhe",                           category: "Stadt",               lat: 48.9966, lon: 8.3871, toHome: 0,     toDestination: 724.0 },
+    { name: "Offenburg (KFC+Burger King)",         category: "Fast-Food",           lat: 48.469782, lon: 7.931443, toHome: 74.8,  toDestination: 655 },
+    { name: "Freiburg (KFC+McDonald's)",           category: "Fast-Food",           lat: 48.025957, lon: 7.847272, toHome: 129,   toDestination: 604 },
+    { name: "Griesheim, Rheinufer",                category: "Natur",               lat: 47.880504, lon: 7.560051, toHome: 154,   toDestination: 574 },
+    { name: "Neuenburg, Rheinufer",                category: "Natur",               lat: 47.816402, lon: 7.544538, toHome: 160,   toDestination: 562 },
+    { name: "Aire d'Écot",                         category: "Autobahn-Raststätte", lat: 47.4414, lon: 6.7297, toHome: 245.0, toDestination: 479.0 },
+    { name: "Illzach (KFC+McDonald's)",            category: "Fast-Food",           lat: 47.770729, lon: 7.380408, toHome: 176,   toDestination: 549 },
+    { name: "Chalon-sur-Saône (mit WC)",           category: "Stadt",               lat: 46.780175, lon: 4.862151, toHome: 430.0, toDestination: 294.0 },
+    { name: "Aire de Belleville",                  category: "Autobahn-Raststätte", lat: 46.1426, lon: 4.7670, toHome: 510.0, toDestination: 214 },
+    { name: "Rochemaure (Parkplatz Château)",      category: "Parkplatz",           lat: 44.5849, lon: 4.7004, toHome: 703.1, toDestination: 20.9 },
+    { name: "Aire de Montélimar",                  category: "Autobahn-Raststätte", lat: 44.5165, lon: 4.7823, toHome: 695.4, toDestination: 28.6 },
+    { name: "Camping Le Pommier",                  category: "Campingplatz",        lat: DESTINATION.lat, lon: DESTINATION.lon, toHome: 724.0, toDestination: 0 },
+];
+locations.forEach((loc, i) => { loc.id = i; }); // stabile ID, unabhängig von Sortierung/Filterung
+
+// ---- Geo-Mathematik -------------------------------------------------------
+const toRad = d => d * Math.PI / 180;
+const toDeg = r => r * 180 / Math.PI;
+
+function distanceKm(a, b) {
+  const R = 6371;
+  const dLat = toRad(b.lat - a.lat);
+  const dLon = toRad(b.lon - a.lon);
+  const s = Math.sin(dLat/2)**2 +
+            Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1-s));
+}
+
+function bearingDeg(a, b) {
+  const φ1 = toRad(a.lat), φ2 = toRad(b.lat);
+  const λ1 = toRad(a.lon), λ2 = toRad(b.lon);
+  const y = Math.sin(λ2-λ1) * Math.cos(φ2);
+  const x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(λ2-λ1);
+  return (toDeg(Math.atan2(y, x)) + 360) % 360;
+}
+
+// ---- Sortierung entlang der Nordost–Südwest-Diagonale ---------------------
+// Lokale Projektion (Äquirektangular-Näherung, ausreichend für Sortierzwecke):
+// Ost/Nord in km, dann Skalarprodukt mit dem NO-Einheitsvektor (Peilung 45°).
+const REF_LAT = locations.reduce((sum, l) => sum + l.lat, 0) / locations.length;
+const NE_UNIT = { e: Math.SQRT1_2, n: Math.SQRT1_2 }; // sin(45°), cos(45°)
+
+function neProjection(loc) {
+  const eastKm  = loc.lon * Math.cos(toRad(REF_LAT)) * 111.32;
+  const northKm = loc.lat * 111.32;
+  return eastKm * NE_UNIT.e + northKm * NE_UNIT.n;
+}
+
+locations.forEach(loc => { loc.neProj = neProjection(loc); });
+
+let direction = "hin"; // "hin" = NO → SW, "zurueck" = SW → NO
+
+function sortByDirection() {
+  locations.sort((a, b) => direction === "hin" ? b.neProj - a.neProj : a.neProj - b.neProj);
+}
+sortByDirection();
+
+// ---- Sichtbare Zeilen: max. 1 "hinter"-Ort + Standort-Trennlinie ----------
+// "Hinter" = auf der Diagonalen bereits in Fahrtrichtung passiert.
+// "Hin" fährt in Richtung fallender Projektion (NO→SW): hinter = größere Projektion als aktuell.
+// "Zurück" fährt in Richtung steigender Projektion (SW→NO): hinter = kleinere Projektion als aktuell.
+function buildVisibleRows() {
+  if (!lastPosition) {
+    return locations.map(loc => ({ type: "location", loc }));
+  }
+  const here = { lat: lastPosition.coords.latitude, lon: lastPosition.coords.longitude };
+  const curProj = neProjection(here);
+  const isBehind = loc => direction === "hin" ? loc.neProj > curProj : loc.neProj < curProj;
+
+  const behind = locations.filter(isBehind);   // in Listenreihenfolge: am weitesten hinten zuerst
+  const ahead  = locations.filter(loc => !isBehind(loc));
+  const nearestBehind = behind.length ? [behind[behind.length - 1]] : [];
+
+  const rows = nearestBehind.map(loc => ({ type: "location", loc }));
+  rows.push({ type: "divider" });
+  ahead.forEach(loc => rows.push({ type: "location", loc }));
+  return rows;
+}
+
+function fmtKm(km) {
+  if (km == null) return "&ndash;";
+  return km < 10 ? km.toFixed(1) + " km" : Math.round(km) + " km";
+}
+
+function fmtNum(km) {
+  if (km == null) return "&ndash;";
+  return km < 10 ? km.toFixed(1) : String(Math.round(km));
+}
+
+function mapsUrl(loc) {
+  // Koordinaten als Suchziel: öffnet exakt den Punkt in Google Maps
+  return `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lon}`;
+}
+
+// ---- Rendering -------------------------------------------------------------
+const listEl = document.getElementById("list");
+
+function compassSvg(id) {
+  return `
+  <svg viewBox="0 0 64 64" role="img" aria-label="Richtungsanzeige">
+    <circle class="ring" cx="32" cy="32" r="30" fill="none" stroke="#3a4652" stroke-width="1"/>
+    <text x="32" y="10" text-anchor="middle" font-size="9" fill="#6b747d" font-family="ui-monospace, monospace">N</text>
+    <g id="needle-${id}" transform="rotate(0 32 32)">
+      <line x1="32" y1="32" x2="32" y2="10" stroke="#e2a63b" stroke-width="3" stroke-linecap="round"/>
+      <line x1="32" y1="32" x2="32" y2="46" stroke="#4a5560" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="32" cy="32" r="3.5" fill="#ece7da"/>
+    </g>
+  </svg>`;
+}
+
+function cardHtml(loc) {
+  // Bei "hin": Start = Zuhause, Ziel = Reiseziel. Bei "zurueck": nur die Variablen vertauscht.
+  const leftVal  = direction === "hin" ? loc.toHome : loc.toDestination;
+  const rightVal = direction === "hin" ? loc.toDestination : loc.toHome;
+  return `
+    <div class="card">
+      <a class="compass" href="${mapsUrl(loc)}" target="_blank" rel="noopener" aria-label="${loc.name} in Google Maps öffnen" title="In Google Maps öffnen">
+        ${compassSvg(loc.id)}
+      </a>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="name">${loc.name}</div>
+          <div class="badge" data-cat="${loc.category}">${loc.category}</div>
+        </div>
+        <div class="stats-line">
+          <span class="lbl">Start</span>
+          <span class="stat-value">${fmtNum(leftVal)} km</span>
+          <span class="stat-sep">-</span>
+          <span class="stat-value live pending" id="cur-${loc.id}">&ndash;</span>
+          <span class="stat-value live">km</span>
+          <span class="stat-sep">-</span>
+          <span class="stat-value">${fmtNum(rightVal)} km</span>
+          <span class="lbl">Ziel</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+const dividerHtml = `
+  <div class="here-divider" aria-label="Aktueller Standort" role="separator">
+    <span class="here-line"></span>
+  </div>
+`;
+
+let lastPosition = null;
+
+function render() {
+  const rows = buildVisibleRows();
+  listEl.innerHTML = rows.map(row =>
+    row.type === "divider" ? dividerHtml : cardHtml(row.loc)
+  ).join("");
+}
+render();
+
+// ---- Live-Positionierung ---------------------------------------------------
+const liveToggle = document.getElementById("liveToggle");
+const metaText = document.getElementById("metaText");
+const refreshBtn = document.getElementById("refreshBtn");
+const errorBanner = document.getElementById("errorBanner");
+
+let intervalHandle = null;
+const UPDATE_MS = 10000;
+
+function showError(msg) {
+  errorBanner.textContent = msg;
+  errorBanner.classList.add("show");
+}
+function clearError() {
+  errorBanner.classList.remove("show");
+}
+
+function applyPosition(pos) {
+  const here = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+  locations.forEach(loc => {
+    const d = distanceKm(here, loc);
+    const brg = bearingDeg(here, loc);
+    const curEl = document.getElementById(`cur-${loc.id}`);
+    const needle = document.getElementById(`needle-${loc.id}`);
+    if (curEl) { curEl.textContent = fmtNum(d); curEl.classList.remove("pending"); }
+    if (needle) needle.setAttribute("transform", `rotate(${brg} 32 32)`);
+  });
+}
+
+function updateFromPosition(pos) {
+  lastPosition = pos;
+  const now = new Date();
+  clearError();
+  metaText.textContent = "aktualisiert " + now.toLocaleTimeString("de-DE");
+  render();          // Filterung (max. 1 "hinter"-Ort + Trennlinie) neu bewerten
+  applyPosition(pos); // Live-Werte in die frisch gerenderten Karten eintragen
+}
+
+function handleError(err) {
+  let msg = "Standort konnte nicht ermittelt werden.";
+  if (err.code === err.PERMISSION_DENIED) msg = "Standortzugriff wurde verweigert. Bitte in den Browser-Einstellungen erlauben.";
+  else if (err.code === err.POSITION_UNAVAILABLE) msg = "Standort aktuell nicht verfügbar.";
+  else if (err.code === err.TIMEOUT) msg = "Zeitüberschreitung bei der Standortabfrage.";
+  showError(msg);
+  metaText.textContent = "Fehler bei Standortabfrage";
+}
+
+function fetchOnce() {
+  if (!navigator.geolocation) {
+    showError("Dieser Browser unterstützt keine Standortabfrage.");
+    return;
+  }
+  metaText.textContent = "wird ermittelt\u2026";
+  navigator.geolocation.getCurrentPosition(updateFromPosition, handleError, {
+    enableHighAccuracy: true,
+    timeout: 8000,
+    maximumAge: 5000
+  });
+}
+
+function startLive() {
+  fetchOnce();
+  intervalHandle = setInterval(fetchOnce, UPDATE_MS);
+}
+
+function stopLive() {
+  if (intervalHandle) clearInterval(intervalHandle);
+  intervalHandle = null;
+  metaText.textContent = "Live-Tracking pausiert";
+}
+
+liveToggle.addEventListener("change", () => {
+  if (liveToggle.checked) startLive();
+  else stopLive();
+});
+
+refreshBtn.addEventListener("click", () => {
+  if (!liveToggle.checked) return;
+  fetchOnce();
+});
+
+// ---- Richtungs-Toggle: Hin (NO→SW) / Zurück (SW→NO) ------------------------
+const dirButtons = document.querySelectorAll("#dirToggle button");
+dirButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (btn.dataset.dir === direction) return;
+    direction = btn.dataset.dir;
+    dirButtons.forEach(b => b.classList.toggle("active", b === btn));
+    sortByDirection();
+    render();
+    if (lastPosition) applyPosition(lastPosition);
+  });
+});
+
+// Start
+startLive();
+</script>
+
+</body>
+</html>
