@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Türchen 19 – Das Schlitten-Lenkspiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+<style>
+:root{--bg:#fbf6ec;--fg:#1f1d1a;--muted:#5e5a52;--accent:#b3261e;--pine:#1f4d3a;--gold:#b8901c;--card:#fffdf8;
+--line:#e6dcc6;--snow:rgba(120,150,180,.35);--dot:rgba(184,144,28,.10);--door-fg:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1a2b;--fg:#eef1f6;--muted:#a9b3c4;--accent:#ff8a80;
+--pine:#6cc398;--gold:#e0bf55;--card:#16243a;--line:#2a3a55;--snow:rgba(255,255,255,.55);--dot:rgba(224,191,85,.07)}}
+:root[data-theme="dark"]{--bg:#0f1a2b;--fg:#eef1f6;--muted:#a9b3c4;--accent:#ff8a80;--pine:#6cc398;--gold:#e0bf55;
+--card:#16243a;--line:#2a3a55;--snow:rgba(255,255,255,.55);--dot:rgba(224,191,85,.07)}
+body{margin:0;color:var(--fg);font:16px/1.6 system-ui,sans-serif;background-color:var(--bg);
+background-image:radial-gradient(var(--dot) 1.5px,transparent 2px);background-size:28px 28px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+background-image:radial-gradient(circle at 20px 30px,var(--snow) 2px,transparent 3px),
+radial-gradient(circle at 140px 90px,var(--snow) 3px,transparent 4px),
+radial-gradient(circle at 80px 170px,var(--snow) 1.5px,transparent 2.5px);
+background-size:200px 200px,260px 260px,180px 180px;animation:snow 30s linear infinite}
+@keyframes snow{to{background-position:40px 600px,-30px 780px,20px 540px}}
+@media (prefers-reduced-motion: reduce){body::before{animation:none}.flame{animation:none}}
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:16px}
+h1,h2,.door,.footer-note{font-family:"Playfair Display",Georgia,"Times New Roman",serif}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:24px 0 16px;border-bottom:3px double var(--gold)}
+.door{flex:none;width:76px;height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+background:var(--accent);color:var(--door-fg);border:3px solid var(--gold);border-radius:10px 10px 4px 4px;
+box-shadow:inset 0 0 0 3px rgba(255,255,255,.25),0 4px 10px rgba(0,0,0,.15);font-size:2.3rem;font-weight:700;line-height:1}
+.door small{font:600 .62rem/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.door.finale{background:var(--gold);color:#1f1d1a;border-color:var(--accent)}
+.door.finale .star{font-size:1.4rem;margin-bottom:2px}
+.headline{flex:1 1 260px;min-width:0}
+.date{color:var(--muted);margin:0}
+h1{font-size:2rem;line-height:1.2;margin:.2rem 0 0;color:var(--pine)}
+.wreath{flex:none;width:150px;height:auto}
+.flame{transform-origin:50% 100%;transform-box:fill-box;animation:flicker 1.6s ease-in-out infinite alternate}
+@keyframes flicker{0%{transform:scale(1,1)}50%{transform:scale(.92,1.08) rotate(-3deg)}100%{transform:scale(1.04,.95) rotate(2deg)}}
+.greeting{font-size:1.1rem;margin:20px 0 0;padding:12px 16px;border-left:4px solid var(--pine);background:var(--card);border-radius:0 8px 8px 0}
+.part{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 16px 16px;margin:32px 0 24px;
+box-shadow:0 2px 8px rgba(0,0,0,.06);
+background-image:linear-gradient(90deg,transparent calc(50% - 7px),var(--accent) calc(50% - 7px),var(--accent) calc(50% + 7px),transparent calc(50% + 7px));
+background-size:100% 14px;background-repeat:no-repeat}
+.part::before{content:"";position:absolute;top:-18px;left:50%;width:56px;height:30px;transform:translateX(-50%);
+background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 30"><path d="M28 15C18 0 4 2 6 12s16 6 22 3z" fill="%23b3261e"/><path d="M28 15C38 0 52 2 50 12s-16 6-22 3z" fill="%23b3261e"/><path d="M28 15l-9 14M28 15l9 14" stroke="%23b3261e" stroke-width="4" stroke-linecap="round"/><circle cx="28" cy="15" r="5" fill="%23c9a227"/></svg>') no-repeat center/contain}
+.kicker{margin:0;color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center}
+h2{font-size:1.5rem;color:var(--accent);margin:.3rem 0 .8rem;text-align:center}
+h2::before,h2::after{content:"✦";color:var(--gold);font-size:.8em;margin:0 .45em;vertical-align:.1em}
+h3{font-size:1.15rem;color:var(--pine)}
+h4{font-size:1rem}
+.intro{color:var(--muted)}
+.divider{display:flex;justify-content:center;margin:8px 0}
+.divider svg{width:220px;max-width:70%;height:auto}
+img{max-width:100%;height:auto;display:block;margin:12px auto}
+pre{overflow-x:auto;background:#1b1f1c;color:#e2e6e0;padding:12px;border-radius:8px;border-left:4px solid var(--pine);font-size:.9rem}
+code{font-family:ui-monospace,monospace}
+table{display:block;overflow-x:auto;border-collapse:collapse;max-width:100%;margin:12px 0;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:rgba(31,77,58,.10)}
+a{color:var(--accent)}
+.puzzle-note{padding:10px 14px;border-left:4px solid var(--gold);background:rgba(184,144,28,.08);border-radius:0 8px 8px 0}
+.solution{margin:24px 0 0;background:var(--card);border:1px dashed var(--gold);border-radius:12px;padding:0 16px}
+.solution summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--pine);list-style:none}
+.solution summary::-webkit-details-marker{display:none}
+.solution summary::before{content:"▸ ";color:var(--gold)}
+.solution[open] summary::before{content:"▾ "}
+.solution[open]{padding-bottom:16px}
+.back{display:inline-block;margin-top:8px;font-weight:600}
+.calendar{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));grid-auto-flow:dense;gap:12px;margin:24px 0}
+.tile{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-decoration:none;color:#fff;background:#b3261e;border:3px solid #c9a227;border-radius:10px 10px 4px 4px;
+box-shadow:inset 0 0 0 3px rgba(255,255,255,.2),0 4px 10px rgba(0,0,0,.18);
+font:700 2.2rem/1 "Playfair Display",Georgia,serif;transition:transform .25s ease;transform-origin:left center}
+.tile:nth-child(3n+2){background:#1f4d3a}
+.tile:nth-child(5n+4){background:#7a1d18}
+.tile:hover,.tile:focus-visible{transform:perspective(500px) rotateY(-18deg)}
+.tile.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;font-size:3.4rem}
+.tile.bonus{background:#c9a227;color:#1f1d1a;border-color:#b3261e}
+.tile.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion: reduce){.tile,.tile:hover,.tile:focus-visible{transition:none;transform:none}.tile.shake{animation:none}}
+footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);text-align:center;color:var(--muted)}
+.footer-note{font-size:1.25rem;color:var(--pine);margin:0 0 4px}
+</style>
+</head>
+<body>
+<main>
+<header><div class="door" aria-hidden="true"><small>Türchen</small>19</div><div class="headline"><p class="date">Türchen 19 · Samstag, 19. Dezember 2026</p><h1>Das Schlitten-Lenkspiel</h1></div><svg class="wreath" viewBox="0 0 150 76" role="img" aria-label="Adventskranz: 3 von 4 Kerzen brennen" xmlns="http://www.w3.org/2000/svg"><title>Adventskranz: 3 von 4 Kerzen brennen</title><rect x="27" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="29" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M34 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M34 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M34 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="59" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="61" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M66 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M66 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M66 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="91" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="93" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M98 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M98 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M98 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="123" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="125" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M130 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><ellipse cx="12" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="24" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="36" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="48" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="60" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="72" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="84" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="96" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="108" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="120" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="132" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="144" cy="66" rx="14" ry="7" fill="#1f4d3a"/><circle cx="18" cy="62" r="3" fill="#c9302c"/><circle cx="50" cy="67" r="3" fill="#c9302c"/><circle cx="82" cy="62" r="3" fill="#c9302c"/><circle cx="114" cy="67" r="3" fill="#c9302c"/><circle cx="140" cy="62" r="3" fill="#c9302c"/></svg></header>
+<p class="greeting">Ab auf die Rodelbahn! Mit dem Joystick lenkst du deinen Schlitten zwischen den Tannenbäumen hindurch – der Buzzer meldet jeden Zusammenstoß.</p>
+<section class="part"><p class="kicker">Heute im Säckchen</p><h2>KY-023 Joystick (X-Y-Achsen)</h2><p class="intro">X und Y Position des Joysticks, werden als analoge Spannung auf den Ausgangspins ausgegeben.</p><img src="img/KY-023/KY-023.png" alt="KY-023 Joystick (X-Y-Achsen)" loading="lazy"><p>Dieses Modul erfasst die X- und Y-Position eines Joysticks und gibt diese als analoge Spannung an den Ausgangspins aus. Für jede Achse, X und Y, ist ein eigenes Potentiometer eingebaut. Im Ruhezustand befindet sich das Potentiometer in der Mitte, was bedeutet, dass die Widerstände und damit die Spannungen gleich sind.</p>
+<p>Wenn die Position der X- oder Y-Achse verändert wird, ändern sich die Widerstände in Abhängigkeit von der neuen Position. Diese Veränderung der Widerstände führt zu unterschiedlichen Spannungswerten, die zwischen den Widerständen gemessen werden können. So kann die genaue Position der Achse bestimmt werden.</p>
+<p>Dieses Modul ist ideal für Anwendungen wie Steuerungen in Spielen, Robotik oder anderen Projekten, bei denen die präzise Erfassung der Bewegung erforderlich ist. Durch die Ausgabe der Position als analoge Spannung kann der Joystick einfach in verschiedene elektronische Systeme integriert werden, um eine genaue und intuitive Steuerung zu ermöglichen.</p>
+<img src="img/KY-023/KY-023-VoltDivide.svg" alt="" loading="lazy">
+<h3>Anschlussbelegung</h3>
+<img src="img/KY-023/KY-023.svg" alt="" loading="lazy">
+<img src="img/KY-023/023-ARD.svg" alt="" loading="lazy">
+<table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>+5V</td></tr><tr><td>GND</td><td>GND</td></tr><tr><td>Pin A1</td><td>VRy</td></tr><tr><td>Pin A0</td><td>VRx</td></tr><tr><td>Pin 3</td><td>Knopf</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+<g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtswerkstatt mit Bauteilen der letzten Tage</p><h2>Weihnachtswerkstatt: Das Schlitten-Lenkspiel</h2>
+<p>Ab auf die Rodelbahn! Im Seriellen Monitor saust dein Schlitten (S) eine verschneite Bahn hinunter, auf der immer wieder Tannenbäume (^) stehen. Mit dem Joystick lenkst du nach links und rechts. Jeder Zusammenstoß kostet ein Leben, und der Buzzer von Tag 6 brummt. Wer schafft die meisten Punkte?</p>
+<h3>Verdrahtung</h3>
+<table><thead><tr><th>Komponente</th><th>Arduino-Pin</th><th>Anschluss am Modul</th></tr></thead><tbody><tr><td>KY-023 Joystick X</td><td>A0</td><td>VRx</td></tr><tr><td>KY-023 Joystick Y</td><td>nicht belegt</td><td>VRy</td></tr><tr><td>KY-023 Knopf</td><td>3</td><td>Knopf</td></tr><tr><td>KY-023</td><td>5V / GND</td><td>+5V / GND</td></tr><tr><td>KY-006 von Tag 6</td><td>8</td><td>Signal</td></tr><tr><td>KY-006 von Tag 6</td><td>GND</td><td>GND</td></tr></tbody></table>
+<h3>Ablauf</h3>
+<p>Die Bahn rückt alle 400 ms eine Reihe weiter, das Tempo stellst du mit <code>TAKT_MS</code> ein. Für jede Reihe ohne Zusammenstoß gibt es einen Punkt. Sind alle drei Leben verbraucht, startet ein Druck auf den Joystick-Knopf ein neues Rennen. Fährt der Schlitten in die falsche Richtung, halte den Joystick einfach andersherum.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 20.</p><pre><code>// Türchen 19: Das Schlitten-Lenkspiel
+// Verdrahtung siehe tag-19.md
+
+const char ART[] PROGMEM = R"ART(
+    ____
+   |    \_______________
+   |     o   o   o   o  |
+    \___________________/
+   ======================
+  Tuerchen 19: Das Schlitten-Lenkspiel
+)ART";
+
+const int JOY_X = A0;       // KY-023 VRx
+const int JOY_KNOPF = 3;    // KY-023 Knopf, LOW beim Drücken
+const int BUZZER = 8;       // KY-006 von Tag 6
+const int BREITE = 9;       // Spuren auf der Rodelbahn
+const int HOEHE = 5;        // sichtbare Reihen; die unterste ist die Reihe des Schlittens
+const int TAKT_MS = 400;
+
+int baum[HOEHE];            // Spur des Tannenbaums in jeder Reihe, -1 = frei
+int sx;                     // Spur des Schlittens
+int leben;
+unsigned long punkte;
+
+void neuesSpiel() {
+  for (int y = 0; y &lt; HOEHE; y++) baum[y] = -1;
+  sx = BREITE / 2;
+  leben = 3;
+  punkte = 0;
+  Serial.println("Neues Rennen! Lenke mit dem Joystick nach links und rechts.");
+}
+
+void zeichne() {
+  for (int y = 0; y &lt; HOEHE; y++) {
+    Serial.print('|');
+    for (int x = 0; x &lt; BREITE; x++) {
+      if (y == HOEHE - 1 &amp;&amp; x == sx) Serial.print('S');
+      else if (baum[y] == x) Serial.print('^');
+      else Serial.print(' ');
+    }
+    Serial.println('|');
+  }
+  Serial.print("Leben: ");
+  Serial.print(leben);
+  Serial.print("   Punkte: ");
+  Serial.println(punkte);
+  Serial.println();
+}
+
+void setup() {
+  pinMode(JOY_KNOPF, INPUT_PULLUP);
+  pinMode(BUZZER, OUTPUT);
+  Serial.begin(9600);
+  Serial.println((const __FlashStringHelper*)ART);
+  randomSeed(analogRead(A5));  // offener Analogeingang liefert zufälliges Rauschen
+  neuesSpiel();
+}
+
+void loop() {
+  // In jedem Takt: lenken, die Bahn eine Reihe nach unten schieben (oben vielleicht
+  // ein neuer Baum), Zusammenstoß prüfen und zeichnen. Ein Treffer kostet ein Leben
+  // und brummt; ohne Leben startet der Joystick-Knopf ein neues Rennen.
+}</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+<g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-023 Joystick (X-Y-Achsen)</h2><h3>Code-Beispiel</h3>
+<p>Das Programm liest die aktuellen Werte der Eingang-Pins, konvertiert diese in eine Spannung (0-1023 -&gt; 0 V-5 V) und gibt diese in der seriellen Ausgabe aus.</p>
+<p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
+<p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
+<pre><code>// Deklaration und Initialisierung der Eingang-Pins
+int joystick_X = A0; // X-Achse-Signal
+int joystick_Y = A1; // Y-Achse-Signal
+int joystick_button = 3; // Knopf
+
+void setup () {
+  pinMode(joystick_X, INPUT);
+  pinMode(joystick_Y, INPUT);
+  pinMode(joystick_button, INPUT);
+  // Da der Knopf das Signal beim druecken auf Masse zieht,
+  // schalten wir hiermit den PullUp-Widerstand ein
+  digitalWrite(joystick_button, HIGH);
+  Serial.begin (9600); // Serielle Ausgabe mit 9600 bps
+}
+
+// Das Programm liest die aktuellen Werte der Eingang-Pins
+// und gibt diese auf der seriellen Ausgabe aus
+void loop () {
+  // Temporäre Variablen
+  float temp_x, temp_y;
+  int button_value;
+
+  // Aktuelle Werte werden ausgelesen, auf den Spannungswert konvertiert...
+  temp_x = analogRead(joystick_X) * (5.0 / 1023.0);
+  temp_y = analogRead(joystick_Y) * (5.0 / 1023.0);
+  button_value = digitalRead(joystick_button);
+
+  // ... und an dieser Stelle ausgegeben
+  Serial.print ("X-Achse: ");
+  Serial.print (temp_x, 4);
+  Serial.print ("V, \tY-Achse: ");
+  Serial.print (temp_y, 4);
+  Serial.print ("V, \tKnopf: ");
+  if (button_value == 1) {
+      Serial.println("nicht gedrückt");
+  }
+  else {
+      Serial.println("gedrückt");
+  }
+  delay(1000);
+}</code></pre></section>
+<details class="solution"><summary>Lösung für Tag 18 anzeigen</summary><pre><code>// Auflösung zu Türchen 18: Der Wunschzettel
+// Verdrahtung wie im Artikel KY-040 (CLK an Pin 3, DT an Pin 4, Knopf an Pin 5)
+
+const char ART[] PROGMEM = R"ART(
+     ____________________
+    /   Wunschzettel    /|
+   |  - ............   | |
+   |  - ............   | |
+   |  - ............   | |
+   |___________________|/
+  Tuerchen 18: Der Wunschzettel
+)ART";
+
+const int pin_clk = 3;
+const int pin_dt = 4;
+const int button_pin = 5;  // aktiv LOW
+
+const char* const WUENSCHE[] = {
+  "Schlitten",
+  "Lebkuchenherz",
+  "Neue Sensoren",
+  "Dicke Wollsocken",
+  "Ein Lötkolben",
+  "Schnee bis zum Fensterbrett",
+  "Ein Tag ohne Hausaufgaben",
+};
+const int ANZAHL = sizeof(WUENSCHE) / sizeof(WUENSCHE[0]);
+
+bool gewaehlt[ANZAHL];
+int position = 0;
+int pin_clk_last;
+bool knopfVorher = false;
+
+void zeigeAuswahl() {
+  Serial.print("&gt; ");
+  Serial.print(WUENSCHE[position]);
+  Serial.println(gewaehlt[position] ? "  [steht schon drauf]" : "");
+}
+
+void zeigeZettel() {
+  Serial.println("Mein Wunschzettel:");
+  for (int i = 0; i &lt; ANZAHL; i++) {
+    if (gewaehlt[i]) {
+      Serial.print("  - ");
+      Serial.println(WUENSCHE[i]);
+    }
+  }
+}
+
+void setup() {
+  pinMode(pin_clk, INPUT);
+  pinMode(pin_dt, INPUT);
+  pinMode(button_pin, INPUT);
+  digitalWrite(pin_clk, true);  // interne Pull-ups wie im Artikel
+  digitalWrite(pin_dt, true);
+  digitalWrite(button_pin, true);
+  pin_clk_last = digitalRead(pin_clk);
+  Serial.begin(9600);
+  Serial.println((const __FlashStringHelper*)ART);
+  Serial.println("Drehen zum Blättern, Drücken zum Aufschreiben oder Streichen.");
+  zeigeAuswahl();
+}
+
+void loop() {
+  // Drehrichtung wie im Artikel: Unterscheiden sich DT und CLK, wurde im Uhrzeigersinn gedreht.
+  // Pro Raststufe wechselt CLK zweimal; nur die fallende Flanke zählt, sonst springt die Liste doppelt.
+  int pin_clk_current = digitalRead(pin_clk);
+  if (pin_clk_current != pin_clk_last &amp;&amp; pin_clk_current == LOW) {
+    if (digitalRead(pin_dt) != pin_clk_current) {
+      position = (position + 1) % ANZAHL;
+    } else {
+      position = (position + ANZAHL - 1) % ANZAHL;
+    }
+    zeigeAuswahl();
+  }
+  pin_clk_last = pin_clk_current;
+
+  bool knopf = !digitalRead(button_pin);
+  if (knopf &amp;&amp; !knopfVorher) {
+    gewaehlt[position] = !gewaehlt[position];
+    Serial.print(WUENSCHE[position]);
+    Serial.println(gewaehlt[position] ? " steht jetzt auf dem Wunschzettel." : " wurde gestrichen.");
+    zeigeZettel();
+    delay(50);  // Knopf entprellen
+  }
+  knopfVorher = knopf;
+}</code></pre></details>
+<footer><p class="footer-note">Noch 5 Türchen bis Heiligabend</p><p>Morgen öffnet sich Türchen 20.</p><a class="back" href="index.html">Zur Kalender-Übersicht</a></footer>
+</main>
+</body>
+</html>
