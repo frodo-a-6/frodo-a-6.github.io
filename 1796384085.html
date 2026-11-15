@@ -100,14 +100,13 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr><tr><td>Pin 3</td><td>Digitales Signal</td></tr><tr><td>Pin A0</td><td>Analoges Signal</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Eisblumen-Wächter</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Eisblumen</h2>
 <p>Wenn die Fensterscheibe kalt genug wird, wachsen Eisblumen. Der Thermistor-Fühler wacht auf der Fensterbank und meldet, sobald es frostig wird. Die Grenze stellst du direkt am Poti des Moduls ein.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Analoges Signal an A0, digitales Signal an Pin 3, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Einmal pro Sekunde zeigt der Sketch die Spannung am Analogausgang und wie stark sie sich seit dem Start verändert hat. Wechselt der Digitalausgang, kommt die Meldung „Eisblumen-Gefahr“ oder „Entwarnung“.</p>
-<p>Zum Einstellen legst du das Modul an die kalte Scheibe und drehst das Poti, bis die LED am Modul gerade umschaltet. Kommt die Meldung genau verkehrt herum, setze im Sketch <code>FROST_BEI_HIGH</code> auf <code>false</code>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 5.</p><pre><code>// Türchen 4: Der Eisblumen-Wächter
-// Verdrahtung wie im Artikel KY-028 (A0 analog, Pin 3 digital)
+<p>Einmal pro Sekunde zeigt das Programm die Spannung am Analogausgang und wie stark sie sich seit dem Start verändert hat. Wechselt der Digitalausgang, kommt die Meldung „Eisblumen-Gefahr“ oder „Entwarnung“.</p>
+<p>Zum Einstellen legst du das Modul an die kalte Scheibe und drehst das Poti, bis die LED am Modul gerade umschaltet. Kommt die Meldung genau verkehrt herum, setze im Programm <code>FROST_BEI_HIGH</code> auf <code>false</code>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 5.</p><pre><code>// Türchen 4: Eisblumen
 
 const char ART[] PROGMEM = R"ART(
         \  |  /
@@ -117,7 +116,7 @@ const char ART[] PROGMEM = R"ART(
           /|\
       -- / | \ --
         /  |  \
-  Tuerchen 4: Der Eisblumen-Waechter
+  Tuerchen 4: Eisblumen
 )ART";
 
 const int analog_input = A0;   // KY-028 analoger Messwert
@@ -143,7 +142,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-028 Temperatursensor (Thermistor)</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-028 Temperatursensor (Thermistor) anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Das Programm liest den aktuellen Spannungswert aus, der am analogen Ausgang gemessen werden kann, und gibt diesen auf der seriellen Schnittstelle aus. Zudem wird ebenfalls der Zustand des digitalen Pins in der Konsole ausgegeben. Dieser Zustand gibt an, ob der Grenzwert überschritten wurde.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -181,9 +180,8 @@ void loop () {
   }
   Serial.println("----------------------------------------------------------------");
   delay(1000);
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 3 anzeigen</summary><pre><code>// Auflösung zu Türchen 3: Das Schneemann-Thermometer
-// Verdrahtung wie im Artikel KY-001 (Signal an Pin 4)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 3 anzeigen</summary><pre><code>// Auflösung zu Türchen 3: Schneemann
 // Bibliotheken: OneWire, DallasTemperature
 
 #include &lt;OneWire.h&gt;
@@ -196,7 +194,7 @@ const char ART[] PROGMEM = R"ART(
       (    :    )
      (     :     )
       `---------'
-  Tuerchen 3: Das Schneemann-Thermometer
+  Tuerchen 3: Schneemann
 )ART";
 
 #define KY001_Signal_PIN 4

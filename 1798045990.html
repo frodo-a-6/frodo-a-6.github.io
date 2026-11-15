@@ -96,16 +96,15 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr><tr><td>Pin A5</td><td>SCL</td></tr><tr><td>Pin A4</td><td>SDA</td></tr><tr><td>-</td><td>ADDR</td></tr><tr><td>-</td><td>ALRT</td></tr><tr><td>-</td><td>A0</td></tr><tr><td>-</td><td>A1</td></tr><tr><td>-</td><td>A2</td></tr><tr><td>-</td><td>A3</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Schneehöhen-Messer</h2>
-<p>Einen Tag vor Heiligabend steigt die Spannung: Gibt es weiße Weihnachten? Mit einem Drehpotentiometer „lässt du es schneien“: Der ADS1115 misst die Spannung am Poti sehr fein, und der Sketch rechnet sie in eine Schneehöhe von 0 bis 50 cm um.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Tiefschnee</h2>
+<p>Einen Tag vor Heiligabend steigt die Spannung: Gibt es weiße Weihnachten? Mit einem Drehpotentiometer „lässt du es schneien“: Der ADS1115 misst die Spannung am Poti sehr fein, und das Programm rechnet sie in eine Schneehöhe von 0 bis 50 cm um.</p>
 <h3>Verdrahtung</h3>
 <p>Den ADS1115 wie im Abschnitt zum Bauteil oben anschließen (SCL an A5, SDA an A4, +V an 5V, GND an GND). Zusätzlich ein Potentiometer (z. B. 10 kΩ):</p>
 <table><thead><tr><th>Potentiometer</th><th>Anschluss</th></tr></thead><tbody><tr><td>äußerer Pin</td><td>5V</td></tr><tr><td>äußerer Pin</td><td>GND</td></tr><tr><td>mittlerer Pin (Schleifer)</td><td>A0 am ADS1115</td></tr></tbody></table>
 <h3>Ablauf</h3>
-<p>Einmal pro Sekunde liest der Sketch Kanal A0 und zeigt die Schneehöhe als Balken, in Zentimetern und als Spannung. Der Messbereich ist wie im Artikel auf ±6,144 V eingestellt, so dass die vollen 5 V des Potis hineinpassen.</p>
+<p>Einmal pro Sekunde liest das Programm Kanal A0 und zeigt die Schneehöhe als Balken, in Zentimetern und als Spannung. Der Messbereich ist wie im Artikel auf ±6,144 V eingestellt, so dass die vollen 5 V des Potis hineinpassen.</p>
 <h3>Bibliothek</h3>
-<p>Wie im Artikel: <strong>Adafruit ADS1X15</strong>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 24.</p><pre><code>// Türchen 23: Der Schneehöhen-Messer
-// Verdrahtung siehe tag-23.md (ADS1115 wie im Artikel, Poti an Kanal A0)
+<p>Wie im Artikel: <strong>Adafruit ADS1X15</strong>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 24.</p><pre><code>// Türchen 23: Tiefschnee
 // Bibliothek: Adafruit ADS1X15
 
 #include &lt;Adafruit_ADS1X15.h&gt;
@@ -117,7 +116,7 @@ const char ART[] PROGMEM = R"ART(
    20 -|##############
    10 -|##############
     0 -|##############
-  Tuerchen 23: Der Schneehoehen-Messer
+  Tuerchen 23: Tiefschnee
 )ART";
 
 Adafruit_ADS1115 ads;
@@ -139,7 +138,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-053 Analog Digital Converter</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-053 Analog Digital Converter anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Die Arduino-Boards verfügen bereits über einen integrierten 10 Bit-ADC mit 6 Kanälen. Werden weitere Kanäle, oder eine höhere Genauigkeit, benötigt, so kann der Arduino mit Hilfe des KY-053 Analog Digital Converter Moduls um 4 ADC Kanäle mit 16-Bit Genauigkeit erweitert werden.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Es werden für das Codebeispiel auch die folgenden Bibliotheken verwendet:</p>
@@ -201,9 +200,8 @@ void loop() {
   Serial.println ("------------------------");
 
   delay (1000);
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 22 anzeigen</summary><pre><code>// Auflösung zu Türchen 22: Der Wichtel-Dolmetscher
-// Verdrahtung siehe tag-22.md (Arduino an Seite B mit 5 V, A1 zurück an Arduino-Pin A0)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 22 anzeigen</summary><pre><code>// Auflösung zu Türchen 22: Wichtel-Dolmetscher
 
 const char ART[] PROGMEM = R"ART(
       /\               /\
@@ -211,7 +209,7 @@ const char ART[] PROGMEM = R"ART(
     (o  o)   5 V     (o  o)
      \__/  &lt;------&gt;   \__/
     /|  |\   3,3 V   /|  |\
-  Tuerchen 22: Der Wichtel-Dolmetscher
+  Tuerchen 22: Wichtel-Dolmetscher
 )ART";
 
 const int SIGNAL_B1 = 3;   // Arduino-Pin 3 an B1 (5-V-Seite)

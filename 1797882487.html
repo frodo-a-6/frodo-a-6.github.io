@@ -102,13 +102,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin A0</td><td>Signal</td></tr><tr><td>5V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Aufregungsmesser</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Herzklopfen</h2>
 <p>Je näher die Bescherung rückt, desto schneller klopft das Herz. Der Herzschlagsensor misst den Puls am Finger und übersetzt ihn in eine Aufregungsstufe, von „ganz entspannt“ bis „gleich platzt das Geschenkpapier“. Die LED an Pin 13 blinkt im Takt.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an A0, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Die Pulserkennung ist dieselbe wie im Artikel. Am zuverlässigsten misst der Sensor im abgedunkelten Raum mit ruhig aufgelegtem Finger. Das ist ein Bastelprojekt und kein medizinisches Messgerät.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 22.</p><pre><code>// Türchen 21: Der Aufregungsmesser
-// Verdrahtung wie im Artikel KY-039 (Signal an A0)
+<p>Die Pulserkennung ist dieselbe wie im Artikel. Am zuverlässigsten misst der Sensor im abgedunkelten Raum mit ruhig aufgelegtem Finger. Das ist ein Bastelprojekt und kein medizinisches Messgerät.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 22.</p><pre><code>// Türchen 21: Herzklopfen
 
 const char ART[] PROGMEM = R"ART(
      *****     *****
@@ -119,7 +118,7 @@ const char ART[] PROGMEM = R"ART(
         *********
           *****
             *
-  Tuerchen 21: Der Aufregungsmesser
+  Tuerchen 21: Herzklopfen
 )ART";
 
 const int ledPin = 13;
@@ -174,7 +173,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-039 Herzschlagsensor</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-039 Herzschlagsensor anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
 <pre><code>////////////////////////////////////////////////////////////////////////
@@ -276,9 +275,8 @@ void loop() {
   }
   delay(delayMsec);
   beatMsec += delayMsec;
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 20 anzeigen</summary><pre><code>// Auflösung zu Türchen 20: Der geheime Klopf-Code
-// Verdrahtung siehe tag-20.md
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 20 anzeigen</summary><pre><code>// Auflösung zu Türchen 20: Christmas-Tango
 
 const char ART[] PROGMEM = R"ART(
     ___________
@@ -287,7 +285,7 @@ const char ART[] PROGMEM = R"ART(
    | |_|   |_| |       klopf
    |        o  |   klopf-klopf
    |___________|          klopf
-  Tuerchen 20: Der geheime Klopf-Code
+  Tuerchen 20: Christmas-Tango
 )ART";
 
 const int KLOPF = 10;       // KY-031, LOW beim Klopfen

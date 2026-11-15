@@ -94,15 +94,14 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 4</td><td>Signal</td></tr><tr><td>5V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Das Schneemann-Thermometer</h2>
-<p>Wie geht es dem Schneemann im Garten? Der DS18B20 misst die Temperatur, und der Sketch übersetzt sie in Schneemann-Sprache: bis 0 °C stabil, unter 5 °C schmilzt er langsam, darüber bleibt nur eine Pfütze.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Schneemann</h2>
+<p>Wie geht es dem Schneemann im Garten? Der DS18B20 misst die Temperatur, und das Programm übersetzt sie in Schneemann-Sprache: bis 0 °C stabil, unter 5 °C schmilzt er langsam, darüber bleibt nur eine Pfütze.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an Pin 4, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
 <p>Einmal pro Sekunde erscheint die Temperatur mit dem Zustand des Schneemanns. Zum Testen hältst du das Modul an eine kalte Fensterscheibe oder legst es kurz in einen Gefrierbeutel mit Eiswürfeln. Das Modul ist nicht wasserdicht und darf nicht nass werden.</p>
 <h3>Bibliotheken</h3>
-<p>Wie im Artikel: <strong>OneWire</strong> und <strong>DallasTemperature</strong>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 4.</p><pre><code>// Türchen 3: Das Schneemann-Thermometer
-// Verdrahtung wie im Artikel KY-001 (Signal an Pin 4)
+<p>Wie im Artikel: <strong>OneWire</strong> und <strong>DallasTemperature</strong>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 4.</p><pre><code>// Türchen 3: Schneemann
 // Bibliotheken: OneWire, DallasTemperature
 
 #include &lt;OneWire.h&gt;
@@ -115,7 +114,7 @@ const char ART[] PROGMEM = R"ART(
       (    :    )
      (     :     )
       `---------'
-  Tuerchen 3: Das Schneemann-Thermometer
+  Tuerchen 3: Schneemann
 )ART";
 
 #define KY001_Signal_PIN 4
@@ -134,7 +133,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-001 Temperatursensor (DS18B20)</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-001 Temperatursensor (DS18B20) anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Es werden für das Codebeispiel auch die folgenden Bibliotheken verwendet:</p>
 <p><a href="https://github.com/PaulStoffregen/OneWire" rel="noopener">OneWire Library</a> von <a href="https://github.com/PaulStoffregen" rel="noopener">Paul Stoffregen</a> | veröffentlicht unter der MIT License</p>
@@ -172,9 +171,8 @@ void loop()
     Serial.println(" °C");
 
     delay(1000); // 1s Pause bis zur nächsten Messung
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 2 anzeigen</summary><pre><code>// Auflösung zu Türchen 2: Der Kerzenwecker
-// Verdrahtung wie im Artikel KY-018 (Signal an A5)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 2 anzeigen</summary><pre><code>// Auflösung zu Türchen 2: Kerzenschein
 
 const char ART[] PROGMEM = R"ART(
          ,
@@ -185,7 +183,7 @@ const char ART[] PROGMEM = R"ART(
        |  |
      __|__|__
     (________)
-  Tuerchen 2: Der Kerzenwecker
+  Tuerchen 2: Kerzenschein
 )ART";
 
 const int photo_resistor = A5;  // KY-018

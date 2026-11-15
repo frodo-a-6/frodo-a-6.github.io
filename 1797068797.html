@@ -100,14 +100,13 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr><tr><td>Pin 3</td><td>Digitales Signal</td></tr><tr><td>Pin A0</td><td>Analoges Signal</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtswerkstatt mit Bauteilen der letzten Tage</p><h2>Weihnachtswerkstatt: Heiß oder kalt? Die Wichtel-Schatzsuche</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Wichteln</h2>
 <p>Ein Wichtel hat einen kleinen Magneten in einer von mehreren Geschenkschachteln versteckt. Mit dem linearen Hall-Sensor gehst du auf Schatzsuche, wie beim Topfschlagen: Die RGB-LED von Tag 5 leuchtet blau, solange du weit weg bist („kalt“), und wird immer röter, je näher du dem Magneten kommst („heiß, hier ist der Schatz!“).</p>
 <h3>Verdrahtung</h3>
 <table><thead><tr><th>Komponente</th><th>Arduino-Pin</th><th>Anschluss am Modul</th></tr></thead><tbody><tr><td>KY-024 Analogausgang</td><td>A0</td><td>Analoges Signal</td></tr><tr><td>KY-024 Digitalausgang</td><td>nicht belegt</td><td>Digitales Signal</td></tr><tr><td>KY-024</td><td>5V / GND</td><td>+V / GND</td></tr><tr><td>KY-016 von Tag 5</td><td>9 / 6 / 5</td><td>LED Rot / Grün / Blau (über Vorwiderstände)</td></tr><tr><td>KY-016 von Tag 5</td><td>GND</td><td>GND</td></tr></tbody></table>
 <p>Den Sensor am besten an ein paar Kabeln „lose“ halten, dann lässt er sich gut über die Schachteln führen.</p>
 <h3>Ablauf</h3>
-<p>Beim Start misst der Sketch den Ruhewert ohne Magnet; halte den Magneten in dieser Zeit fern. Danach bestimmt er laufend, wie stark der Messwert davon abweicht. Ob sich Nord- oder Südpol nähert, spielt keine Rolle. Ist der Magnet sehr schwach oder sehr stark, passe <code>GANZ_NAH</code> an.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 13.</p><pre><code>// Türchen 12: Heiß oder kalt? Die Wichtel-Schatzsuche
-// Verdrahtung siehe tag-12.md
+<p>Beim Start misst das Programm den Ruhewert ohne Magnet; halte den Magneten in dieser Zeit fern. Danach bestimmt es laufend, wie stark der Messwert davon abweicht. Ob sich Nord- oder Südpol nähert, spielt keine Rolle. Ist der Magnet sehr schwach oder sehr stark, passe <code>GANZ_NAH</code> an.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 13.</p><pre><code>// Türchen 12: Wichteln
 
 const char ART[] PROGMEM = R"ART(
        _\/_       _\/_       _\/_
@@ -117,7 +116,7 @@ const char ART[] PROGMEM = R"ART(
    |    ||    |    ||    |    ||    |
    |____||____|____||____|____||____|
           Wo ist der Schatz?
-  Tuerchen 12: Die Wichtel-Schatzsuche
+  Tuerchen 12: Wichteln
 )ART";
 
 const int HALL_ANALOG = A0;  // KY-024, analoger Ausgang
@@ -167,7 +166,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-024 Linearer, magnetischer Hall-Sensor</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-024 Linearer, magnetischer Hall-Sensor anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Das Programm liest den aktuellen Spannungswert aus, der am analogen Ausgang gemessen werden kann, und gibt diesen auf der seriellen Schnittstelle aus. Zudem wird ebenfalls der Zustand des digitalen Pins in der Konsole angegeben. Dieser gibt an, ob der Grenzwert überschritten wurde.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -205,9 +204,8 @@ void loop () {
   }
   Serial.println("----------------------------------------------------------------");
   delay(1000);
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 11 anzeigen</summary><pre><code>// Auflösung zu Türchen 11: Drinnen mollig, draußen eisig
-// Verdrahtung wie im Artikel KY-013 (Signal an A1)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 11 anzeigen</summary><pre><code>// Auflösung zu Türchen 11: Temperatursturz
 
 const char ART[] PROGMEM = R"ART(
    _______________
@@ -217,7 +215,7 @@ const char ART[] PROGMEM = R"ART(
   |   *   |   *   |
   | *   * | *   * |
   |_______|_______|
-  Tuerchen 11: Drinnen mollig, draussen eisig
+  Tuerchen 11: Temperatursturz
 )ART";
 
 const int ntc = A1;  // KY-013

@@ -98,15 +98,14 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>Vccb</td></tr><tr><td>Pin 3</td><td>B1</td></tr><tr><td>Pin 4</td><td>B2</td></tr><tr><td>Pin 5</td><td>B3</td></tr><tr><td>Pin 6</td><td>B4</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Wichtel-Dolmetscher</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Wichtel-Dolmetscher</h2>
 <p>Der Arduino Uno arbeitet mit 5 V, viele andere Bausteine nur mit 3,3 V. Der Level Shifter übersetzt zwischen beiden wie ein Wichtel-Dolmetscher. Zur Probe morst der Arduino „FROHES FEST“ mit 5 V in die eine Seite hinein und misst auf der anderen Seite nach, mit welcher Spannung die Botschaft ankommt.</p>
 <h3>Verdrahtung</h3>
 <p>Ohne Raspberry Pi übernimmt der 3,3-V-Pin des Arduino die Niederspannungsseite:</p>
 <table><thead><tr><th>Arduino</th><th>Level Shifter</th></tr></thead><tbody><tr><td>5V</td><td>Vccb</td></tr><tr><td>3.3V</td><td>Vcca</td></tr><tr><td>Pin 3</td><td>B1</td></tr><tr><td>A0</td><td>A1</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table>
 <p>Wie im Artikel beschrieben muss Vccb mindestens so groß sein wie Vcca, und beide Seiten brauchen gemeinsames GND. OE muss nicht angeschlossen werden.</p>
 <h3>Ablauf</h3>
-<p>Der Sketch morst die Botschaft mit den üblichen Längen: Punkt eine Einheit, Strich drei, Pause zwischen Buchstaben drei und zwischen Wörtern sieben Einheiten. Der Serielle Monitor schreibt Buchstabe und Morsecode mit. Nach jedem Durchgang zeigt er die höchste Spannung, die an A1 gemessen wurde: etwa 3,3 V statt 5 V.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 23.</p><pre><code>// Türchen 22: Der Wichtel-Dolmetscher
-// Verdrahtung siehe tag-22.md (Arduino an Seite B mit 5 V, A1 zurück an Arduino-Pin A0)
+<p>Das Programm morst die Botschaft mit den üblichen Längen: Punkt eine Einheit, Strich drei, Pause zwischen Buchstaben drei und zwischen Wörtern sieben Einheiten. Der Serielle Monitor schreibt Buchstabe und Morsecode mit. Nach jedem Durchgang zeigt er die höchste Spannung, die an A1 gemessen wurde: etwa 3,3 V statt 5 V.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 23.</p><pre><code>// Türchen 22: Wichtel-Dolmetscher
 
 const char ART[] PROGMEM = R"ART(
       /\               /\
@@ -114,7 +113,7 @@ const char ART[] PROGMEM = R"ART(
     (o  o)   5 V     (o  o)
      \__/  &lt;------&gt;   \__/
     /|  |\   3,3 V   /|  |\
-  Tuerchen 22: Der Wichtel-Dolmetscher
+  Tuerchen 22: Wichtel-Dolmetscher
 )ART";
 
 const int SIGNAL_B1 = 3;   // Arduino-Pin 3 an B1 (5-V-Seite)
@@ -152,8 +151,7 @@ void loop() {
   // Die BOTSCHAFT Buchstabe für Buchstabe morsen (Codes in MORSE, senden mit morseElement())
   // und danach die höchste auf Seite A gemessene Spannung ausgeben.
 }</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 21 anzeigen</summary><pre><code>// Auflösung zu Türchen 21: Der Aufregungsmesser
-// Verdrahtung wie im Artikel KY-039 (Signal an A0)
+<details class="solution"><summary>Lösung für Tag 21 anzeigen</summary><pre><code>// Auflösung zu Türchen 21: Herzklopfen
 
 const char ART[] PROGMEM = R"ART(
      *****     *****
@@ -164,7 +162,7 @@ const char ART[] PROGMEM = R"ART(
         *********
           *****
             *
-  Tuerchen 21: Der Aufregungsmesser
+  Tuerchen 21: Herzklopfen
 )ART";
 
 const int ledPin = 13;

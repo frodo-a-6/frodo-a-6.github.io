@@ -83,8 +83,7 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <header><div class="headline"><p class="date">25. Dezember 2026 · 1. Weihnachtstag</p><h1>Die letzte Auflösung</h1></div><svg class="wreath" viewBox="0 0 150 76" role="img" aria-label="Adventskranz: 4 von 4 Kerzen brennen" xmlns="http://www.w3.org/2000/svg"><title>Adventskranz: 4 von 4 Kerzen brennen</title><rect x="27" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="29" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M34 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M34 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M34 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="59" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="61" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M66 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M66 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M66 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="91" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="93" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M98 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M98 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M98 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="123" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="125" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M130 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M130 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M130 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><ellipse cx="12" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="24" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="36" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="48" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="60" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="72" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="84" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="96" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="108" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="120" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="132" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="144" cy="66" rx="14" ry="7" fill="#1f4d3a"/><circle cx="18" cy="62" r="3" fill="#c9302c"/><circle cx="50" cy="67" r="3" fill="#c9302c"/><circle cx="82" cy="62" r="3" fill="#c9302c"/><circle cx="114" cy="67" r="3" fill="#c9302c"/><circle cx="140" cy="62" r="3" fill="#c9302c"/></svg></header>
 <p class="greeting">Frohe Weihnachten! Ein letztes Türchen gibt es noch: Dahinter steckt die Auflösung zur Weiße-Weihnachten-Station von gestern. Wie nah warst du dran?</p>
 
-<details class="solution"><summary>Lösung für Tag 24 anzeigen</summary><pre><code>// Auflösung zu Türchen 24: Die Weiße-Weihnachten-Station
-// Verdrahtung siehe tag-24.md
+<details class="solution"><summary>Lösung für Tag 24 anzeigen</summary><pre><code>// Auflösung zu Türchen 24: Winterwetter
 // Bibliotheken: Adafruit BMP280 Library, DHT sensor library, Adafruit Unified Sensor
 
 #include &lt;Wire.h&gt;
@@ -102,7 +101,7 @@ const char ART[] PROGMEM = R"ART(
            /'.''.'.\
            ^^^[_]^^^
   F R O H E   W E I H N A C H T E N
-  Tuerchen 24: Die Weisse-Weihnachten-Station
+  Tuerchen 24: Winterwetter
 )ART";
 
 Adafruit_BMP280 bmp;        // KY-052: Temperatur und Luftdruck, I2C-Adresse 0x77

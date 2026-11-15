@@ -90,13 +90,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 13</td><td>Signal</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Die Christbaumspitze</h2>
-<p>Die 7-Farben-LED wird zum funkelnden Stern auf der Baumspitze. Die LED wechselt ihre Farben von allein; der Sketch schaltet sie mal länger, mal kürzer ein und lässt sie zwischendurch kurz verlöschen.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Christbaumspitze</h2>
+<p>Die 7-Farben-LED wird zum funkelnden Stern auf der Baumspitze. Die LED wechselt ihre Farben von allein; das Programm schaltet sie mal länger, mal kürzer ein und lässt sie zwischendurch kurz verlöschen.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an Pin 13, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Jede Leuchtphase dauert zufällig zwischen 2 und 6 Sekunden, die Pause zwischen 0,3 und 1,5 Sekunden. Der Serielle Monitor zählt die Runden mit. Weil die LED ihr Farbprogramm bei jedem Einschalten neu startet, sieht jede Runde ein wenig anders aus. Ein Tipp für die Optik: Stülpe einen Stern aus Transparentpapier über die LED.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 10.</p><pre><code>// Türchen 9: Die Christbaumspitze
-// Verdrahtung wie im Artikel KY-034 (Signal an Pin 13)
+<p>Jede Leuchtphase dauert zufällig zwischen 2 und 6 Sekunden, die Pause zwischen 0,3 und 1,5 Sekunden. Der Serielle Monitor zählt die Runden mit. Weil die LED ihr Farbprogramm bei jedem Einschalten neu startet, sieht jede Runde ein wenig anders aus. Ein Tipp für die Optik: Stülpe einen Stern aus Transparentpapier über die LED.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 10.</p><pre><code>// Türchen 9: Christbaumspitze
 
 const char ART[] PROGMEM = R"ART(
            *
@@ -105,7 +104,7 @@ const char ART[] PROGMEM = R"ART(
        *********
         *** ***
        **     **
-  Tuerchen 9: Die Christbaumspitze
+  Tuerchen 9: Christbaumspitze
 )ART";
 
 const int led = 13;  // KY-034 wechselt seine Farben selbstständig, solange Strom fließt
@@ -123,7 +122,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-034 7-Farben Flash-LED</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-034 7-Farben Flash-LED anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Diese Codebeispiel zeigt auf, wie eine LED mittels eines definierbaren Ausgangspins abwechselnd für vier Sekunden ein- und danach für zwei Sekunden ausgeschaltet werden kann.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -138,9 +137,8 @@ void loop() {
   delay(4000); // Warte für 4 Sekunden
   digitalWrite(led, LOW); // LED wird ausgeschaltet
   delay(2000); // Warte für weitere zwei Sekunden
-}</code></pre></section>
+}</code></pre></details>
 <details class="solution"><summary>Lösung für Tag 8 anzeigen</summary><pre><code>// Auflösung zu Türchen 8: Tannengrün und Kerzenrot
-// Verdrahtung wie im Artikel KY-029 (Rot an Pin 11, Grün an Pin 10)
 
 const char ART[] PROGMEM = R"ART(
           )

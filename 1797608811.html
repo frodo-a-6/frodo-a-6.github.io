@@ -91,13 +91,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr><tr><td>Pin 3</td><td>CLK</td></tr><tr><td>Pin 4</td><td>DT</td></tr><tr><td>Pin 5</td><td>Knopf</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Wunschzettel</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Wunschzettel</h2>
 <p>Mit dem Drehgeber blätterst du durch eine Liste möglicher Weihnachtswünsche. Ein Druck auf den Knopf schreibt den aktuellen Wunsch auf den Wunschzettel oder streicht ihn wieder, danach erscheint der ganze Zettel im Seriellen Monitor.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: CLK an Pin 3, DT an Pin 4, Knopf an Pin 5, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Die Drehrichtung erkennt der Sketch wie im Artikel. Nach dem letzten Wunsch geht es wieder mit dem ersten weiter. Eigene Wünsche trägst du in der Liste <code>WUENSCHE</code> ein.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 19.</p><pre><code>// Türchen 18: Der Wunschzettel
-// Verdrahtung wie im Artikel KY-040 (CLK an Pin 3, DT an Pin 4, Knopf an Pin 5)
+<p>Die Drehrichtung erkennt das Programm wie im Artikel. Nach dem letzten Wunsch geht es wieder mit dem ersten weiter. Eigene Wünsche trägst du in der Liste <code>WUENSCHE</code> ein.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 19.</p><pre><code>// Türchen 18: Wunschzettel
 
 const char ART[] PROGMEM = R"ART(
      ____________________
@@ -106,7 +105,7 @@ const char ART[] PROGMEM = R"ART(
    |  - ............   | |
    |  - ............   | |
    |___________________|/
-  Tuerchen 18: Der Wunschzettel
+  Tuerchen 18: Wunschzettel
 )ART";
 
 const int pin_clk = 3;
@@ -114,13 +113,13 @@ const int pin_dt = 4;
 const int button_pin = 5;  // aktiv LOW
 
 const char* const WUENSCHE[] = {
-  "Schlitten",
-  "Lebkuchenherz",
-  "Neue Sensoren",
+  "Spiele",
+  "Knäckebrot",
+  "3D Drucker",
   "Dicke Wollsocken",
   "Ein Lötkolben",
   "Schnee bis zum Fensterbrett",
-  "Ein Tag ohne Hausaufgaben",
+  "Ein Tag im Bett",
 };
 const int ANZAHL = sizeof(WUENSCHE) / sizeof(WUENSCHE[0]);
 
@@ -165,7 +164,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-040 Kodierter Drehschalter (Rotary Encoder)</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-040 Kodierter Drehschalter (Rotary Encoder) anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Das Beispielprogramm prüft auf die Änderung der Pin-Zustände und ermittelt die Drehrichtung, sobald eine Drehung erkannt wurde. Nachdem die Richtung festgestellt wurde, werden die Schritte von der Startposition an gezählt und ausgegeben. Ein Drücken des Knopfes setzt dabei die Zählung zurück.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -238,9 +237,8 @@ void loop() {
     counter = 0;
     Serial.println("Position resettet");
   }
- }</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 17 anzeigen</summary><pre><code>// Auflösung zu Türchen 17: Das geheime Geschenkversteck
-// Verdrahtung wie im Artikel KY-025 (A0 analog, Pin 3 digital)
+ }</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 17 anzeigen</summary><pre><code>// Auflösung zu Türchen 17: Geschenkeversteck
 
 const char ART[] PROGMEM = R"ART(
           /\
@@ -249,7 +247,7 @@ const char ART[] PROGMEM = R"ART(
        /______\
          |  |    _\/_
          |__|   |_||_|
-  Tuerchen 17: Das geheime Geschenkversteck
+  Tuerchen 17: Geschenkeversteck
 )ART";
 
 const int analog_input = A0;   // KY-025 analoger Messwert

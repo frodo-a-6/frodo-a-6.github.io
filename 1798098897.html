@@ -102,16 +102,15 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 2</td><td>Signal</td></tr><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtswerkstatt mit Bauteilen der letzten Tage</p><h2>Weihnachtswerkstatt: Die Weiße-Weihnachten-Station</h2>
-<p>Zum großen Finale wird der Arduino zur Wetterstation. Heute kommen ausnahmsweise zwei neue Bauteile dazu, denn kein Sensor im Kit misst alles allein: Der BMP280 (KY-052) liefert Temperatur und Luftdruck, der DHT11 (KY-015) die Luftfeuchte. Daraus schätzt der Sketch mit einem Augenzwinkern die Chance auf weiße Weihnachten, und die RGB-LED von Tag 5 zeigt das Ergebnis: weiß für Schnee, hellblau für „vielleicht“, grün für grüne Weihnachten.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Winterwetter</h2>
+<p>Zum großen Finale wird der Arduino zur Wetterstation. Heute kommen ausnahmsweise zwei neue Bauteile dazu, denn kein Sensor im Kit misst alles allein: Der BMP280 (KY-052) liefert Temperatur und Luftdruck, der DHT11 (KY-015) die Luftfeuchte. Daraus schätzt das Programm mit einem Augenzwinkern die Chance auf weiße Weihnachten, und die RGB-LED von Tag 5 zeigt das Ergebnis: weiß für Schnee, hellblau für „vielleicht“, grün für grüne Weihnachten.</p>
 <h3>Verdrahtung</h3>
 <table><thead><tr><th>Komponente</th><th>Arduino-Pin</th><th>Anschluss am Modul</th></tr></thead><tbody><tr><td>KY-052 BMP280</td><td>A4</td><td>SDA</td></tr><tr><td>KY-052 BMP280</td><td>A5</td><td>SCL</td></tr><tr><td>KY-052 BMP280</td><td>5V</td><td>SDO (Adresse 0x77)</td></tr><tr><td>KY-052 BMP280</td><td>5V</td><td>CSB</td></tr><tr><td>KY-052 BMP280</td><td>5V / GND</td><td>+V / GND</td></tr><tr><td>KY-015 DHT11</td><td>2</td><td>Signal</td></tr><tr><td>KY-015 DHT11</td><td>5V / GND</td><td>+V / GND</td></tr><tr><td>KY-016 von Tag 5</td><td>9 / 6 / 5</td><td>LED Rot / Grün / Blau (über Vorwiderstände)</td></tr><tr><td>KY-016 von Tag 5</td><td>GND</td><td>GND</td></tr></tbody></table>
-<p>Beide Sensoren können auch die Temperatur messen. Der Sketch nimmt sie nur vom BMP280, der DHT11 ist allein für die Luftfeuchte zuständig.</p>
+<p>Beide Sensoren können auch die Temperatur messen. Das Programm nimmt sie nur vom BMP280, der DHT11 ist allein für die Luftfeuchte zuständig.</p>
 <h3>Ablauf</h3>
 <p>Alle zwei Sekunden erscheint ein Wetterbericht mit Temperatur, Luftfeuchte, Luftdruck und Schneechance. Kälte, hohe Luftfeuchte und tiefer Luftdruck erhöhen die Schneechance. Das ist ein Spaß und keine Wettervorhersage. Am besten stellst du die Station für den Test kurz ans offene Fenster.</p>
 <h3>Bibliotheken</h3>
-<p>Installiere in der Arduino IDE: <strong>Adafruit BMP280 Library</strong>, <strong>DHT sensor library</strong> (Adafruit) und <strong>Adafruit Unified Sensor</strong>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen, am 1. Weihnachtstag, auf einer eigenen Seite.</p><pre><code>// Türchen 24: Die Weiße-Weihnachten-Station
-// Verdrahtung siehe tag-24.md
+<p>Installiere in der Arduino IDE: <strong>Adafruit BMP280 Library</strong>, <strong>DHT sensor library</strong> (Adafruit) und <strong>Adafruit Unified Sensor</strong>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen, am 1. Weihnachtstag, auf einer eigenen Seite.</p><pre><code>// Türchen 24: Winterwetter
 // Bibliotheken: Adafruit BMP280 Library, DHT sensor library, Adafruit Unified Sensor
 
 #include &lt;Wire.h&gt;
@@ -129,7 +128,7 @@ const char ART[] PROGMEM = R"ART(
            /'.''.'.\
            ^^^[_]^^^
   F R O H E   W E I H N A C H T E N
-  Tuerchen 24: Die Weisse-Weihnachten-Station
+  Tuerchen 24: Winterwetter
 )ART";
 
 Adafruit_BMP280 bmp;        // KY-052: Temperatur und Luftdruck, I2C-Adresse 0x77
@@ -175,7 +174,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-052 Drucksensor / Temperatursensor (BMP280)</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-052 Drucksensor / Temperatursensor (BMP280) anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Dieser Sensor gibt sein Messergebnis nicht als Signal auf seinem Ausgangspin aus, sondern kommuniziert diesen per I2C-Bus. Über diesen lässt sich der Sensor ansteuern und die jeweiligen Messungen zum Druck und der Temperatur starten und auswerten.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Es werden für das Codebeispiel auch die folgenden Bibliotheken verwendet:</p>
@@ -242,10 +241,10 @@ void loop() {
 
   Serial.println();
   delay(2000);
-}</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
+}</code></pre></details><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-015 Kombi-Sensor (Temperatur &amp; Feuchtigkeit)</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-015 Kombi-Sensor (Temperatur &amp; Feuchtigkeit) anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Es werden für das Codebeispiel auch die folgenden Bibliotheken verwendet:</p>
 <p><a href="https://github.com/adafruit/DHT-sensor-library" rel="noopener">DHT sensor library</a> von Adafruit | veröffentlicht unter der <a href="https://github.com/adafruit/DHT-sensor-library/blob/master/license.txt" rel="noopener">MIT License</a></p>
@@ -299,9 +298,8 @@ void loop() {
   Serial.println("-----------------------------------------------------------");
   Serial.println(" ");
 }</code></pre>
-<p><strong><em>Bitte beachte, dass der Sensor nur etwa alle 2 Sekunden ein neues Messergebnis zur Verfügung stellt.</em></strong></p></section>
-<details class="solution"><summary>Lösung für Tag 23 anzeigen</summary><pre><code>// Auflösung zu Türchen 23: Der Schneehöhen-Messer
-// Verdrahtung siehe tag-23.md (ADS1115 wie im Artikel, Poti an Kanal A0)
+<p><strong><em>Bitte beachte, dass der Sensor nur etwa alle 2 Sekunden ein neues Messergebnis zur Verfügung stellt.</em></strong></p></details>
+<details class="solution"><summary>Lösung für Tag 23 anzeigen</summary><pre><code>// Auflösung zu Türchen 23: Tiefschnee
 // Bibliothek: Adafruit ADS1X15
 
 #include &lt;Adafruit_ADS1X15.h&gt;
@@ -313,7 +311,7 @@ const char ART[] PROGMEM = R"ART(
    20 -|##############
    10 -|##############
     0 -|##############
-  Tuerchen 23: Der Schneehoehen-Messer
+  Tuerchen 23: Tiefschnee
 )ART";
 
 Adafruit_ADS1115 ads;

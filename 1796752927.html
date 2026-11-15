@@ -93,13 +93,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 11</td><td>LED Rot</td></tr><tr><td>Pin 10</td><td>LED Grün</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Tannengrün und Kerzenrot</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Tannengrün und Kerzenrot</h2>
 <p>Statt hart umzuschalten, blendet die Zweifarben-LED sanft zwischen Kerzenrot und Tannengrün über, wie ein kleines Licht im Adventsgesteck.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: LED Rot an Pin 11, LED Grün an Pin 10, GND an GND. Beide Pins können PWM, deshalb lässt sich die Helligkeit stufenlos steuern. Vorwiderstände wie im Artikel angegeben.</p>
 <h3>Ablauf</h3>
-<p>Mit <code>analogWrite</code> wird die eine Farbe in 256 Stufen dunkler und die andere gleichzeitig heller. Ein Übergang dauert gut 2,5 Sekunden, danach leuchtet die Farbe eine Sekunde lang voll. Mit <code>SCHRITT_MS</code> änderst du das Tempo.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 9.</p><pre><code>// Türchen 8: Tannengrün und Kerzenrot
-// Verdrahtung wie im Artikel KY-029 (Rot an Pin 11, Grün an Pin 10)
+<p>Mit <code>analogWrite</code> wird die eine Farbe in 256 Stufen dunkler und die andere gleichzeitig heller. Ein Übergang dauert gut 2,5 Sekunden, danach leuchtet die Farbe eine Sekunde lang voll. Mit <code>SCHRITT_MS</code> änderst du das Tempo.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 9.</p><pre><code>// Türchen 8: Tannengrün und Kerzenrot
 
 const char ART[] PROGMEM = R"ART(
           )
@@ -135,7 +134,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-029 2-Farben 3mm LED</h2><h3>1. Codebeispiel: ON/OFF</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-029 2-Farben 3mm LED anzeigen</summary><h3>1. Codebeispiel: ON/OFF</h3>
 <p>Dieses Codebeispiel zeigt auf, wie die integrierten LEDs mittels eines definierbaren Ausgangspins abwechselnd, im 3 Sekunden Takt, gewechselt werden können.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -185,17 +184,15 @@ void loop() {
       analogWrite(led_red, 255 - i);
       delay(15);
    }
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 7 anzeigen</summary><pre><code>// Auflösung zu Türchen 7: Der Chor-Pegel
-// Verdrahtung wie im Artikel KY-038 (A0 analog, Pin 3 digital)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 7 anzeigen</summary><pre><code>// Auflösung zu Türchen 7: Engel
 
 const char ART[] PROGMEM = R"ART(
         |\        |\
         | |       | |
         |         |
       (_)       (_)
-    ~ O Tannenbaum ~
-  Tuerchen 7: Der Chor-Pegel
+  Tuerchen 7: Engel
 )ART";
 
 const int analog_input = A0;   // KY-038 Mikrofonsignal

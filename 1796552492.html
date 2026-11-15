@@ -90,13 +90,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 8</td><td>Signal</td></tr><tr><td>-</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtswerkstatt mit Bauteilen der letzten Tage</p><h2>Weihnachtswerkstatt: Die Nikolaus-Klingel</h2>
-<p>Heute bekommt die Haustür eine Nikolaus-Klingel. Der Taster von Tag 1 ist der Klingelknopf: Wer drückt, hört „Lasst uns froh und munter sein“ aus dem neuen passiven Buzzer, und die RGB-LED von Tag 5 blinkt rot und grün im Takt dazu.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Klingelingeling</h2>
+<p>Heute bekommt die Haustür eine Nikolaus-Klingel. Der Taster von Tag 1 ist der Klingelknopf: Wer drückt, hört eine Melodie aus dem neuen passiven Buzzer, und die RGB-LED von Tag 5 blinkt rot und grün im Takt dazu.</p>
 <h3>Verdrahtung</h3>
 <table><thead><tr><th>Komponente</th><th>Arduino-Pin</th><th>Anschluss am Modul</th></tr></thead><tbody><tr><td>KY-006 passiver Buzzer</td><td>8</td><td>Signal</td></tr><tr><td>KY-006 passiver Buzzer</td><td>GND</td><td>GND</td></tr><tr><td>KY-004 von Tag 1</td><td>10</td><td>Signal</td></tr><tr><td>KY-004 von Tag 1</td><td>5V / GND</td><td>+V / GND</td></tr><tr><td>KY-016 von Tag 5</td><td>9 / 6 / 5</td><td>LED Rot / Grün / Blau (über Vorwiderstände)</td></tr><tr><td>KY-016 von Tag 5</td><td>GND</td><td>GND</td></tr></tbody></table>
 <h3>Ablauf</h3>
-<p>Die Melodie steht als zwei Listen im Sketch: die Tonhöhen in Hertz und die Dauer jedes Tons in Achtelnoten. Mit <code>ACHTEL_MS</code> stellst du das Tempo ein. Jeder Ton wird etwas kürzer gespielt, als er dauert, damit gleiche Töne hintereinander getrennt klingen.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 7.</p><pre><code>// Türchen 6: Die Nikolaus-Klingel
-// Verdrahtung siehe tag-06.md
+<p>Die Melodie steht als zwei Listen im Programm: die Tonhöhen in Hertz und die Dauer jedes Tons in Achtelnoten. Mit <code>ACHTEL_MS</code> stellst du das Tempo ein. Jeder Ton wird etwas kürzer gespielt, als er dauert, damit gleiche Töne hintereinander getrennt klingen.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 7.</p><pre><code>// Türchen 6: Klingelingeling
 
 const char ART[] PROGMEM = R"ART(
           __
@@ -107,7 +106,7 @@ const char ART[] PROGMEM = R"ART(
      /__________\
           ()
      Ding-dong!
-  Tuerchen 6: Die Nikolaus-Klingel
+  Tuerchen 6: Klingelingeling
 )ART";
 
 const int TASTER = 10;      // KY-004 von Tag 1, LOW beim Drücken
@@ -120,7 +119,6 @@ const int ACHTEL_MS = 220;  // Länge einer Achtelnote
 // Töne in Hz (T_A4 statt A4, weil A4 auf dem Arduino schon ein Analogpin ist), 0 = Pause
 const int T_G4 = 392, T_A4 = 440, T_B4 = 494, T_C5 = 523, T_D5 = 587, T_E5 = 659, T_G5 = 784, PAUSE = 0;
 
-// „Lasst uns froh und munter sein“ (Volkslied aus dem Hunsrück, gemeinfrei)
 const int MELODIE[] = {
   T_D5, T_D5, T_D5, T_E5, T_D5, T_C5,   T_B4, T_B4, T_B4, PAUSE,
   T_C5, T_C5, T_C5, T_D5, T_C5, T_B4,   T_A4, T_A4, T_A4, PAUSE,
@@ -161,7 +159,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-006 Passiver Piezo-Buzzer</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-006 Passiver Piezo-Buzzer anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Hierbei handelt es sich um ein Beispielprogramm, welches am Buzzer ein Alarmsignal mittels einer Rechteckspannung erzeugt.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -200,30 +198,30 @@ void loop() {
     // 1 Sekunde Pause
     delay(1000);
   }
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 5 anzeigen</summary><pre><code>// Auflösung zu Türchen 5: Der Thermometer-Christbaum
-// Verdrahtung siehe tag-05.md
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 5 anzeigen</summary><pre><code>// Auflösung zu Türchen 5: Schneeballschlacht
 // Bibliotheken: OneWire, DallasTemperature
 
 #include &lt;OneWire.h&gt;
 #include &lt;DallasTemperature.h&gt;
 
 const char ART[] PROGMEM = R"ART(
-          *
-         /o\
-        /o*o\
-       /*o*o*\
-      /o*o*o*o\
-     /*o*o*o*o*\
-         |_|
-  Tuerchen 5: Der Thermometer-Christbaum
+        ____
+       /    \   _
+      |      | / )
+      |      |/ /
+      |        /     *  .  *
+      |       |    .  ( )  .
+      |_______|      *  .  *
+      [_______]
+  Tuerchen 5: Schneeballschlacht
 )ART";
 
 const int DS18B20_PIN = 4;   // KY-001 von Tag 3
 const int LED_ROT = 9;       // KY-016, alle drei Farben an PWM-Pins
 const int LED_GRUEN = 6;
 const int LED_BLAU = 5;
-const float KALT = 15.0;     // ab hier leuchtet der Baum ganz blau
+const float KALT = 15.0;     // ab hier leuchtet die LED ganz blau
 const float WARM = 30.0;     // ab hier ganz rot
 
 OneWire oneWire(DS18B20_PIN);
@@ -242,7 +240,7 @@ void setup() {
   Serial.begin(9600);
   sensors.begin();
   Serial.println((const __FlashStringHelper*)ART);
-  Serial.println("Halte den Sensor in der Hand oder an die kalte Fensterscheibe.");
+  Serial.println("Frisch von der Schneeballschlacht? Nimm den Sensor fest in die Hand und wärme ihn auf!");
 }
 
 void loop() {
@@ -259,9 +257,14 @@ void loop() {
   setzeFarbe(anteil * 255, 0, (1.0 - anteil) * 255);
 
   Serial.print(t, 1);
-  Serial.print(" C -&gt; ");
-  Serial.print(anteil * 100, 0);
-  Serial.println(" % warm");
+  Serial.print(" C: ");
+  if (anteil &lt; 0.33) {
+    Serial.println("Eisfinger!");
+  } else if (anteil &lt; 0.66) {
+    Serial.println("Die Finger tauen langsam auf ...");
+  } else {
+    Serial.println("Kaminwarm!");
+  }
   delay(1000);
 }</code></pre></details>
 <footer><p class="footer-note">Noch 18 Türchen bis Heiligabend</p><p>Morgen öffnet sich Türchen 7.</p><a class="back" href="index.html">Zur Kalender-Übersicht</a></footer>

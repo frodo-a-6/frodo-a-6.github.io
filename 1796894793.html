@@ -93,13 +93,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>GND</td><td>GND</td></tr><tr><td>5 V</td><td>+V</td></tr><tr><td>Pin A5</td><td>Signal</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Sternschnuppen-Detektor</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Sternschnuppen</h2>
 <p>Der Fototransistor reagiert sehr schnell und bemerkt auch kurze Lichtblitze. Huscht der Strahl einer Taschenlampe im dunklen Zimmer über den Sensor, zählt das als Sternschnuppe, und der Serielle Monitor schlägt gleich einen Weihnachtswunsch vor.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an A5, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Der Sketch merkt sich die Helligkeit des Hintergrunds und führt sie langsam nach, wenn sich das Raumlicht ändert. Liegt ein Messwert um mehr als <code>SPRUNG</code> darüber, zählt das als Sternschnuppe. Löst er bei normalem Licht schon aus, erhöhe <code>SPRUNG</code>; bemerkt er die Taschenlampe nicht, verringere den Wert.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 11.</p><pre><code>// Türchen 10: Der Sternschnuppen-Detektor
-// Verdrahtung wie im Artikel KY-054 (Signal an A5)
+<p>Das Programm merkt sich die Helligkeit des Hintergrunds und führt sie langsam nach, wenn sich das Raumlicht ändert. Liegt ein Messwert um mehr als <code>SPRUNG</code> darüber, zählt das als Sternschnuppe. Löst es bei normalem Licht schon aus, erhöhe <code>SPRUNG</code>; bemerkt es die Taschenlampe nicht, verringere den Wert.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 11.</p><pre><code>// Türchen 10: Sternschnuppen
 
 const char ART[] PROGMEM = R"ART(
                           *
@@ -107,7 +106,7 @@ const char ART[] PROGMEM = R"ART(
                 . '
            . '
       . '
-  Tuerchen 10: Der Sternschnuppen-Detektor
+  Tuerchen 10: Sternschnuppen
 )ART";
 
 const int light_sensor = A5;  // KY-054, mehr Licht = höherer Messwert
@@ -140,7 +139,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-054 Fototransistor</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-054 Fototransistor anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
 <pre><code>// Definiere Pin für Fototransistor
@@ -184,9 +183,8 @@ void loop() {
 
   // eine Sekunde lang warten
   delay(1000);
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 9 anzeigen</summary><pre><code>// Auflösung zu Türchen 9: Die Christbaumspitze
-// Verdrahtung wie im Artikel KY-034 (Signal an Pin 13)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 9 anzeigen</summary><pre><code>// Auflösung zu Türchen 9: Christbaumspitze
 
 const char ART[] PROGMEM = R"ART(
            *
@@ -195,7 +193,7 @@ const char ART[] PROGMEM = R"ART(
        *********
         *** ***
        **     **
-  Tuerchen 9: Die Christbaumspitze
+  Tuerchen 9: Christbaumspitze
 )ART";
 
 const int led = 13;  // KY-034 wechselt seine Farben selbstständig, solange Strom fließt

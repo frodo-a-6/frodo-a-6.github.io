@@ -100,22 +100,20 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr><tr><td>Pin 3</td><td>Digitales Signal</td></tr><tr><td>Pin A0</td><td>Analoges Signal</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Chor-Pegel</h2>
-<p>Wie laut singt der Weihnachtschor? Das Mikrofon misst die Lautstärke und zeichnet sie als Pegelbalken in den Seriellen Monitor. Wird der Chor so laut, dass die Schwelle am Poti erreicht ist, gibt es ein Bravo.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Engel</h2>
+<p>Wie laut singt der Chor der Engel? Das Mikrofon misst die Lautstärke und zeichnet sie als Pegelbalken in den Seriellen Monitor. Wird der Chor so laut, dass die Schwelle am Poti erreicht ist, gibt es ein Bravo.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Analoges Signal an A0, digitales Signal an Pin 3, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Etwa sechsmal pro Sekunde sammelt der Sketch 50 ms lang Messwerte. Weil Schall eine Schwingung ist, bestimmt der Abstand zwischen dem höchsten und dem tiefsten Wert die Lautstärke, nicht der einzelne Messwert. Schlägt der Balken kaum aus, verkleinere <code>VOLLAUSSCHLAG</code>; ist er dauernd voll, vergrößere den Wert. Die Bravo-Schwelle stellst du am Poti des Moduls ein.</p>
-<p>Die Balken bestehen aus Textzeichen und erscheinen deshalb im Seriellen Monitor, nicht im Seriellen Plotter.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 8.</p><pre><code>// Türchen 7: Der Chor-Pegel
-// Verdrahtung wie im Artikel KY-038 (A0 analog, Pin 3 digital)
+<p>Etwa sechsmal pro Sekunde sammelt das Programm 50 ms lang Messwerte. Weil Schall eine Schwingung ist, bestimmt der Abstand zwischen dem höchsten und dem tiefsten Wert die Lautstärke, nicht der einzelne Messwert. Schlägt der Balken kaum aus, verkleinere <code>VOLLAUSSCHLAG</code>; ist er dauernd voll, vergrößere den Wert. Die Bravo-Schwelle stellst du am Poti des Moduls ein.</p>
+<p>Die Balken bestehen aus Textzeichen und erscheinen deshalb im Seriellen Monitor, nicht im Seriellen Plotter.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 8.</p><pre><code>// Türchen 7: Engel
 
 const char ART[] PROGMEM = R"ART(
         |\        |\
         | |       | |
         |         |
       (_)       (_)
-    ~ O Tannenbaum ~
-  Tuerchen 7: Der Chor-Pegel
+  Tuerchen 7: Engel
 )ART";
 
 const int analog_input = A0;   // KY-038 Mikrofonsignal
@@ -137,7 +135,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-038 Mikrofon Soundsensor</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-038 Mikrofon Soundsensor anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Das Programm liest den aktuellen Spannungswert aus, der am analogen Ausgang gemessen werden kann, und gibt diesen auf der seriellen Schnittstelle aus. Zudem wird ebenfalls der Zustand des digitalen Pins in der Konsole angegeben. Dieser gibt an, ob der Grenzwert überschritten wurde.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -175,9 +173,8 @@ void loop () {
   }
   Serial.println("----------------------------------------------------------------");
   delay(1000);
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 6 anzeigen</summary><pre><code>// Auflösung zu Türchen 6: Die Nikolaus-Klingel
-// Verdrahtung siehe tag-06.md
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 6 anzeigen</summary><pre><code>// Auflösung zu Türchen 6: Klingelingeling
 
 const char ART[] PROGMEM = R"ART(
           __
@@ -188,7 +185,7 @@ const char ART[] PROGMEM = R"ART(
      /__________\
           ()
      Ding-dong!
-  Tuerchen 6: Die Nikolaus-Klingel
+  Tuerchen 6: Klingelingeling
 )ART";
 
 const int TASTER = 10;      // KY-004 von Tag 1, LOW beim Drücken
@@ -201,7 +198,6 @@ const int ACHTEL_MS = 220;  // Länge einer Achtelnote
 // Töne in Hz (T_A4 statt A4, weil A4 auf dem Arduino schon ein Analogpin ist), 0 = Pause
 const int T_G4 = 392, T_A4 = 440, T_B4 = 494, T_C5 = 523, T_D5 = 587, T_E5 = 659, T_G5 = 784, PAUSE = 0;
 
-// „Lasst uns froh und munter sein“ (Volkslied aus dem Hunsrück, gemeinfrei)
 const int MELODIE[] = {
   T_D5, T_D5, T_D5, T_E5, T_D5, T_C5,   T_B4, T_B4, T_B4, PAUSE,
   T_C5, T_C5, T_C5, T_D5, T_C5, T_B4,   T_A4, T_A4, T_A4, PAUSE,

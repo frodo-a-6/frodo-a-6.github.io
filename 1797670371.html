@@ -92,13 +92,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>5 V</td><td>+5V</td></tr><tr><td>GND</td><td>GND</td></tr><tr><td>Pin A1</td><td>VRy</td></tr><tr><td>Pin A0</td><td>VRx</td></tr><tr><td>Pin 3</td><td>Knopf</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtswerkstatt mit Bauteilen der letzten Tage</p><h2>Weihnachtswerkstatt: Das Schlitten-Lenkspiel</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Schlittenfahrt</h2>
 <p>Ab auf die Rodelbahn! Im Seriellen Monitor saust dein Schlitten (S) eine verschneite Bahn hinunter, auf der immer wieder Tannenbäume (^) stehen. Mit dem Joystick lenkst du nach links und rechts. Jeder Zusammenstoß kostet ein Leben, und der Buzzer von Tag 6 brummt. Wer schafft die meisten Punkte?</p>
 <h3>Verdrahtung</h3>
 <table><thead><tr><th>Komponente</th><th>Arduino-Pin</th><th>Anschluss am Modul</th></tr></thead><tbody><tr><td>KY-023 Joystick X</td><td>A0</td><td>VRx</td></tr><tr><td>KY-023 Joystick Y</td><td>nicht belegt</td><td>VRy</td></tr><tr><td>KY-023 Knopf</td><td>3</td><td>Knopf</td></tr><tr><td>KY-023</td><td>5V / GND</td><td>+5V / GND</td></tr><tr><td>KY-006 von Tag 6</td><td>8</td><td>Signal</td></tr><tr><td>KY-006 von Tag 6</td><td>GND</td><td>GND</td></tr></tbody></table>
 <h3>Ablauf</h3>
-<p>Die Bahn rückt alle 400 ms eine Reihe weiter, das Tempo stellst du mit <code>TAKT_MS</code> ein. Für jede Reihe ohne Zusammenstoß gibt es einen Punkt. Sind alle drei Leben verbraucht, startet ein Druck auf den Joystick-Knopf ein neues Rennen. Fährt der Schlitten in die falsche Richtung, halte den Joystick einfach andersherum.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 20.</p><pre><code>// Türchen 19: Das Schlitten-Lenkspiel
-// Verdrahtung siehe tag-19.md
+<p>Die Bahn rückt alle 400 ms eine Reihe weiter, das Tempo stellst du mit <code>TAKT_MS</code> ein. Für jede Reihe ohne Zusammenstoß gibt es einen Punkt. Sind alle drei Leben verbraucht, startet ein Druck auf den Joystick-Knopf ein neues Rennen. Fährt der Schlitten in die falsche Richtung, halte den Joystick einfach andersherum.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 20.</p><pre><code>// Türchen 19: Schlittenfahrt
 
 const char ART[] PROGMEM = R"ART(
     ____
@@ -106,7 +105,7 @@ const char ART[] PROGMEM = R"ART(
    |     o   o   o   o  |
     \___________________/
    ======================
-  Tuerchen 19: Das Schlitten-Lenkspiel
+  Tuerchen 19: Schlittenfahrt
 )ART";
 
 const int JOY_X = A0;       // KY-023 VRx
@@ -162,7 +161,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-023 Joystick (X-Y-Achsen)</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-023 Joystick (X-Y-Achsen) anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Das Programm liest die aktuellen Werte der Eingang-Pins, konvertiert diese in eine Spannung (0-1023 -&gt; 0 V-5 V) und gibt diese in der seriellen Ausgabe aus.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -206,9 +205,8 @@ void loop () {
       Serial.println("gedrückt");
   }
   delay(1000);
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 18 anzeigen</summary><pre><code>// Auflösung zu Türchen 18: Der Wunschzettel
-// Verdrahtung wie im Artikel KY-040 (CLK an Pin 3, DT an Pin 4, Knopf an Pin 5)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 18 anzeigen</summary><pre><code>// Auflösung zu Türchen 18: Wunschzettel
 
 const char ART[] PROGMEM = R"ART(
      ____________________
@@ -217,7 +215,7 @@ const char ART[] PROGMEM = R"ART(
    |  - ............   | |
    |  - ............   | |
    |___________________|/
-  Tuerchen 18: Der Wunschzettel
+  Tuerchen 18: Wunschzettel
 )ART";
 
 const int pin_clk = 3;
@@ -225,13 +223,13 @@ const int pin_dt = 4;
 const int button_pin = 5;  // aktiv LOW
 
 const char* const WUENSCHE[] = {
-  "Schlitten",
-  "Lebkuchenherz",
-  "Neue Sensoren",
+  "Spiele",
+  "Knäckebrot",
+  "3D Drucker",
   "Dicke Wollsocken",
   "Ein Lötkolben",
   "Schnee bis zum Fensterbrett",
-  "Ein Tag ohne Hausaufgaben",
+  "Ein Tag im Bett",
 };
 const int ANZAHL = sizeof(WUENSCHE) / sizeof(WUENSCHE[0]);
 

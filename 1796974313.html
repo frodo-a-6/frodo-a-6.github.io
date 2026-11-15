@@ -93,13 +93,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <p>Man kann auch einen ADC wie der KY-053 verwenden. Dieser ADC hat eine höhere Auflösung als der interne ADC vom Arduino, was dazuführt, dass der Sensor genauer ausgewertet werden kann.</p></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Drinnen mollig, draußen eisig</h2>
-<p>Beim Einschalten merkt sich der Sketch die Zimmertemperatur. Hältst du den Sensor danach an die Fensterscheibe oder kurz vor das geöffnete Fenster, zeigt der Serielle Monitor, wie viel kälter es dort ist, von „mollig warm“ bis „eisig“.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Temperatursturz</h2>
+<p>Beim Einschalten merkt sich das Programm die Zimmertemperatur. Hältst du den Sensor danach an die Fensterscheibe oder kurz vor das geöffnete Fenster, zeigt der Serielle Monitor, wie viel kälter es dort ist, von „mollig warm“ bis „eisig“.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an A1, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Einmal pro Sekunde rechnet der Sketch den Messwert wie im Artikel in eine Temperatur um und zeigt den Unterschied zur Zimmertemperatur in Kelvin. Bis 2 K kälter gilt als mollig, bis 8 K als zugig, darunter als eisig. Starte den Sketch im warmen Zimmer, damit der Vergleichswert stimmt.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 12.</p><pre><code>// Türchen 11: Drinnen mollig, draußen eisig
-// Verdrahtung wie im Artikel KY-013 (Signal an A1)
+<p>Einmal pro Sekunde rechnet das Programm den Messwert wie im Artikel in eine Temperatur um und zeigt den Unterschied zur Zimmertemperatur in Kelvin. Bis 2 K kälter gilt als mollig, bis 8 K als zugig, darunter als eisig. Starte das Programm im warmen Zimmer, damit der Vergleichswert stimmt.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 12.</p><pre><code>// Türchen 11: Temperatursturz
 
 const char ART[] PROGMEM = R"ART(
    _______________
@@ -109,7 +108,7 @@ const char ART[] PROGMEM = R"ART(
   |   *   |   *   |
   | *   * | *   * |
   |_______|_______|
-  Tuerchen 11: Drinnen mollig, draussen eisig
+  Tuerchen 11: Temperatursturz
 )ART";
 
 const int ntc = A1;  // KY-013
@@ -140,7 +139,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-013 Temperatursensor (NTC)</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-013 Temperatursensor (NTC) anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Das Programm misst den aktuellen Spannungswert am NTC, berechnet die Temperatur und übersetzt das Ergebnis in °C für die serielle Ausgabe.</p>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
@@ -168,9 +167,8 @@ void loop () {
   // Ausgabe des Messwerts
   Serial.println("Temperatur: " + String(temperature) + " °C");
   delay(1000); // 1 Sekunde auf nächste Messung warten
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 10 anzeigen</summary><pre><code>// Auflösung zu Türchen 10: Der Sternschnuppen-Detektor
-// Verdrahtung wie im Artikel KY-054 (Signal an A5)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 10 anzeigen</summary><pre><code>// Auflösung zu Türchen 10: Sternschnuppen
 
 const char ART[] PROGMEM = R"ART(
                           *
@@ -178,7 +176,7 @@ const char ART[] PROGMEM = R"ART(
                 . '
            . '
       . '
-  Tuerchen 10: Der Sternschnuppen-Detektor
+  Tuerchen 10: Sternschnuppen
 )ART";
 
 const int light_sensor = A5;  // KY-054, mehr Licht = höherer Messwert

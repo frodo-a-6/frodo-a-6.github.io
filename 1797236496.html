@@ -92,20 +92,19 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 10</td><td>Signal</td></tr><tr><td>5V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Plätzchendieb-Zähler</h2>
-<p>Wer nascht da heimlich? Klebe einen Streifen Karton so an den Deckel der Keksdose, dass er beim Öffnen durch den Spalt der Gabel-Lichtschranke fährt. Jedes Öffnen zählt als stibitzter Keks.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Plätzchen</h2>
+<p>Wer nascht da heimlich? Klebe einen Streifen Karton so an den Deckel der Plätzchendose, dass er beim Öffnen durch den Spalt der Gabel-Lichtschranke fährt. Jedes Öffnen zählt als stibitztes Plätzchen.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an Pin 10, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Der Sketch zählt nur den Moment, in dem die Schranke unterbrochen wird; bleibt etwas im Spalt stecken, zählt das nur einmal. Nach jedem fünften Keks kommt eine Warnung.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 15.</p><pre><code>// Türchen 14: Der Plätzchendieb-Zähler
-// Verdrahtung wie im Artikel KY-010 (Signal an Pin 10)
+<p>Das Programm zählt nur den Moment, in dem die Schranke unterbrochen wird; bleibt etwas im Spalt stecken, zählt das nur einmal. Nach jedem fünften Plätzchen kommt eine Warnung.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 15.</p><pre><code>// Türchen 14: Plätzchen
 
 const char ART[] PROGMEM = R"ART(
       (@)   (#)   (@)
     (#)   (@)   (#)
    \_________________/
     `---------------'
-  Tuerchen 14: Der Plaetzchendieb-Zaehler
+  Tuerchen 14: Plaetzchen
 )ART";
 
 const int barrier = 10;  // KY-010, HIGH = Lichtschranke unterbrochen
@@ -126,7 +125,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-010 Lichtschranke</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-010 Lichtschranke anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
 <pre><code>int barrier = 10; // Deklaration des Sensor-Eingangspin
@@ -147,22 +146,22 @@ void loop () {
     Serial.println("Signal erkannt");
     delay(100); // 100 ms Pause
   }
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 13 anzeigen</summary><pre><code>// Auflösung zu Türchen 13: Die Fernbedienung für den Christbaum
-// Verdrahtung siehe tag-13.md
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 13 anzeigen</summary><pre><code>// Auflösung zu Türchen 13: Bescherung
 // Bibliothek: IRremote 4.x
 
 #include &lt;IRremote.hpp&gt;
 
 const char ART[] PROGMEM = R"ART(
-      .----------.
-      |   (o)    |
-      | [1][2][3]|
-      | [4][5][6]|
-      | [7][8][9]|
-      |   [OK]   |
-      '----------'
-  Tuerchen 13: Die Fernbedienung fuer den Christbaum
+     _______________
+    |  ___________  |
+    | |           | |
+    | |   PSST!   | |
+    | |         O | |
+    | |         | | |
+    | |___________| |
+    |_______________|
+  Tuerchen 13: Bescherung
 )ART";
 
 const int IR_PIN = 2;       // KY-022
@@ -170,33 +169,38 @@ const int BUZZER = 8;       // KY-006 von Tag 6
 const int LED_ROT = 9;      // KY-016 von Tag 5
 const int LED_GRUEN = 6;
 const int LED_BLAU = 5;
-const int ACHTEL_MS = 220;
+const int ACHTEL_MS = 200;
 
-// Programm, das mit jedem Tastendruck einen Schritt weitergeht; der letzte Schritt spielt Musik
+// Die Vorbereitungen hinter der Wohnzimmertür; jeder Tastendruck meldet den nächsten Schritt
 struct Schritt {
   const char* name;
   int r, g, b;
 };
 const Schritt PROGRAMM[] = {
-  {"Christbaumrot", 255, 0, 0},
-  {"Tannengrün", 0, 255, 0},
-  {"Winterblau", 0, 0, 255},
-  {"Kerzengold", 255, 120, 0},
-  {"Musik!", 0, 0, 0},
+  {"Die Geschenke werden eingepackt ...", 255, 0, 0},
+  {"Der Baum wird geschmückt ...", 0, 255, 0},
+  {"Die Kerzen werden angezündet ...", 0, 0, 255},
+  {"Gleich ist es so weit!", 255, 120, 0},
+  {"Bescherung!", 0, 0, 0},
 };
 const int SCHRITTE = sizeof(PROGRAMM) / sizeof(PROGRAMM[0]);
 int schritt = -1;
 
-// Refrain von „Jingle Bells“ (James Lord Pierpont, 1857, gemeinfrei)
-const int T_C4 = 262, T_D4 = 294, T_E4 = 330, T_F4 = 349, T_G4 = 392;
+const int T_EB4 = 311, T_F4 = 349, T_G4 = 392, T_AB4 = 415, T_BB4 = 466, T_C5 = 523, T_EB5 = 622, PAUSE = 0;
 const int MELODIE[] = {
-  T_E4, T_E4, T_E4,   T_E4, T_E4, T_E4,   T_E4, T_G4, T_C4, T_D4, T_E4,
-  T_F4, T_F4, T_F4, T_F4,   T_F4, T_E4, T_E4, T_E4, T_E4,   T_E4, T_D4, T_D4, T_E4,   T_D4, T_G4
+  T_BB4,
+  T_BB4, T_G4, T_BB4,    T_BB4, T_G4, T_BB4,    T_AB4, T_F4, T_AB4,    T_G4, PAUSE, T_BB4,
+  T_BB4, T_G4, T_BB4,    T_BB4, T_G4, T_BB4,    T_AB4, T_F4, T_AB4,    T_G4, PAUSE, T_G4,
+  T_F4, T_F4, T_F4,      T_AB4, T_AB4, T_AB4,   T_G4, T_G4, T_G4,      T_C5, PAUSE, T_C5,
+  T_BB4, T_BB4, T_BB4,   T_EB5, T_BB4, T_G4,    T_AB4, T_F4, T_F4,     T_EB4, PAUSE
 };
-// Dauer jedes Tons in Achtelnoten
+// Dauer jedes Tons in Achtelnoten (Auftakt, dann je Takt halbe Note und zwei Viertel)
 const byte DAUER[] = {
-  2, 2, 4,   2, 2, 4,   2, 2, 3, 1, 8,
-  2, 2, 3, 1,   2, 2, 2, 1, 1,   2, 2, 2, 2,   4, 4
+  2,
+  4, 2, 2,   4, 2, 2,   4, 2, 2,   4, 2, 2,
+  4, 2, 2,   4, 2, 2,   4, 2, 2,   4, 2, 2,
+  4, 2, 2,   4, 2, 2,   4, 2, 2,   4, 2, 2,
+  4, 2, 2,   4, 2, 2,   4, 2, 2,   4, 2
 };
 const int LAENGE = sizeof(MELODIE) / sizeof(MELODIE[0]);
 
@@ -223,13 +227,17 @@ void spieleMelodie() {
   IrReceiver.stop();
   for (int i = 0; i &lt; LAENGE; i++) {
     int dauer = DAUER[i] * ACHTEL_MS;
-    if (i % 2 == 0) setzeFarbe(255, 0, 0);
-    else setzeFarbe(0, 255, 0);
-    tone(BUZZER, MELODIE[i], dauer * 9 / 10);
+    if (MELODIE[i] == PAUSE) {
+      setzeFarbe(0, 0, 0);
+    } else {
+      if (i % 2 == 0) setzeFarbe(255, 0, 0);
+      else setzeFarbe(255, 120, 0);
+      tone(BUZZER, MELODIE[i], dauer * 9 / 10);
+    }
     delay(dauer);
   }
   noTone(BUZZER);
-  setzeFarbe(0, 0, 0);
+  setzeFarbe(255, 120, 0);  // nach dem Lied leuchtet es festlich gold
   IrReceiver.start();
 }
 
@@ -241,7 +249,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println((const __FlashStringHelper*)ART);
   IrReceiver.begin(IR_PIN, DISABLE_LED_FEEDBACK);
-  Serial.println("Richte eine Fernbedienung auf den Empfänger und drück eine beliebige Taste.");
+  Serial.println("Die Tür bleibt zu! Drinnen meldet jemand mit der Fernbedienung, wie weit es ist.");
 }
 
 void loop() {

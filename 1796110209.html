@@ -90,13 +90,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 10</td><td>Signal</td></tr><tr><td>5V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Türchen-Zähler</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>24 Türchen</h2>
 <p>Ein eigener kleiner Adventskalender im Seriellen Monitor: Jeder Druck auf den Taster öffnet das nächste Türchen und verrät, wie viele noch bis Heiligabend fehlen. Nach Türchen 24 beginnt die Zählung von vorn.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an Pin 10, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Der Sketch zählt nur den Moment des Drückens, Festhalten öffnet also kein weiteres Türchen. Eine kurze Pause von 50 ms entprellt den Taster.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 2.</p><pre><code>// Türchen 1: Der Türchen-Zähler
-// Verdrahtung wie im Artikel KY-004 (Signal an Pin 10)
+<p>Das Programm zählt nur den Moment des Drückens, Festhalten öffnet also kein weiteres Türchen. Eine kurze Pause von 50 ms entprellt den Taster.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 2.</p><pre><code>// Türchen 1: 24 Türchen
 
 const char ART[] PROGMEM = R"ART(
    _______________
@@ -106,7 +105,7 @@ const char ART[] PROGMEM = R"ART(
   | |         o | |
   | |___________| |
   |_______________|
-  Tuerchen 1: Der Tuerchen-Zaehler
+  Tuerchen 1: 24 Tuerchen
 )ART";
 
 const int button = 10;   // KY-004, LOW beim Drücken
@@ -127,7 +126,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-004 Taster</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-004 Taster anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
 <pre><code>int button = 10; // Deklaration des Sensoreingangs-Pins
@@ -148,7 +147,7 @@ void loop () {
     Serial.println("Signal erkannt");
     delay(300); // 300 ms Pause
     }
-}</code></pre></section>
+}</code></pre></details>
 
 <footer><p class="footer-note">Noch 23 Türchen bis Heiligabend</p><p>Morgen öffnet sich Türchen 2.</p><a class="back" href="index.html">Zur Kalender-Übersicht</a></footer>
 </main>

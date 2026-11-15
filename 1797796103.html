@@ -89,14 +89,13 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin 10</td><td>Signal</td></tr><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtswerkstatt mit Bauteilen der letzten Tage</p><h2>Weihnachtswerkstatt: Der geheime Klopf-Code</h2>
-<p>Am vierten Advent darf nur zum Geschenk, wer den geheimen Klopf-Rhythmus kennt: lang, lang, kurz, kurz – also „klopf … klopf … klopf-klopf-klopf“. Der neue Klopfsensor hört zu. Stimmt der Rhythmus, leuchtet die RGB-LED von Tag 5 grün und der Buzzer von Tag 6 spielt eine Fanfare. Sonst blinkt es dreimal rot.</p>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Christmas-Tango</h2>
+<p>Der Weihnachtsmann ist im Tango-Fieber! Hilf ihm, den richtigen Rhythmus zu lernen. Der neue Klopfsensor hört zu. Stimmt der Rhythmus, leuchtet die RGB-LED von Tag 5 grün und der Buzzer von Tag 6 spielt eine Fanfare. Sonst blinkt es dreimal rot.</p>
 <h3>Verdrahtung</h3>
 <table><thead><tr><th>Komponente</th><th>Arduino-Pin</th><th>Anschluss am Modul</th></tr></thead><tbody><tr><td>KY-031 Klopfsensor</td><td>10</td><td>Signal</td></tr><tr><td>KY-031 Klopfsensor</td><td>5V / GND</td><td>+V / GND</td></tr><tr><td>KY-006 von Tag 6</td><td>8</td><td>Signal</td></tr><tr><td>KY-006 von Tag 6</td><td>GND</td><td>GND</td></tr><tr><td>KY-016 von Tag 5</td><td>9 / 6 / 5</td><td>LED Rot / Grün / Blau (über Vorwiderstände)</td></tr><tr><td>KY-016 von Tag 5</td><td>GND</td><td>GND</td></tr></tbody></table>
 <p>Lege den Klopfsensor auf den Tisch oder klebe ihn an eine Schachtel und klopfe daneben.</p>
 <h3>Ablauf</h3>
-<p>Der Sketch merkt sich die Zeitpunkte aller Klopfer, bis 1,5 Sekunden Ruhe ist. Verglichen werden nicht die absoluten Zeiten, sondern die Abstände im Verhältnis zueinander. Ob du schnell oder langsam klopfst, ist deshalb egal. Einen eigenen Geheimcode legst du in <code>CODE</code> fest, wie genau er getroffen werden muss, in <code>TOLERANZ</code>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 21.</p><pre><code>// Türchen 20: Der geheime Klopf-Code
-// Verdrahtung siehe tag-20.md
+<p>Das Programm merkt sich die Zeitpunkte aller Klopfer, bis 1,5 Sekunden Ruhe ist. Verglichen werden nicht die absoluten Zeiten, sondern die Abstände im Verhältnis zueinander. Ob du schnell oder langsam klopfst, ist deshalb egal. Einen eigenen Geheimcode legst du in <code>CODE</code> fest, wie genau er getroffen werden muss, in <code>TOLERANZ</code>.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 21.</p><pre><code>// Türchen 20: Christmas-Tango
 
 const char ART[] PROGMEM = R"ART(
     ___________
@@ -105,7 +104,7 @@ const char ART[] PROGMEM = R"ART(
    | |_|   |_| |       klopf
    |        o  |   klopf-klopf
    |___________|          klopf
-  Tuerchen 20: Der geheime Klopf-Code
+  Tuerchen 20: Christmas-Tango
 )ART";
 
 const int KLOPF = 10;       // KY-031, LOW beim Klopfen
@@ -154,7 +153,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-031 Klopfsensor</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-031 Klopfsensor anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
 <pre><code>int knock = 10; // Deklaration des Sensor-Eingangspin
@@ -174,9 +173,8 @@ void loop () {
     Serial.println("Klopfen erkannt");
     delay(200); // 200 ms Pause
   }
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 19 anzeigen</summary><pre><code>// Auflösung zu Türchen 19: Das Schlitten-Lenkspiel
-// Verdrahtung siehe tag-19.md
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 19 anzeigen</summary><pre><code>// Auflösung zu Türchen 19: Schlittenfahrt
 
 const char ART[] PROGMEM = R"ART(
     ____
@@ -184,7 +182,7 @@ const char ART[] PROGMEM = R"ART(
    |     o   o   o   o  |
     \___________________/
    ======================
-  Tuerchen 19: Das Schlitten-Lenkspiel
+  Tuerchen 19: Schlittenfahrt
 )ART";
 
 const int JOY_X = A0;       // KY-023 VRx

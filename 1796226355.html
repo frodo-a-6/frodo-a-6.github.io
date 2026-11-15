@@ -92,13 +92,12 @@ footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);tex
 <table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin A5</td><td>Signal</td></tr><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Kerzenwecker</h2>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><h2>Kerzenschein</h2>
 <p>Der Fotowiderstand merkt, wann es draußen dämmert, und erinnert daran, die Adventskerze anzuzünden. Wird es wieder hell, darf die Kerze Pause machen.</p>
 <h3>Verdrahtung</h3>
 <p>Wie im Abschnitt zum Bauteil oben: Signal an A5, +V an 5V, GND an GND.</p>
 <h3>Ablauf</h3>
-<p>Zweimal pro Sekunde rechnet der Sketch den Messwert wie im Artikel in einen Widerstand um. Über 20 kΩ gilt es als dunkel, unter 10 kΩ wieder als hell. Der Abstand zwischen beiden Schwellen verhindert, dass die Meldung in der Dämmerung hin- und herspringt. Passe <code>DUNKEL_AB</code> und <code>HELL_AB</code> an dein Zimmer an, indem du die angezeigten Werte bei Tageslicht und in der Dämmerung vergleichst.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 3.</p><pre><code>// Türchen 2: Der Kerzenwecker
-// Verdrahtung wie im Artikel KY-018 (Signal an A5)
+<p>Zweimal pro Sekunde rechnet das Programm den Messwert wie im Artikel in einen Widerstand um. Über 20 kΩ gilt es als dunkel, unter 10 kΩ wieder als hell. Der Abstand zwischen beiden Schwellen verhindert, dass die Meldung in der Dämmerung hin- und herspringt. Passe <code>DUNKEL_AB</code> und <code>HELL_AB</code> an dein Zimmer an, indem du die angezeigten Werte bei Tageslicht und in der Dämmerung vergleichst.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Programm fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 3.</p><pre><code>// Türchen 2: Kerzenschein
 
 const char ART[] PROGMEM = R"ART(
          ,
@@ -109,7 +108,7 @@ const char ART[] PROGMEM = R"ART(
        |  |
      __|__|__
     (________)
-  Tuerchen 2: Der Kerzenwecker
+  Tuerchen 2: Kerzenschein
 )ART";
 
 const int photo_resistor = A5;  // KY-018
@@ -131,7 +130,7 @@ void loop() {
 }</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 <g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
-<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-018 Fotowiderstand</h2><h3>Code-Beispiel</h3>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><details class="solution"><summary>Grundlagen-Beispiel zu KY-018 Fotowiderstand anzeigen</summary><h3>Code-Beispiel</h3>
 <p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
 <p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
 <pre><code>int photo_resistor = A5; // Hier wird der Eingangs-Pin deklariert
@@ -165,9 +164,8 @@ void loop() {
     Serial.println("----------------------------------------------------------------");
 
     delay(500);
-}</code></pre></section>
-<details class="solution"><summary>Lösung für Tag 1 anzeigen</summary><pre><code>// Auflösung zu Türchen 1: Der Türchen-Zähler
-// Verdrahtung wie im Artikel KY-004 (Signal an Pin 10)
+}</code></pre></details>
+<details class="solution"><summary>Lösung für Tag 1 anzeigen</summary><pre><code>// Auflösung zu Türchen 1: 24 Türchen
 
 const char ART[] PROGMEM = R"ART(
    _______________
@@ -177,7 +175,7 @@ const char ART[] PROGMEM = R"ART(
   | |         o | |
   | |___________| |
   |_______________|
-  Tuerchen 1: Der Tuerchen-Zaehler
+  Tuerchen 1: 24 Tuerchen
 )ART";
 
 const int button = 10;   // KY-004, LOW beim Drücken
