@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Türchen 11 – Wie kalt ist es am Fenster?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+<style>
+:root{--bg:#fbf6ec;--fg:#1f1d1a;--muted:#5e5a52;--accent:#b3261e;--pine:#1f4d3a;--gold:#b8901c;--card:#fffdf8;
+--line:#e6dcc6;--snow:rgba(120,150,180,.35);--dot:rgba(184,144,28,.10);--door-fg:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1a2b;--fg:#eef1f6;--muted:#a9b3c4;--accent:#ff8a80;
+--pine:#6cc398;--gold:#e0bf55;--card:#16243a;--line:#2a3a55;--snow:rgba(255,255,255,.55);--dot:rgba(224,191,85,.07)}}
+:root[data-theme="dark"]{--bg:#0f1a2b;--fg:#eef1f6;--muted:#a9b3c4;--accent:#ff8a80;--pine:#6cc398;--gold:#e0bf55;
+--card:#16243a;--line:#2a3a55;--snow:rgba(255,255,255,.55);--dot:rgba(224,191,85,.07)}
+body{margin:0;color:var(--fg);font:16px/1.6 system-ui,sans-serif;background-color:var(--bg);
+background-image:radial-gradient(var(--dot) 1.5px,transparent 2px);background-size:28px 28px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+background-image:radial-gradient(circle at 20px 30px,var(--snow) 2px,transparent 3px),
+radial-gradient(circle at 140px 90px,var(--snow) 3px,transparent 4px),
+radial-gradient(circle at 80px 170px,var(--snow) 1.5px,transparent 2.5px);
+background-size:200px 200px,260px 260px,180px 180px;animation:snow 30s linear infinite}
+@keyframes snow{to{background-position:40px 600px,-30px 780px,20px 540px}}
+@media (prefers-reduced-motion: reduce){body::before{animation:none}.flame{animation:none}}
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:16px}
+h1,h2,.door,.footer-note{font-family:"Playfair Display",Georgia,"Times New Roman",serif}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:24px 0 16px;border-bottom:3px double var(--gold)}
+.door{flex:none;width:76px;height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+background:var(--accent);color:var(--door-fg);border:3px solid var(--gold);border-radius:10px 10px 4px 4px;
+box-shadow:inset 0 0 0 3px rgba(255,255,255,.25),0 4px 10px rgba(0,0,0,.15);font-size:2.3rem;font-weight:700;line-height:1}
+.door small{font:600 .62rem/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.door.finale{background:var(--gold);color:#1f1d1a;border-color:var(--accent)}
+.door.finale .star{font-size:1.4rem;margin-bottom:2px}
+.headline{flex:1 1 260px;min-width:0}
+.date{color:var(--muted);margin:0}
+h1{font-size:2rem;line-height:1.2;margin:.2rem 0 0;color:var(--pine)}
+.wreath{flex:none;width:150px;height:auto}
+.flame{transform-origin:50% 100%;transform-box:fill-box;animation:flicker 1.6s ease-in-out infinite alternate}
+@keyframes flicker{0%{transform:scale(1,1)}50%{transform:scale(.92,1.08) rotate(-3deg)}100%{transform:scale(1.04,.95) rotate(2deg)}}
+.greeting{font-size:1.1rem;margin:20px 0 0;padding:12px 16px;border-left:4px solid var(--pine);background:var(--card);border-radius:0 8px 8px 0}
+.part{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 16px 16px;margin:32px 0 24px;
+box-shadow:0 2px 8px rgba(0,0,0,.06);
+background-image:linear-gradient(90deg,transparent calc(50% - 7px),var(--accent) calc(50% - 7px),var(--accent) calc(50% + 7px),transparent calc(50% + 7px));
+background-size:100% 14px;background-repeat:no-repeat}
+.part::before{content:"";position:absolute;top:-18px;left:50%;width:56px;height:30px;transform:translateX(-50%);
+background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 30"><path d="M28 15C18 0 4 2 6 12s16 6 22 3z" fill="%23b3261e"/><path d="M28 15C38 0 52 2 50 12s-16 6-22 3z" fill="%23b3261e"/><path d="M28 15l-9 14M28 15l9 14" stroke="%23b3261e" stroke-width="4" stroke-linecap="round"/><circle cx="28" cy="15" r="5" fill="%23c9a227"/></svg>') no-repeat center/contain}
+.kicker{margin:0;color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center}
+h2{font-size:1.5rem;color:var(--accent);margin:.3rem 0 .8rem;text-align:center}
+h2::before,h2::after{content:"✦";color:var(--gold);font-size:.8em;margin:0 .45em;vertical-align:.1em}
+h3{font-size:1.15rem;color:var(--pine)}
+h4{font-size:1rem}
+.intro{color:var(--muted)}
+.divider{display:flex;justify-content:center;margin:8px 0}
+.divider svg{width:220px;max-width:70%;height:auto}
+img{max-width:100%;height:auto;display:block;margin:12px auto}
+pre{overflow-x:auto;background:#1b1f1c;color:#e2e6e0;padding:12px;border-radius:8px;border-left:4px solid var(--pine);font-size:.9rem}
+code{font-family:ui-monospace,monospace}
+table{display:block;overflow-x:auto;border-collapse:collapse;max-width:100%;margin:12px 0;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:rgba(31,77,58,.10)}
+a{color:var(--accent)}
+.puzzle-note{padding:10px 14px;border-left:4px solid var(--gold);background:rgba(184,144,28,.08);border-radius:0 8px 8px 0}
+.solution{margin:24px 0 0;background:var(--card);border:1px dashed var(--gold);border-radius:12px;padding:0 16px}
+.solution summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--pine);list-style:none}
+.solution summary::-webkit-details-marker{display:none}
+.solution summary::before{content:"▸ ";color:var(--gold)}
+.solution[open] summary::before{content:"▾ "}
+.solution[open]{padding-bottom:16px}
+.back{display:inline-block;margin-top:8px;font-weight:600}
+.calendar{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));grid-auto-flow:dense;gap:12px;margin:24px 0}
+.tile{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-decoration:none;color:#fff;background:#b3261e;border:3px solid #c9a227;border-radius:10px 10px 4px 4px;
+box-shadow:inset 0 0 0 3px rgba(255,255,255,.2),0 4px 10px rgba(0,0,0,.18);
+font:700 2.2rem/1 "Playfair Display",Georgia,serif;transition:transform .25s ease;transform-origin:left center}
+.tile:nth-child(3n+2){background:#1f4d3a}
+.tile:nth-child(5n+4){background:#7a1d18}
+.tile:hover,.tile:focus-visible{transform:perspective(500px) rotateY(-18deg)}
+.tile.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;font-size:3.4rem}
+.tile.bonus{background:#c9a227;color:#1f1d1a;border-color:#b3261e}
+.tile.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion: reduce){.tile,.tile:hover,.tile:focus-visible{transition:none;transform:none}.tile.shake{animation:none}}
+footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);text-align:center;color:var(--muted)}
+.footer-note{font-size:1.25rem;color:var(--pine);margin:0 0 4px}
+</style>
+</head>
+<body>
+<main>
+<header><div class="door" aria-hidden="true"><small>Türchen</small>11</div><div class="headline"><p class="date">Türchen 11 · Freitag, 11. Dezember 2026</p><h1>Wie kalt ist es am Fenster?</h1></div><svg class="wreath" viewBox="0 0 150 76" role="img" aria-label="Adventskranz: 2 von 4 Kerzen brennen" xmlns="http://www.w3.org/2000/svg"><title>Adventskranz: 2 von 4 Kerzen brennen</title><rect x="27" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="29" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M34 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M34 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M34 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="59" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="61" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M66 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M66 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M66 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="91" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="93" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M98 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><rect x="123" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="125" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M130 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><ellipse cx="12" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="24" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="36" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="48" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="60" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="72" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="84" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="96" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="108" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="120" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="132" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="144" cy="66" rx="14" ry="7" fill="#1f4d3a"/><circle cx="18" cy="62" r="3" fill="#c9302c"/><circle cx="50" cy="67" r="3" fill="#c9302c"/><circle cx="82" cy="62" r="3" fill="#c9302c"/><circle cx="114" cy="67" r="3" fill="#c9302c"/><circle cx="140" cy="62" r="3" fill="#c9302c"/></svg></header>
+<p class="greeting">Mollig warm drinnen, eisig draußen? Der NTC-Sensor misst den Unterschied.</p>
+<section class="part"><p class="kicker">Heute im Säckchen</p><h2>KY-013 Temperatursensor (NTC)</h2><p class="intro">Dieses Modul beinhaltet einen NTC Thermistor welcher Temperaturen im Bereich von -55°C bis zu +125°C messen kann.</p><img src="img/KY-013/KY-013.png" alt="KY-013 Temperatursensor (NTC)" loading="lazy"><p>Dieses Modul enthält einen NTC-Thermistor, der Temperaturen im Bereich von -55°C bis +125°C messen kann. Ein NTC-Thermistor (Negative Temperature Coefficient) hat die Eigenschaft, dass sein Widerstand bei steigender Temperatur abnimmt. Diese Änderung des Widerstandswerts ermöglicht es, die entsprechende Temperatur zu berechnen.</p>
+<p>Die Beziehung zwischen Temperatur und Widerstand ist nicht linear, kann jedoch mathematisch angenähert werden. Durch die Verwendung eines Spannungsteilers kann die Änderung des Widerstands ermittelt werden. Ein Spannungsteiler besteht aus einem bekannten festen Widerstand und dem variablen Widerstand des Thermistors. Wenn eine Spannung an den Spannungsteiler angelegt wird, teilt sich die Spannung entsprechend den Widerstandswerten auf. Durch das Messen der Spannung über den Thermistor kann der aktuelle Widerstand berechnet werden.</p>
+<p>Diese Widerstandswerte lassen sich dann in Temperaturen umrechnen. Die genaue Berechnungsmethode und der mathematische Ansatz zur Bestimmung der Temperatur sind in den beigefügten Codebeispielen beschrieben. Dieses Modul ist ideal für Anwendungen, bei denen präzise Temperaturmessungen erforderlich sind, wie z.B. in Klimasteuerungen, Überwachungssystemen und anderen temperaturabhängigen Prozessen. Durch seine hohe Genauigkeit und den breiten Messbereich bietet es eine zuverlässige Lösung für viele Temperaturmessaufgaben. ![](../../images/files/files/sensors/KY-013/KY-013-NTC-Kurve.svg) ![](../../images/files/files/sensors/KY-013/KY-013-VoltDivide.svg)</p>
+<table><thead><tr><th>Technische Daten</th><th></th></tr></thead><tbody><tr><td>Betriebsspannung</td><td>3,3 V - 5 V</td></tr><tr><td>Messbereich</td><td>–55°C bis +125°C</td></tr><tr><td>Messgenauigkeit</td><td>± 0,5 °C</td></tr><tr><td>Bekannter Widerstand</td><td>10 kΩ</td></tr><tr><td>Spezifischer Widerstand des NTC</td><td>3950 Ω</td></tr></tbody></table>
+<h4>Anschlussbelegung</h4>
+<img src="img/KY-013/KY-013.svg" alt="" loading="lazy">
+<img src="img/KY-013/013-ARD.svg" alt="" loading="lazy">
+<table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>A1</td><td>Signal</td></tr><tr><td>5 V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table>
+<p>Man kann auch einen ADC wie der KY-053 verwenden. Dieser ADC hat eine höhere Auflösung als der interne ADC vom Arduino, was dazuführt, dass der Sensor genauer ausgewertet werden kann.</p></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+<g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Drinnen mollig, draußen eisig</h2>
+<p>Beim Einschalten merkt sich der Sketch die Zimmertemperatur. Hältst du den Sensor danach an die Fensterscheibe oder kurz vor das geöffnete Fenster, zeigt der Serielle Monitor, wie viel kälter es dort ist, von „mollig warm“ bis „eisig“.</p>
+<h3>Verdrahtung</h3>
+<p>Wie im Abschnitt zum Bauteil oben: Signal an A1, +V an 5V, GND an GND.</p>
+<h3>Ablauf</h3>
+<p>Einmal pro Sekunde rechnet der Sketch den Messwert wie im Artikel in eine Temperatur um und zeigt den Unterschied zur Zimmertemperatur in Kelvin. Bis 2 K kälter gilt als mollig, bis 8 K als zugig, darunter als eisig. Starte den Sketch im warmen Zimmer, damit der Vergleichswert stimmt.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 12.</p><pre><code>// Türchen 11: Drinnen mollig, draußen eisig
+// Verdrahtung wie im Artikel KY-013 (Signal an A1)
+
+const char ART[] PROGMEM = R"ART(
+   _______________
+  |   *   |   *   |
+  | *   * | *   * |
+  |_______|_______|
+  |   *   |   *   |
+  | *   * | *   * |
+  |_______|_______|
+  Tuerchen 11: Drinnen mollig, draussen eisig
+)ART";
+
+const int ntc = A1;  // KY-013
+float zimmer;        // Temperatur beim Einschalten gilt als Zimmertemperatur
+
+float temperatur() {
+  // Umrechnung wie im Artikel: Spannungsteiler, dann Beta-Formel (B = 3950)
+  int raw_value = analogRead(ntc);
+  float voltage = raw_value * 5.0 / 1023.0;
+  float r = ((voltage / 5.0) * 10000.0) / (1.0 - (voltage / 5.0));
+  float t = 1.0 / ((1.0 / 298.15) + (1.0 / 3950.0) * log(r / 10000.0));
+  return t - 273.15;
+}
+
+void setup() {
+  pinMode(ntc, INPUT);
+  Serial.begin(9600);
+  Serial.println((const __FlashStringHelper*)ART);
+  zimmer = temperatur();
+  Serial.print("Zimmertemperatur gemerkt: ");
+  Serial.print(zimmer, 1);
+  Serial.println(" C. Jetzt den Sensor ans Fenster halten!");
+}
+
+void loop() {
+  // Die aktuelle Temperatur mit der gemerkten Zimmertemperatur vergleichen
+  // und je nach Unterschied „mollig“, „zugig“ oder „eisig“ melden.
+}</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+<g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-013 Temperatursensor (NTC)</h2><h3>Code-Beispiel</h3>
+<p>Das Programm misst den aktuellen Spannungswert am NTC, berechnet die Temperatur und übersetzt das Ergebnis in °C für die serielle Ausgabe.</p>
+<p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
+<p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
+<pre><code>int ntc = A1; // Deklaration des Sensoreingangs-Pins
+// Deklaration von temporäre Variablen
+double raw_value;
+double voltage;
+double temperature;
+
+void setup () {
+  pinMode(ntc, INPUT); // Initialisierung Sensor-Pin
+  Serial.begin(9600); // Initialisierung des seriellen Monitors
+  Serial.println("KY-013 NTC Temperatur Test");
+}
+
+void loop () {
+  // Analogen Wert auslesen
+  raw_value = analogRead(ntc);
+  // Mittels analogen Wert die Spannung auslesen
+  voltage = raw_value * 5.0 / 1023.0;
+  // Berechnung der Temperatur mittels der Spannung
+  temperature = ((voltage / 5.0) * 10000.0) / (1.0 - (voltage / 5.0));
+  temperature = 1.0 / ((1.0 / 298.15) + (1.0 / 3950.0) * log(temperature / 10000.0));
+  temperature = temperature - 273.15;
+  // Ausgabe des Messwerts
+  Serial.println("Temperatur: " + String(temperature) + " °C");
+  delay(1000); // 1 Sekunde auf nächste Messung warten
+}</code></pre></section>
+<details class="solution"><summary>Lösung für Tag 10 anzeigen</summary><pre><code>// Auflösung zu Türchen 10: Der Sternschnuppen-Detektor
+// Verdrahtung wie im Artikel KY-054 (Signal an A5)
+
+const char ART[] PROGMEM = R"ART(
+                          *
+                     . '
+                . '
+           . '
+      . '
+  Tuerchen 10: Der Sternschnuppen-Detektor
+)ART";
+
+const int light_sensor = A5;  // KY-054, mehr Licht = höherer Messwert
+const int SPRUNG = 80;        // so viel heller als der Hintergrund gilt als Sternschnuppe
+
+const char* const WUENSCHE[] = {
+  "Schnell was wünschen: weiße Weihnachten!",
+  "Schnell was wünschen: ein neues Arduino-Board!",
+  "Schnell was wünschen: Plätzchen ohne Ende!",
+  "Schnell was wünschen: Ruhe beim Löten!",
+};
+const int WUENSCHE_ANZAHL = sizeof(WUENSCHE) / sizeof(WUENSCHE[0]);
+
+float hintergrund;
+int schnuppen = 0;
+bool hellVorher = false;
+
+void setup() {
+  pinMode(light_sensor, INPUT);
+  Serial.begin(9600);
+  Serial.println((const __FlashStringHelper*)ART);
+  randomSeed(analogRead(A0));  // offener Analogeingang liefert zufälliges Rauschen
+  hintergrund = analogRead(light_sensor);
+  Serial.println("Licht aus und mit einer Taschenlampe kurz über den Sensor huschen.");
+}
+
+void loop() {
+  int wert = analogRead(light_sensor);
+  bool hell = wert &gt; hintergrund + SPRUNG;
+
+  if (hell &amp;&amp; !hellVorher) {
+    schnuppen++;
+    Serial.print("Sternschnuppe Nr. ");
+    Serial.print(schnuppen);
+    Serial.print("! ");
+    Serial.println(WUENSCHE[random(WUENSCHE_ANZAHL)]);
+  }
+  hellVorher = hell;
+
+  // Hintergrund nur langsam nachführen, damit ein kurzer Blitz ihn nicht verschiebt
+  if (!hell) {
+    hintergrund = hintergrund * 0.98 + wert * 0.02;
+  }
+  delay(10);
+}</code></pre></details>
+<footer><p class="footer-note">Noch 13 Türchen bis Heiligabend</p><p>Morgen öffnet sich Türchen 12.</p><a class="back" href="index.html">Zur Kalender-Übersicht</a></footer>
+</main>
+</body>
+</html>

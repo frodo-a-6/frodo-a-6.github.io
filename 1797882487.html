@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Türchen 21 – Herzklopfen vor der Bescherung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap">
+<style>
+:root{--bg:#fbf6ec;--fg:#1f1d1a;--muted:#5e5a52;--accent:#b3261e;--pine:#1f4d3a;--gold:#b8901c;--card:#fffdf8;
+--line:#e6dcc6;--snow:rgba(120,150,180,.35);--dot:rgba(184,144,28,.10);--door-fg:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1a2b;--fg:#eef1f6;--muted:#a9b3c4;--accent:#ff8a80;
+--pine:#6cc398;--gold:#e0bf55;--card:#16243a;--line:#2a3a55;--snow:rgba(255,255,255,.55);--dot:rgba(224,191,85,.07)}}
+:root[data-theme="dark"]{--bg:#0f1a2b;--fg:#eef1f6;--muted:#a9b3c4;--accent:#ff8a80;--pine:#6cc398;--gold:#e0bf55;
+--card:#16243a;--line:#2a3a55;--snow:rgba(255,255,255,.55);--dot:rgba(224,191,85,.07)}
+body{margin:0;color:var(--fg);font:16px/1.6 system-ui,sans-serif;background-color:var(--bg);
+background-image:radial-gradient(var(--dot) 1.5px,transparent 2px);background-size:28px 28px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+background-image:radial-gradient(circle at 20px 30px,var(--snow) 2px,transparent 3px),
+radial-gradient(circle at 140px 90px,var(--snow) 3px,transparent 4px),
+radial-gradient(circle at 80px 170px,var(--snow) 1.5px,transparent 2.5px);
+background-size:200px 200px,260px 260px,180px 180px;animation:snow 30s linear infinite}
+@keyframes snow{to{background-position:40px 600px,-30px 780px,20px 540px}}
+@media (prefers-reduced-motion: reduce){body::before{animation:none}.flame{animation:none}}
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:16px}
+h1,h2,.door,.footer-note{font-family:"Playfair Display",Georgia,"Times New Roman",serif}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:24px 0 16px;border-bottom:3px double var(--gold)}
+.door{flex:none;width:76px;height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+background:var(--accent);color:var(--door-fg);border:3px solid var(--gold);border-radius:10px 10px 4px 4px;
+box-shadow:inset 0 0 0 3px rgba(255,255,255,.25),0 4px 10px rgba(0,0,0,.15);font-size:2.3rem;font-weight:700;line-height:1}
+.door small{font:600 .62rem/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.door.finale{background:var(--gold);color:#1f1d1a;border-color:var(--accent)}
+.door.finale .star{font-size:1.4rem;margin-bottom:2px}
+.headline{flex:1 1 260px;min-width:0}
+.date{color:var(--muted);margin:0}
+h1{font-size:2rem;line-height:1.2;margin:.2rem 0 0;color:var(--pine)}
+.wreath{flex:none;width:150px;height:auto}
+.flame{transform-origin:50% 100%;transform-box:fill-box;animation:flicker 1.6s ease-in-out infinite alternate}
+@keyframes flicker{0%{transform:scale(1,1)}50%{transform:scale(.92,1.08) rotate(-3deg)}100%{transform:scale(1.04,.95) rotate(2deg)}}
+.greeting{font-size:1.1rem;margin:20px 0 0;padding:12px 16px;border-left:4px solid var(--pine);background:var(--card);border-radius:0 8px 8px 0}
+.part{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 16px 16px;margin:32px 0 24px;
+box-shadow:0 2px 8px rgba(0,0,0,.06);
+background-image:linear-gradient(90deg,transparent calc(50% - 7px),var(--accent) calc(50% - 7px),var(--accent) calc(50% + 7px),transparent calc(50% + 7px));
+background-size:100% 14px;background-repeat:no-repeat}
+.part::before{content:"";position:absolute;top:-18px;left:50%;width:56px;height:30px;transform:translateX(-50%);
+background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 30"><path d="M28 15C18 0 4 2 6 12s16 6 22 3z" fill="%23b3261e"/><path d="M28 15C38 0 52 2 50 12s-16 6-22 3z" fill="%23b3261e"/><path d="M28 15l-9 14M28 15l9 14" stroke="%23b3261e" stroke-width="4" stroke-linecap="round"/><circle cx="28" cy="15" r="5" fill="%23c9a227"/></svg>') no-repeat center/contain}
+.kicker{margin:0;color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center}
+h2{font-size:1.5rem;color:var(--accent);margin:.3rem 0 .8rem;text-align:center}
+h2::before,h2::after{content:"✦";color:var(--gold);font-size:.8em;margin:0 .45em;vertical-align:.1em}
+h3{font-size:1.15rem;color:var(--pine)}
+h4{font-size:1rem}
+.intro{color:var(--muted)}
+.divider{display:flex;justify-content:center;margin:8px 0}
+.divider svg{width:220px;max-width:70%;height:auto}
+img{max-width:100%;height:auto;display:block;margin:12px auto}
+pre{overflow-x:auto;background:#1b1f1c;color:#e2e6e0;padding:12px;border-radius:8px;border-left:4px solid var(--pine);font-size:.9rem}
+code{font-family:ui-monospace,monospace}
+table{display:block;overflow-x:auto;border-collapse:collapse;max-width:100%;margin:12px 0;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:rgba(31,77,58,.10)}
+a{color:var(--accent)}
+.puzzle-note{padding:10px 14px;border-left:4px solid var(--gold);background:rgba(184,144,28,.08);border-radius:0 8px 8px 0}
+.solution{margin:24px 0 0;background:var(--card);border:1px dashed var(--gold);border-radius:12px;padding:0 16px}
+.solution summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--pine);list-style:none}
+.solution summary::-webkit-details-marker{display:none}
+.solution summary::before{content:"▸ ";color:var(--gold)}
+.solution[open] summary::before{content:"▾ "}
+.solution[open]{padding-bottom:16px}
+.back{display:inline-block;margin-top:8px;font-weight:600}
+.calendar{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));grid-auto-flow:dense;gap:12px;margin:24px 0}
+.tile{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-decoration:none;color:#fff;background:#b3261e;border:3px solid #c9a227;border-radius:10px 10px 4px 4px;
+box-shadow:inset 0 0 0 3px rgba(255,255,255,.2),0 4px 10px rgba(0,0,0,.18);
+font:700 2.2rem/1 "Playfair Display",Georgia,serif;transition:transform .25s ease;transform-origin:left center}
+.tile:nth-child(3n+2){background:#1f4d3a}
+.tile:nth-child(5n+4){background:#7a1d18}
+.tile:hover,.tile:focus-visible{transform:perspective(500px) rotateY(-18deg)}
+.tile.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;font-size:3.4rem}
+.tile.bonus{background:#c9a227;color:#1f1d1a;border-color:#b3261e}
+.tile.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion: reduce){.tile,.tile:hover,.tile:focus-visible{transition:none;transform:none}.tile.shake{animation:none}}
+footer{margin:32px 0 16px;padding-top:16px;border-top:3px double var(--gold);text-align:center;color:var(--muted)}
+.footer-note{font-size:1.25rem;color:var(--pine);margin:0 0 4px}
+</style>
+</head>
+<body>
+<main>
+<header><div class="door" aria-hidden="true"><small>Türchen</small>21</div><div class="headline"><p class="date">Türchen 21 · Montag, 21. Dezember 2026</p><h1>Herzklopfen vor der Bescherung</h1></div><svg class="wreath" viewBox="0 0 150 76" role="img" aria-label="Adventskranz: 4 von 4 Kerzen brennen" xmlns="http://www.w3.org/2000/svg"><title>Adventskranz: 4 von 4 Kerzen brennen</title><rect x="27" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="29" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M34 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M34 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M34 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="59" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="61" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M66 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M66 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M66 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="91" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="93" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M98 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M98 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M98 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><rect x="123" y="22" width="14" height="34" rx="2" fill="#b3261e"/><rect x="125" y="22" width="3" height="34" fill="#fff" opacity=".25"/><path d="M130 22v-5" stroke="#3a2a1a" stroke-width="1.5"/><path class="flame" d="M130 4c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z" fill="#f6b73c"/><path class="flame" d="M130 10c2 3 2.5 4 2.5 5a2.5 2.5 0 0 1-5 0c0-1 .5-2 2.5-5z" fill="#fff3c4"/><ellipse cx="12" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="24" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="36" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="48" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="60" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="72" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="84" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="96" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="108" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="120" cy="66" rx="14" ry="7" fill="#1f4d3a"/><ellipse cx="132" cy="60" rx="14" ry="7" fill="#2e6b4f"/><ellipse cx="144" cy="66" rx="14" ry="7" fill="#1f4d3a"/><circle cx="18" cy="62" r="3" fill="#c9302c"/><circle cx="50" cy="67" r="3" fill="#c9302c"/><circle cx="82" cy="62" r="3" fill="#c9302c"/><circle cx="114" cy="67" r="3" fill="#c9302c"/><circle cx="140" cy="62" r="3" fill="#c9302c"/></svg></header>
+<p class="greeting">Bald ist Bescherung, und das Herz klopft schneller. Der Herzschlagsensor misst, wie aufgeregt wir sind.</p>
+<section class="part"><p class="kicker">Heute im Säckchen</p><h2>KY-039 Herzschlagsensor</h2><p class="intro">Wird ein Finger zwischen der Infrarot-Leuchtdiode und dem Foto-Transistor gehalten, so kann am Signalausgang der Puls detektiert werden.</p><img src="img/KY-039/KY-039-02.png" alt="KY-039 Herzschlagsensor" loading="lazy"><p>Der Herzschlagsensor detektiert den Puls, wenn ein Finger zwischen die Infrarot-Leuchtdiode und den Foto-Transistor gehalten wird. Am Signalausgang kann der Puls dann abgelesen werden.</p>
+<p>Die Funktionsweise eines Fototransistors ist wie folgt: Ein Fototransistor funktioniert ähnlich wie ein normaler Transistor, bei dem ein höherer Strom durch ihn fließt, je höher die an ihn angelegte Steuerspannung ist. Bei einem Fototransistor stellt jedoch das einfallende Licht die Steuerspannung dar. Das bedeutet, je mehr Licht auf den Fototransistor trifft, desto mehr Strom lässt er durch. In diesem Sensor wird die Veränderung der Lichtmenge, die durch den Blutfluss im Finger verursacht wird, vom Fototransistor erfasst und in ein Signal umgewandelt, das zur Pulsdetektion verwendet werden kann.</p>
+<p>Dieser Sensor ist ideal für Projekte, bei denen die Herzfrequenzüberwachung erforderlich ist, wie z.B. in Fitness-Tracker, Gesundheitsüberwachungssystemen oder anderen biometrischen Anwendungen.</p>
+<img src="img/KY-039/KY-039-Phototransistor.svg" alt="" loading="lazy">
+<p>Schaltet man vor dem Transistor einen Widerstand in Reihe, so ergibt sich folgendes Verhalten, wenn man die Spannung über den Transistor misst: Scheint auf den Transistor viel Licht bzw. ist es außen hell, so kann man eine niedrige Spannung nahe 0V gemessen - ist der Transistor im Dunklen, so lässt dieser einen relativ kleinen Strom durch und man misst eine Spannung nahe +V.</p>
+<p>Der bei diesem Sensormodul aufgebaute Messaufbau mit Infrarotdiode und Fototransistor ermöglicht uns nun den Puls zu messen, indem ein Finger zwischen Diode und Transistor gelegt wird. Erklärung: genauso wie man es von der Taschenlampe kennt, kann die Haut an der Hand durchleuchtet werden. Trifft man beim Durchleuchten auf eine Blutader, so kann man ganz schwach das Pumpen des Blutes erkennen. Dieses Pumpen erkennt man, da das Blut an unterschiedlichen Stellen in der Ader eine andere Dichte besitzt und somit Helligkeitsunterschiede beim Blutfluss erkennbar sind. Genau diese Unterschiede in der Helligkeit kann man mit dem Sensormodul aufnehmen und somit den Puls erkennen. Deutlich wird dieses beim Betrachten des folgenden Oszilloskop-Bildes.</p>
+<img src="img/KY-039/NewFile1.jpg" alt="KY-039" loading="lazy">
+<p>Dieses zeigt auf der Y-Achse die Veränderung der Spannung am Fototransistor - somit die Helligkeitsveränderungen hervorgerufen durch das fließende Blut. Die oben gekennzeichneten Spitzen ergeben somit das Schlagen vom Herz. Rechnet man nun die registrierten Schläge pro aufgenommene Zeit, so kommt man auf einen Puls von ca. 51 Schläge/Minute (bpm)</p>
+<p>Wie man auf dem oberen Oszilloskop-Bild zudem sehen kann, ist das aufgenommene Signal relativ klein bzw. der Transistor sehr empfindlich, um das schwache Signal aufnehmen zu können. Um ein optimales Ergebnis zu erhalten, empfehlen wir das Modul zum Messen so vorzubereiten, wie in den folgenden Bildern gezeigt:</p>
+<img src="img/KY-039/heartbeat1.jpg" alt="" loading="lazy">
+<p>Um die Empfindlichkeit des Sensors zu erhöhen, empfehlen wir den Sensor mittels eines Pflasters / Klebebandes / Isolierbandes an der Fingerkuppe des kleinen Fingers zu fixieren.</p>
+<img src="img/KY-039/heartbeat2.jpg" alt="" loading="lazy">
+<p>Der Herzschlag wird besonders gut aufgezeichnet/registriert, wenn sich der Sensor über einem größeren Blutgefäß befindet - um das Signal zu verbessern, empfehlen wir zudem die Position des Sensors gegeben falls auf der Fingerkuppe zu verändern.</p>
+<h3>Pin-Belegung</h3>
+<img src="img/KY-039/KY-039.svg" alt="" loading="lazy">
+<table><thead><tr><th>Kabelfarbe</th><th>Kabelbedeutung</th></tr></thead><tbody><tr><td>Schwarz</td><td>Signal</td></tr><tr><td>Weiß</td><td>+V</td></tr><tr><td>Grau</td><td>GND</td></tr></tbody></table>
+<img src="img/KY-039/039-ARD.svg" alt="" loading="lazy">
+<table><thead><tr><th>Arduino</th><th>Sensor</th></tr></thead><tbody><tr><td>Pin A0</td><td>Signal</td></tr><tr><td>5V</td><td>+V</td></tr><tr><td>GND</td><td>GND</td></tr></tbody></table></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+<g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part project"><p class="kicker">Weihnachtsidee zum Bauteil</p><h2>Weihnachtsidee: Der Aufregungsmesser</h2>
+<p>Je näher die Bescherung rückt, desto schneller klopft das Herz. Der Herzschlagsensor misst den Puls am Finger und übersetzt ihn in eine Aufregungsstufe, von „ganz entspannt“ bis „gleich platzt das Geschenkpapier“. Die LED an Pin 13 blinkt im Takt.</p>
+<h3>Verdrahtung</h3>
+<p>Wie im Abschnitt zum Bauteil oben: Signal an A0, +V an 5V, GND an GND.</p>
+<h3>Ablauf</h3>
+<p>Die Pulserkennung ist dieselbe wie im Artikel. Am zuverlässigsten misst der Sensor im abgedunkelten Raum mit ruhig aufgelegtem Finger. Das ist ein Bastelprojekt und kein medizinisches Messgerät.</p><h3>Deine Knobelaufgabe</h3><p class="puzzle-note">Im Sketch fehlt der Inhalt der <code>loop()</code>-Funktion. Die Kommentare darin verraten dir, was passieren soll – programmiere es selbst! Die Auflösung findest du morgen ganz unten auf der Seite von Türchen 22.</p><pre><code>// Türchen 21: Der Aufregungsmesser
+// Verdrahtung wie im Artikel KY-039 (Signal an A0)
+
+const char ART[] PROGMEM = R"ART(
+     *****     *****
+   ********* *********
+   *******************
+    *****************
+      *************
+        *********
+          *****
+            *
+  Tuerchen 21: Der Aufregungsmesser
+)ART";
+
+const int ledPin = 13;
+const int analogPin = 0;
+const int delayMsec = 60;
+
+// Spitzenerkennung wie im Artikel: Ein Herzschlag ist der Beginn eines neuen Maximums
+bool heartbeatDetected(int pin, int delay) {
+  static int maxValue = 0;
+  static bool isPeak = false;
+  bool result = false;
+
+  int rawValue = analogRead(pin);
+  rawValue *= (1000 / delay);
+
+  // Grundlinie zurücksetzen, wenn der Finger entfernt wurde
+  if (rawValue * 4L &lt; maxValue) {
+    maxValue = rawValue * 0.8;
+  }
+  if (rawValue &gt; maxValue - (1000 / delay)) {
+    if (rawValue &gt; maxValue) {
+      maxValue = rawValue;
+    }
+    if (!isPeak) {
+      result = true;
+    }
+    isPeak = true;
+  } else if (rawValue &lt; maxValue - (3000 / delay)) {
+    isPeak = false;
+    maxValue -= (1000 / delay);
+  }
+  return result;
+}
+
+const char* aufregung(int bpm) {
+  if (bpm &lt; 70) return "Ganz entspannt, wie nach dem Festessen.";
+  if (bpm &lt; 90) return "Leichte Vorfreude liegt in der Luft.";
+  if (bpm &lt; 110) return "Bescherungsfieber! Ist das Glöckchen schon zu hören?";
+  return "Gleich platzt das Geschenkpapier vor Aufregung!";
+}
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+  Serial.println((const __FlashStringHelper*)ART);
+  Serial.println("Finger ruhig auf den Sensor legen und nicht wackeln.");
+}
+
+void loop() {
+  // Die Zeit zwischen zwei Schlägen von heartbeatDetected() messen, daraus den Puls
+  // berechnen und mit aufregung() kommentieren. Die LED blinkt bei jedem Schlag.
+}</code></pre></section><div class="divider" aria-hidden="true"><svg viewBox="0 0 220 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 12h80M130 12h80" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+<g fill="#1f4d3a" opacity=".8"><path d="M92 12l8-5v10zM128 12l-8-5v10z"/></g>
+<path d="M110 2l2.6 6.6 7 .5-5.4 4.5 1.7 6.9-5.9-3.8-5.9 3.8 1.7-6.9-5.4-4.5 7-.5z" fill="#c9a227"/></svg></div><section class="part"><p class="kicker">Das Grundlagen-Beispiel</p><h2>KY-039 Herzschlagsensor</h2><h3>Code-Beispiel</h3>
+<p>Um das folgende Codebeispiel auf deinen Arduino zu laden, empfehlen wir die Verwendung der <a href="https://www.arduino.cc/en/software" rel="noopener">Arduino IDE</a>. In der IDE kannst du den passenden Port und das richtige Board für dein Gerät auswählen.</p>
+<p>Kopiere den unten stehenden Code in deine IDE. Um den Code auf deinen Arduino hochzuladen, klicke einfach auf den Upload-Button.</p>
+<pre><code>////////////////////////////////////////////////////////////////////////
+/// Copyright (c)2015 Dan Truong
+/// Permission is granted to use this software under the MIT
+/// licence, with my name and copyright kept in source code
+/// http://http://opensource.org/licenses/MIT
+///
+/// KY039 Arduino Heartrate Monitor V1.0 (April 02, 2015)
+////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
+/// @param[in] IRSensorPin Analog PI an welchen der Sensor angeschlossen ist
+/// @param[in] delay (msec) Die Verzoegerung zwischen den Aufrufen der Abtastfunktion.
+//                   Die besten Ergebnisse erhaelt man, wenn man 5 mal Pro Herzschlag abtastet.
+///                  Nicht langsamer als 150mSec für z.B. 70 BPM Puls
+///                  Besser waere 60 mSec für z.B. bis zu einen Puls von 200 BPM.
+///
+/// @Kurzbeschreibung
+/// Dieser Code stellt eine sog. Peak-Detection dar.
+/// Es wird kein Herzschlagverlauf aufgezeichnet, sondern es
+/// wird innerhalb der aufgezeichneten Daten nach "Peaks" (Spitzen) gesucht,
+/// und per LED angezeigt. Mittels der bekannten Delay Abstaende, kann somit
+/// grob der Puls errechnet werden.
+////////////////////////////////////////////////////////////////////////
+
+int rawValue;
+
+bool heartbeatDetected(int IRSensorPin, int delay) {
+  static int maxValue = 0;
+  static bool isPeak = false;
+  bool result = false;
+  rawValue = analogRead(IRSensorPin);
+  // Hier wird der aktuelle Spannungswert am Fototransistor ausgelesen und in der rawValue-Variable zwischengespeichert
+  rawValue *= (1000/delay);
+  // Sollte der aktuelle Wert vom letzten maximalen Wert zu weit abweichen
+  // (z.B. da der Finger neu aufgesetzt oder weggenommen wurde)
+  // So wird der MaxValue resetiert, um eine neue Basis zu erhalten.
+  if (rawValue * 4L &lt; maxValue) maxValue = rawValue * 0.8; // Neue Spitzenwerte erkennen
+  if (rawValue &gt; maxValue - (1000/delay)) {
+    // Hier wird der eigentliche Peak detektiert. Sollte ein neuer RawValue groeßer sein
+    // als der letzte maximale Wert, so wird das als Spitze der aufgezeichnten Daten erkannt.
+    if (rawValue &gt; maxValue) {
+      maxValue = rawValue;
+    }
+    // Zum erkannten Peak soll nur ein Herzschlag zugewiesen werden
+    if (isPeak == false) {
+      result = true;
+    }
+    isPeak = true;
+  }
+  else if (rawValue &lt; maxValue - (3000/delay)) {
+    isPeak = false;
+    // Hierbei wird der maximale Wert bei jeden Durchlauf
+    // etwas wieder herabgesetzt. Dies hat den Grund, dass
+    // nicht nur der Wert sonst immer stabil bei jedem Schlag
+    // gleich oder kleiner werden wuerde, sondern auch,
+    // falls der Finger sich minimal bewegen sollte und somit
+    // das Signal generell schwaecher werden wuerde.
+    maxValue-=(1000/delay);
+ }
+  return result;
+}
+////////////////////////////////////////////////////////////////////////
+// Arduino Hauptprogramm
+////////////////////////////////////////////////////////////////////////
+int ledPin=13;
+int analogPin=0;
+
+void setup() {
+  // Die eingebaute Arduino LED (Digital 13), wird hier zur Ausgabe genutzt
+  pinMode(ledPin,OUTPUT);
+  // Serielle Ausgabe Initialisierung
+  Serial.begin(9600);
+  Serial.println("KY-039 Herzschlagmessung");
+}
+const int delayMsec = 60; // 100msec pro Probe
+// Das Hauptprogramm hat zwei Aufgaben:
+// - Wird ein Herzschlag erkannt, so blinkt die LED kurz aufgesetzt
+// - Der Puls wird errechnet und auf der serriellen Ausgabe ausgegeben.
+
+void loop() {
+  static int beatMsec = 0;
+  int heartRateBPM = 0;
+  if (heartbeatDetected(analogPin, delayMsec)) {
+    heartRateBPM = 60000 / beatMsec;
+    // LED-Ausgabe bei Herzschlag
+    digitalWrite(ledPin,1);
+    // zu hohe oder zu niedrige Werte ausschließen
+    if (heartRateBPM &gt; 30 &amp;&amp; heartRateBPM &lt; 200){
+      // Serielle Datenausgabe
+      Serial.print("Puls erkannt: ");
+      Serial.println(heartRateBPM);
+    }
+    beatMsec = 0;
+  }
+  else {
+    digitalWrite(ledPin,0);
+  }
+  delay(delayMsec);
+  beatMsec += delayMsec;
+}</code></pre></section>
+<details class="solution"><summary>Lösung für Tag 20 anzeigen</summary><pre><code>// Auflösung zu Türchen 20: Der geheime Klopf-Code
+// Verdrahtung siehe tag-20.md
+
+const char ART[] PROGMEM = R"ART(
+    ___________
+   |  _     _  |
+   | | |   | | |    klopf
+   | |_|   |_| |       klopf
+   |        o  |   klopf-klopf
+   |___________|          klopf
+  Tuerchen 20: Der geheime Klopf-Code
+)ART";
+
+const int KLOPF = 10;       // KY-031, LOW beim Klopfen
+const int BUZZER = 8;       // KY-006 von Tag 6
+const int LED_ROT = 9;      // KY-016 von Tag 5
+const int LED_GRUEN = 6;
+const int LED_BLAU = 5;
+
+const int MAX_KLOPFER = 12;
+const unsigned long ENDE_MS = 1500;     // so lange Stille beendet die Eingabe
+const unsigned long ENTPRELL_MS = 100;  // ein Klopfer prellt; so lange danach nicht neu zählen
+const float TOLERANZ = 0.25;
+
+// Geheimer Rhythmus „lang, lang, kurz, kurz“: die Abstände zwischen den fünf Klopfern,
+// jeweils im Verhältnis zum längsten Abstand (= 1.0). So ist das Tempo egal.
+const float CODE[] = {1.0, 1.0, 0.5, 0.5};
+const int CODE_LAENGE = sizeof(CODE) / sizeof(CODE[0]);
+
+unsigned long zeiten[MAX_KLOPFER];
+
+void setzeFarbe(int r, int g, int b) {
+  analogWrite(LED_ROT, r);
+  analogWrite(LED_GRUEN, g);
+  analogWrite(LED_BLAU, b);
+}
+
+bool klopfer() {
+  return digitalRead(KLOPF) == LOW;
+}
+
+void setup() {
+  pinMode(KLOPF, INPUT_PULLUP);
+  pinMode(BUZZER, OUTPUT);
+  pinMode(LED_ROT, OUTPUT);
+  pinMode(LED_GRUEN, OUTPUT);
+  pinMode(LED_BLAU, OUTPUT);
+  Serial.begin(9600);
+  Serial.println((const __FlashStringHelper*)ART);
+  Serial.println("Nur wer den geheimen Rhythmus kennt, darf zum Geschenk ...");
+}
+
+void loop() {
+  if (!klopfer()) {
+    return;
+  }
+
+  // Klopfer aufzeichnen, bis ENDE_MS lang Ruhe ist
+  int anzahl = 0;
+  zeiten[anzahl++] = millis();
+  delay(ENTPRELL_MS);
+  setzeFarbe(40, 40, 40);  // gedämpftes Licht: Ich höre zu
+  while (millis() - zeiten[anzahl - 1] &lt; ENDE_MS &amp;&amp; anzahl &lt; MAX_KLOPFER) {
+    if (klopfer()) {
+      zeiten[anzahl++] = millis();
+      delay(ENTPRELL_MS);
+    }
+  }
+
+  // Vergleichen: richtige Anzahl und jeder Abstand im Verhältnis passend?
+  bool richtig = (anzahl - 1 == CODE_LAENGE);
+  if (richtig) {
+    unsigned long laengster = 0;
+    for (int i = 1; i &lt; anzahl; i++) {
+      unsigned long abstand = zeiten[i] - zeiten[i - 1];
+      if (abstand &gt; laengster) laengster = abstand;
+    }
+    for (int i = 1; i &lt; anzahl; i++) {
+      float relativ = (zeiten[i] - zeiten[i - 1]) / (float)laengster;
+      if (fabs(relativ - CODE[i - 1]) &gt; TOLERANZ) richtig = false;
+    }
+  }
+
+  Serial.print(anzahl);
+  Serial.print(" Klopfer: ");
+  if (richtig) {
+    Serial.println("Richtig! Herein, das Geschenk wartet.");
+    setzeFarbe(0, 255, 0);
+    const int fanfare[] = {392, 523, 659, 784};
+    for (int i = 0; i &lt; 4; i++) {
+      tone(BUZZER, fanfare[i], 180);
+      delay(220);
+    }
+    delay(1500);
+  } else {
+    Serial.println("Falscher Rhythmus - der Wichtel lässt dich nicht rein.");
+    for (int i = 0; i &lt; 3; i++) {
+      setzeFarbe(255, 0, 0);
+      delay(200);
+      setzeFarbe(0, 0, 0);
+      delay(200);
+    }
+  }
+  setzeFarbe(0, 0, 0);
+}</code></pre></details>
+<footer><p class="footer-note">Noch 3 Türchen bis Heiligabend</p><p>Morgen öffnet sich Türchen 22.</p><a class="back" href="index.html">Zur Kalender-Übersicht</a></footer>
+</main>
+</body>
+</html>
